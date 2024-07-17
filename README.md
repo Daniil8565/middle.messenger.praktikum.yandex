@@ -1,0 +1,18 @@
+<h1>Многостраничное веб приложение "чат".</h1>
+<h2>Установка</h2>
+<ul>
+  <li>npm run dev - запуск версии для разработчика</li>
+  <li>npm run build - сборка приложения</li>
+  <li>npm run start - сборка и запуск приложения</li>
+</ul>
+<h2>Ссылки на готовые страницы проекта</h2>
+<ul>
+  <li>https://serene-salmiakki-eebcdb.netlify.app - оснувная страница</li>
+  <li>https://serene-salmiakki-eebcdb.netlify.app/entrance/entrance - вход</li>
+  <li>https://serene-salmiakki-eebcdb.netlify.app/registration/registration - регистрация</li>
+  <li>https://serene-salmiakki-eebcdb.netlify.app/404/404 - 404</li>
+  <li>https://serene-salmiakki-eebcdb.netlify.app/500/500 - 500</li>
+  <li>https://serene-salmiakki-eebcdb.netlify.app/profile/profile - профиль</li>
+  <li>https://serene-salmiakki-eebcdb.netlify.app/changedata/changedata - изменение данных</li>
+  <li>https://serene-salmiakki-eebcdb.netlify.app/changepassword/changepassword - изменение пароля</li>
+</ul>
