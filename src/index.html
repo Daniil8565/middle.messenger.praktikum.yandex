@@ -8,18 +8,11 @@
     <title>Vite App</title>
   </head>
   <body>
-    <main>
-      <div class="container">
-        <nav>
-          <ul>
-            {{> link URL="./entrance/entrance.html" label="Вход"}} {{> link
-            URL="./registration/registration.html" label="Регистрация"}} {{>
-            link URL="./404/404.html" label="404"}} {{> link
-            URL="./500/500.html" label="500"}} {{> link
-            URL="./profile/profile.html" label="profile"}}
-          </ul>
-        </nav>
-      </div>
-    </main>
+    <div class="container">
+      {{> link URL="./entrance/entrance.html" label="Вход"}} {{> link
+      URL="./registration/registration.html" label="Регистрация"}} {{> link
+      URL="./404/404.html" label="404"}} {{> link URL="./500/500.html"
+      label="500"}} {{> link URL="./profile/profile.html" label="profile"}}
+    </div>
   </body>
 </html>
