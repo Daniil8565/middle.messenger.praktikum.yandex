@@ -1,5 +1,5 @@
 const tpl = `
-<a href='{{URL}}' class='entrance__link'>{{label}}</a>
+<a href="{{url}}">{{ title }}</a>
 `;
 
 export default tpl;
