@@ -1,11 +1,3 @@
-const tpl = `
-<input
-  class='entrance__input'
-  required
-  type='{{type}}'
-  id='{{id}}'
-  name='{{name}}'
-/>
-`;
+const tpl = ``;
 
 export default tpl;

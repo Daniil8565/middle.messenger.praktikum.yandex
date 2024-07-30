@@ -1,5 +1,5 @@
 const tpl = `
-<div class='avatar'><span class='avatar__image'></span></div>
+<span class='avatar__image'></span>
 `;
 
 export default tpl;

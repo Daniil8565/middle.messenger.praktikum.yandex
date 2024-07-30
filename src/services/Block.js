@@ -10,6 +10,7 @@ export default class Block {
 
   _props;
   _children;
+  _lists;
   _id;
   _element;
   _meta;
@@ -17,11 +18,12 @@ export default class Block {
   _setUpdate = false;
 
   constructor(tag = 'div', propsAndChilds = {}) {
-    const { children, props } = this.getChildren(propsAndChilds);
+    const { children, props, lists } = this.getChildren(propsAndChilds);
 
     this._eventBus = new EventBus();
     this._id = makeUUID();
-    this._children = children;
+    this._children = this.makePropsProxy(children);
+    this._lists = this.makePropsProxy(lists);
     this._props = this.makePropsProxy({ ...props, __id: this._id });
     this._meta = { tag, props };
 
@@ -61,7 +63,7 @@ export default class Block {
     this.removeEvents();
     this._element.innerHTML = '';
     this._element.appendChild(block);
-    // this.addAttribute();
+    this.addAttribute();
     this.addEvents();
   }
 
@@ -91,15 +93,18 @@ export default class Block {
   getChildren(propsAndChilds) {
     const children = {};
     const props = {};
+    const lists = {};
 
     Object.keys(propsAndChilds).forEach((key) => {
       if (propsAndChilds[key] instanceof Block) {
         children[key] = propsAndChilds[key];
+      } else if (Array.isArray(propsAndChilds[key])) {
+        lists[key] = propsAndChilds[key];
       } else {
         props[key] = propsAndChilds[key];
       }
     });
-    return { children, props };
+    return { children, props, lists };
   }
 
   compile(template, props) {
@@ -112,6 +117,10 @@ export default class Block {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
     });
 
+    Object.entries(this._lists).forEach(([key, child]) => {
+      propsAndStubs[key] = `<div data-id="__1_${key}"></div>`;
+    });
+
     const fragment = this.createDocumentElement('template');
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
 
@@ -120,6 +129,24 @@ export default class Block {
       if (stub) {
         stub.replaceWith(child.getContent());
       }
+    });
+
+    Object.entries(this._lists).forEach(([key, child]) => {
+      const stub = fragment.content.querySelector(`[data-id="__1_${key}"]`);
+      if (!stub) {
+        return;
+      }
+
+      const listContent = this.createDocumentElement('template');
+      child.forEach((item) => {
+        if (item instanceof Block) {
+          listContent.content.append(item.getContent());
+        } else {
+          listContent.content.append(`${item}`);
+        }
+      });
+
+      stub.replaceWith(listContent.content);
     });
 
     return fragment.content;
@@ -153,35 +180,35 @@ export default class Block {
     return true;
   }
 
-  setProps(newProps) {
-    if (!newProps) {
-      return;
-    }
+  // setProps(newProps) {
+  //   if (!newProps) {
+  //     return;
+  //   }
 
-    const { children, props } = this.getChildren(newProps);
+  //   const { children, props } = this.getChildren(newProps);
 
-    if (Object.values(children).length) {
-      Object.assign(this._children, children);
-    }
-    if (Object.values(props).length) {
-      Object.assign(this._props, props);
-    }
-  }
+  //   if (Object.values(children).length) {
+  //     Object.assign(this._children, children);
+  //   }
+  //   if (Object.values(props).length) {
+  //     Object.assign(this._props, props);
+  //   }
+  // }
 
-  makePropsProxy(props) {
-    return new Proxy(props, {
-      get(target, prop) {
-        const value = target[prop];
-        return typeof value === 'function' ? value.bind(target) : value;
-      },
-      set: (target, prop, value) => {
-        const oldValue = { ...target };
-        target[prop] = value;
-        this._eventBus.emit(Block.EVENT_FLOW_CDU, oldValue, target);
-        return true;
-      },
-    });
-  }
+  // makePropsProxy(props) {
+  //   return new Proxy(props, {
+  //     get(target, prop) {
+  //       const value = target[prop];
+  //       return typeof value === 'function' ? value.bind(target) : value;
+  //     },
+  //     set: (target, prop, value) => {
+  //       const oldValue = { ...target };
+  //       target[prop] = value;
+  //       this._eventBus.emit(Block.EVENT_FLOW_CDU, oldValue, target);
+  //       return true;
+  //     },
+  //   });
+  // }
 
   show() {
     this.getContent().style.display = 'block';
@@ -194,41 +221,41 @@ export default class Block {
   getContent() {
     return this._element;
   }
-  // setProps(newProps){
-  //     if(!newProps){
-  //         return
-  //     }
-  //     this._setUpdate = false;
-  //     const oldValue = {...this._props};
 
-  //     const {children, props} = this.getChildren(newProps);
+  setProps(newProps) {
+    if (!newProps) {
+      return;
+    }
+    this._setUpdate = false;
+    const oldValue = { ...this._props };
 
-  //     if(Object.values(children).length){
-  //         Object.assign(this._children, children)
-  //     }
-  //     if(Object.values(props).length){
-  //         Object.assign(this._props, props)
-  //     }
-  //     if(this._setUpdate){
-  //         this._eventBus.emit(Component.EVENT_FLOW_CDU, oldValue, this._props);
-  //         this._setUpdate = false;
-  //     }
-  // }
+    const { children, props } = this.getChildren(newProps);
 
-  // makePropsProxy(props){
-  //     return new Proxy(props, {
+    if (Object.values(children).length) {
+      Object.assign(this._children, children);
+    }
+    if (Object.values(props).length) {
+      Object.assign(this._props, props);
+    }
+    if (this._setUpdate) {
+      this._eventBus.emit(Block.EVENT_FLOW_CDU, oldValue, this._props);
+      this._setUpdate = false;
+    }
+  }
 
-  //         get(target, prop){
-  //             const value = target[prop];
-  //             return typeof value === 'function' ? value.bind(target) : value;
-  //         },
-  //         set: (target, prop, value) => {
-  //             if(target[prop] !== value){
-  //                 target[prop] = value;
-  //                 this._setUpdate = true;
-  //             }
-  //             return true;
-  //         },
-  //     });
-  // }
+  makePropsProxy(props) {
+    return new Proxy(props, {
+      get(target, prop) {
+        const value = target[prop];
+        return typeof value === 'function' ? value.bind(target) : value;
+      },
+      set: (target, prop, value) => {
+        if (target[prop] !== value) {
+          target[prop] = value;
+          this._setUpdate = true;
+        }
+        return true;
+      },
+    });
+  }
 }

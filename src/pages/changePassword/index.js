@@ -1,15 +1,23 @@
 import Avatar from '../../components/avatar/index.js';
 import FormSection from '../../components/formSection/index.js';
-import ProfileButton from '../../components/profileButton/index.js';
+import Button from '../../components/button/index.js';
 import IndexChangePassword from './IndexChangePassword/index.js';
+import './style.sass';
 
-const avatar = new Avatar('div', {});
+const avatar = new Avatar('div', {
+  attr: {
+    class: 'avatar',
+  },
+});
 const formSection = new FormSection('div', {
   for: 'oldPassword',
   type: 'password',
   id: 'oldPassword',
   name: 'oldPassword',
   description: 'Старый пароль',
+  attr: {
+    class: 'form__content',
+  },
 });
 
 const formSection2 = new FormSection('div', {
@@ -18,6 +26,9 @@ const formSection2 = new FormSection('div', {
   id: 'newPassword',
   name: 'newPassword',
   description: 'Новый пароль',
+  attr: {
+    class: 'form__content',
+  },
 });
 
 const formSection3 = new FormSection('div', {
@@ -26,10 +37,16 @@ const formSection3 = new FormSection('div', {
   id: 'repeatPassword',
   name: 'repeatPassword',
   description: 'Повторите новый пароль',
+  attr: {
+    class: 'form__content',
+  },
 });
 
-const button = new ProfileButton('button', {
+const button = new Button('button', {
   title: 'Сохранить',
+  attr: {
+    class: 'button',
+  },
 });
 
 const ChangePassword = new IndexChangePassword('div', {

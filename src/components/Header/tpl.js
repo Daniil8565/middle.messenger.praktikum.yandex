@@ -1,5 +1,5 @@
 const tpl = `
-<h1 class='header'>{{title}}</h1>
+{{title}}
 `;
 
 export default tpl;

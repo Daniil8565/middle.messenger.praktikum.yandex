@@ -1,53 +1,26 @@
 import { default as renderDOM } from './utils/render';
 import page from './pages/404';
-import Nav from './components/Nav/index.js';
-import Link from './components/link';
 import Index500 from './pages/500';
 import ChangeData from './pages/changeData';
 import ChangePassword from './pages/changePassword';
-
-const nav = new Nav('nav', {
-  //   items: [
-  //     { url: '/', title: 'Главная' },
-  //     { url: '/form', title: 'Формой' },
-  //   ],
-  //   items: [
-  //     new Link('Li', { url: '/', title: 'Главная' }),
-  //     new Link('Li', { url: '/form', title: 'Формой' }),
-  //   ],
-  items: [
-    { url: '/', title: 'Главная' },
-    { url: '/404', title: '404' },
-    { url: '/500', title: '500' },
-    { url: '/entrance', title: 'entrance' },
-    { url: '/profile', title: 'profile' },
-    { url: '/registration', title: 'registration' },
-  ],
-
-  events: {
-    click: (e) => {
-      if (e.target && e.target.getAttribute('href')) {
-        console.log('link clicked');
-        nav.hide();
-        page.show();
-        renderDOM('.app', page);
-        // window.location.href = e.target.getAttribute('href');
-        // Получаем URL ссылки
-        // const targetUrl = e.target.getAttribute('href');
-
-        // // Обновляем URL в браузере с помощью History API
-        // window.history.pushState({}, '', targetUrl);
-      } else {
-        console.log('No link clicked');
-      }
-    },
-  },
-});
+import Entrance from './pages/entrance/index.js';
+import Profile from './pages/profile/index.js';
+import registration from './pages/registration/index.js';
+import './normalize.sass';
+import './style.sass';
 
 //  Получаем ссылки из навигации
 const links = document.querySelectorAll('nav a');
 console.log(ChangePassword);
-let mas = [nav, page, Index500, ChangeData, ChangePassword];
+let mas = [
+  page,
+  Index500,
+  ChangeData,
+  ChangePassword,
+  Entrance,
+  Profile,
+  registration,
+];
 //  Обработчик событий для ссылок
 links.forEach((link, index) => {
   link.addEventListener('click', (event) => {
@@ -65,6 +38,6 @@ links.forEach((link, index) => {
     //     mas[i].show();
     //   }
     // }
-    renderDOM('.app', mas[index]);
+    renderDOM('.container', mas[index]);
   });
 });
