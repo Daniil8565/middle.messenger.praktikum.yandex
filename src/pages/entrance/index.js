@@ -25,7 +25,7 @@ const Entrance = new IndexEntrance('div', {
   button: button,
   link: link,
   attr: {
-    class: 'entrance__content',
+    class: 'container',
   },
 });
 

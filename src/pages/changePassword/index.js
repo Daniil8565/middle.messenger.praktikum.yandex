@@ -55,6 +55,9 @@ const ChangePassword = new IndexChangePassword('div', {
   formSection2: formSection2,
   formSection3: formSection3,
   button: button,
+  attr: {
+    class: 'container',
+  },
 });
 
 export default ChangePassword;

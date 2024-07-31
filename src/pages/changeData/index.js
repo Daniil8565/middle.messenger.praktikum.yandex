@@ -91,6 +91,9 @@ const ChangeData = new IndexChangeData('div', {
   formSection5: formSection5,
   formSection6: formSection6,
   button: button,
+  attr: {
+    class: 'container',
+  },
 });
 
 export default ChangeData;

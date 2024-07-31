@@ -31,7 +31,7 @@ const index500 = new Index500('div', {
   description: data,
   Link: link,
   attr: {
-    class: 'content',
+    class: 'container',
   },
 });
 

@@ -31,7 +31,7 @@ const page = new Index404('div', {
   description: data,
   Link: link,
   attr: {
-    class: 'content',
+    class: 'container',
   },
 });
 

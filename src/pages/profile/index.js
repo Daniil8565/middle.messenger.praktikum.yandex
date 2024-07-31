@@ -94,7 +94,7 @@ const Profile = new IndexProfile('div', {
   link2: link2,
   exit: exit,
   attr: {
-    class: 'content',
+    class: 'container',
   },
 });
 

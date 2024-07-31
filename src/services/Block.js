@@ -218,6 +218,10 @@ export default class Block {
     this.getContent().style.display = 'none';
   }
 
+  flex() {
+    this.getContent().style.display = 'flex';
+  }
+
   getContent() {
     return this._element;
   }

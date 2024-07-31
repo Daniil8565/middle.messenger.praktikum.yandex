@@ -1,4 +1,5 @@
 const tpl = `
+    <div class='entrance__content'>
         <h2 class="entrance__header">{{title}}</h2>
         <form class="entrance__form">
             <label class="labelEntrance" for="text" >{{description1}}</label>
@@ -8,6 +9,7 @@ const tpl = `
             {{{button}}}
         </form>
         {{{link}}}
+    </div>
 `;
 
 export default tpl;

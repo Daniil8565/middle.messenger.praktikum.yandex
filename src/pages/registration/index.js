@@ -30,7 +30,7 @@ const registration = new IndexRegistration('div', {
   button: button,
   link: link,
   attr: {
-    class: 'registration__content',
+    class: 'container',
   },
 });
 

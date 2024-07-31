@@ -1,11 +1,12 @@
-import { default as renderDOM } from './utils/render';
-import page from './pages/404';
-import Index500 from './pages/500';
-import ChangeData from './pages/changeData';
-import ChangePassword from './pages/changePassword';
+import { default as renderDOM } from './utils/render.js';
+import page from './pages/404/index.js';
+import Index500 from './pages/500/index.js';
+import ChangeData from './pages/changeData/index.js';
+import ChangePassword from './pages/changePassword/index.js';
 import Entrance from './pages/entrance/index.js';
 import Profile from './pages/profile/index.js';
 import registration from './pages/registration/index.js';
+import message from './pages/message/index.js';
 import './normalize.sass';
 import './style.sass';
 
@@ -20,6 +21,7 @@ let mas = [
   Entrance,
   Profile,
   registration,
+  message,
 ];
 //  Обработчик событий для ссылок
 links.forEach((link, index) => {
@@ -30,14 +32,26 @@ links.forEach((link, index) => {
     for (let i = 0; i < links.length; i++) {
       mas[i].hide();
       if (i == index) {
-        mas[i].show();
+        mas[i].flex();
       }
+      // if (
+      //   (i == index && mas[i] == message) ||
+      //   (i == index && mas[i] == registration) ||
+      //   (i == index && mas[i] == Profile) ||
+      //   (i == index && mas[i] == Entrance) ||
+      //   (i == index && mas[i] == ChangePassword) ||
+      //   (i == index && mas[i] == ChangeData) ||
+      //   (i == index && mas[i] == Index500) ||
+      //   (i == index && mas[i] == page)
+      // ) {
+      //   mas[i].flex();
+      // }
     }
     // for (let i = 0; i < links.length; i++) {
     //   if (i == index) {
     //     mas[i].show();
     //   }
     // }
-    renderDOM('.container', mas[index]);
+    renderDOM('.app', mas[index]);
   });
 });

@@ -1,4 +1,5 @@
 const tpl = `
+<div class="content">
         {{{avatar}}}
         <div class="name">{{name}}</div>
         <div class="container__data">
@@ -14,6 +15,7 @@ const tpl = `
         {{{link2}}}
         {{{exit}}}
         </div>
-`;
+</div>
+        `;
 
 export default tpl;

@@ -1,4 +1,5 @@
 const tpl = `
+<div>
         {{{avatar}}}
         <form class="form">
         {{{formSection}}}
@@ -6,6 +7,7 @@ const tpl = `
         {{{formSection3}}}
         {{{button}}}
         </form>
-`;
+</div>
+        `;
 
 export default tpl;

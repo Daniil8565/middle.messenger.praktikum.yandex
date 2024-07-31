@@ -1,4 +1,5 @@
 const tpl = `
+    <div class='registration__content'>
         <h2 class="entrance__header">{{title}}</h2>
         <form class="registration__form">
             <label class="labelRegistration" for="email" >{{description1}}</label>
@@ -25,6 +26,7 @@ const tpl = `
             {{{button}}}
         </form>
         {{{link}}}
+        </div>
 `;
 
 export default tpl;
