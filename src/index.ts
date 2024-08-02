@@ -12,7 +12,6 @@ import './style.sass';
 
 //  Получаем ссылки из навигации
 const links = document.querySelectorAll('nav a');
-console.log(ChangePassword);
 let mas = [
   page,
   Index500,

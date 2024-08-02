@@ -1,7 +1,18 @@
 import Button from '../../components/button/index.ts';
 import IndexRegistration from './IndexRegistration/index.ts';
+import Error from '../../components/Error/index.ts';
 import Link from '../../components/link/index.ts';
+import Form from '../../components/form/index.ts';
+import Label from '../../components/label/index.ts';
+import Input from '../../components/input/index.ts';
+import DataCollection from '../../utils/DataCollection/index.ts';
 import './style.sass';
+import CheckEmail from '../../utils/CheckingData/CheckEmail/index.ts';
+import CheckLogin from '../../utils/CheckingData/CheckLogin/index.ts';
+import CheckName from '../../utils/CheckingData/CheckName/index.ts';
+import CheckSurname from '../../utils/CheckingData/CheckSurname/index.ts';
+import CheckPhone from '../../utils/CheckingData/CheckPhone/index.ts';
+import CheckPassword from '../../utils/CheckingData/CheckPassword/index.ts';
 
 const button = new Button('button', {
   title: 'Зарегестрироваться',
@@ -18,16 +29,175 @@ const link = new Link('a', {
   title: 'Войти',
 });
 
+const forma = new Form('form', {
+  items: [
+    new Label('label', {
+      description: 'Почта',
+      attr: {
+        class: 'labelRegistration',
+        for: 'email',
+      },
+    }),
+    new Input('input', {
+      attr: {
+        class: 'entrance__input',
+        type: 'email',
+        id: 'email',
+        name: 'email',
+      },
+      events: {
+        blur: CheckEmail,
+      },
+    }),
+    new Error('span', {
+      attr: { id: 'emailError', class: 'error-message' },
+    }),
+    new Label('label', {
+      description: 'Логин',
+      attr: {
+        class: 'labelRegistration',
+        for: 'login',
+      },
+    }),
+    new Input('input', {
+      attr: {
+        class: 'entrance__input',
+        type: 'text',
+        id: 'login',
+        name: 'login',
+      },
+      events: {
+        blur: CheckLogin,
+      },
+    }),
+    new Error('span', {
+      attr: { id: 'loginError', class: 'error-message' },
+    }),
+    new Label('label', {
+      description: 'Имя',
+      attr: {
+        class: 'labelRegistration',
+        for: 'first_name',
+      },
+    }),
+    new Input('input', {
+      attr: {
+        class: 'entrance__input',
+        type: 'text',
+        id: 'first_name',
+        name: 'first_name',
+      },
+      events: {
+        blur: CheckName,
+      },
+    }),
+    new Error('span', {
+      attr: { id: 'firstNameError', class: 'error-message' },
+    }),
+    new Label('label', {
+      description: 'Фамилия',
+      attr: {
+        class: 'labelRegistration',
+        for: 'second_name',
+      },
+    }),
+    new Input('input', {
+      attr: {
+        class: 'entrance__input',
+        type: 'text',
+        id: 'second_name',
+        name: 'second_name',
+      },
+      events: {
+        blur: CheckSurname,
+      },
+    }),
+    new Error('span', {
+      attr: { id: 'secondNameError', class: 'error-message' },
+    }),
+    new Label('label', {
+      description: 'Телефон',
+      attr: {
+        class: 'labelRegistration',
+        for: 'phone',
+      },
+    }),
+    new Input('input', {
+      attr: {
+        class: 'entrance__input',
+        type: 'tel',
+        id: 'phone',
+        name: 'phone',
+      },
+      events: {
+        blur: CheckPhone,
+      },
+    }),
+    new Error('span', {
+      attr: { id: 'phoneError', class: 'error-message' },
+    }),
+    new Label('label', {
+      description: 'Пароль',
+      attr: {
+        class: 'labelRegistration',
+        for: 'password',
+      },
+    }),
+    new Input('input', {
+      attr: {
+        class: 'entrance__input',
+        type: 'password',
+        id: 'password',
+        name: 'password',
+      },
+      events: {
+        blur: CheckPassword,
+      },
+    }),
+    new Error('span', {
+      attr: { id: 'passwordError', class: 'error-message' },
+    }),
+    new Label('label', {
+      description: 'Пароль(ещё раз)',
+      attr: {
+        class: 'labelRegistration',
+        for: 'PasswordRepeat',
+      },
+    }),
+    new Input('input', {
+      attr: {
+        class: 'entrance__input',
+        type: 'password',
+        id: 'PasswordRepeat',
+        name: 'password',
+      },
+      events: {
+        blur: CheckPassword,
+      },
+    }),
+    new Error('span', {
+      attr: { id: 'passwordError', class: 'error-message' },
+    }),
+  ],
+  button: button,
+  events: {
+    submit: DataCollection,
+    blurPassword: CheckPassword,
+    blurPhone: CheckPhone,
+    blurSurname: CheckSurname,
+    blurName: CheckName,
+    blurLogin: CheckLogin,
+    blurEmail: CheckEmail,
+  },
+  attr: {
+    class: 'registration__form',
+    id: 'Form',
+  },
+});
+
 const registration = new IndexRegistration('div', {
   title: 'Регистрация',
-  description1: 'Почта',
-  description2: 'Логин',
-  description3: 'Имя',
-  description4: 'Фамилия',
-  description5: 'Телефон',
-  description6: 'Пароль',
-  description7: 'Пароль(ещё раз)',
-  button: button,
+  form: forma,
   link: link,
   attr: {
     class: 'container',

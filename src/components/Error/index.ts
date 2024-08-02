@@ -1,7 +1,7 @@
+import Component from '../../services/Block.ts';
 import tpl from './tpl.ts';
-import Component from '../../../services/Block.ts';
 
-export default class IndexChangeData extends Component {
+export default class Error extends Component {
   render(): HTMLDivElement {
     return this.compile(tpl) as HTMLDivElement;
   }

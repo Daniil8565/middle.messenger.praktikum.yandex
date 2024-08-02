@@ -23,15 +23,7 @@ const tpl: string = `
           <div class="content__main"></div>
           <div class="content__footer">
             <a href=""><span class="footer__Investment"></span></a>
-            <form action="" class="form__message">
-              <input
-                class="input__message"
-                type="text"
-                placeholder="Сообщение"
-                name="message"
-              />
-              <button class="button__message"></button>
-            </form>
+            {{{form}}}
           </div>
         </div>
 `;
