@@ -1,10 +1,12 @@
-export default function CheckPassword() {
+export default function CheckOldPassword() {
   const form = document.getElementById('Form') as HTMLFormElement;
-  const passwordInput = document.getElementById('password') as HTMLInputElement;
+  const passwordInput = document.getElementById(
+    'oldPassword'
+  ) as HTMLInputElement;
   const passwordError = document.getElementById(
-    'passwordError'
+    'oldPasswordError'
   ) as HTMLSpanElement;
-
+  console.log(passwordError);
   const validatePassword = (password: string) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,40}$/;
     if (regex.test(password)) {

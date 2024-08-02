@@ -5,6 +5,7 @@ import Button from '../../components/button/index.ts';
 import './style.sass';
 import DataCollection from '../../utils/DataCollection/index.ts';
 import Form from '../../components/form/index.ts';
+import Input from '../../components/input/index.ts';
 import CheckEmail from '../../utils/CheckingData/CheckEmail/index.ts';
 import CheckLogin from '../../utils/CheckingData/CheckLogin/index.ts';
 import CheckName from '../../utils/CheckingData/CheckName/index.ts';
@@ -25,62 +26,125 @@ const button = new Button('button', {
   },
 });
 
+const input = new Input('input', {
+  attr: {
+    class: 'input',
+    type: 'email',
+    id: 'email',
+    name: 'email',
+  },
+  events: {
+    blur: CheckEmail,
+  },
+});
+
+const input2 = new Input('input', {
+  attr: {
+    class: 'input',
+    type: 'text',
+    id: 'login',
+    name: 'login',
+  },
+  events: {
+    blur: CheckLogin,
+  },
+});
+
+const input3 = new Input('input', {
+  attr: {
+    class: 'input',
+    type: 'text',
+    id: 'first_name',
+    name: 'first_name',
+  },
+  events: {
+    blur: CheckName,
+  },
+});
+
+const input4 = new Input('input', {
+  attr: {
+    class: 'input',
+    type: 'text',
+    id: 'second_name',
+    name: 'second_name',
+  },
+  events: {
+    blur: CheckSurname,
+  },
+});
+
+const input5 = new Input('input', {
+  attr: {
+    class: 'input',
+    type: 'text',
+    id: 'display_name',
+    name: 'display_name',
+  },
+  events: {
+    blur: CheckEmail,
+  },
+});
+
+const input6 = new Input('input', {
+  attr: {
+    class: 'input',
+    type: 'tel',
+    id: 'phone',
+    name: 'phone',
+  },
+  events: {
+    blur: CheckPhone,
+  },
+});
+
 const forma = new Form('form', {
   items: [
     new FormSection('div', {
       for: 'email',
-      type: 'email',
-      id: 'email',
-      name: 'email',
+      input: input,
       description: 'Почта',
       attr: {
         class: 'form__content',
-        events: CheckEmail,
       },
+      class: 'error-message',
       SpanID: 'emailError',
     }),
     new FormSection('div', {
       for: 'login',
-      type: 'text',
-      id: 'login',
-      name: 'login',
+      input: input2,
       description: 'Логин',
+      class: 'error-message',
       attr: {
         class: 'form__content',
-        events: CheckLogin,
       },
       SpanID: 'loginError',
     }),
     new FormSection('div', {
       for: 'first_name',
-      type: 'text',
-      id: 'first_name',
-      name: 'first_name',
+      input: input3,
       description: 'Имя',
+      class: 'error-message',
       attr: {
         class: 'form__content',
-        events: CheckName,
       },
       SpanID: 'firstNameError',
     }),
     new FormSection('div', {
       for: 'second_name',
-      type: 'text',
-      id: 'second_name',
-      name: 'second_name',
+      input: input4,
       description: 'Фамилия',
+      class: 'error-message',
       attr: {
         class: 'form__content',
-        events: CheckSurname,
       },
       SpanID: 'secondNameError',
     }),
     new FormSection('div', {
       for: 'display_name',
-      type: 'text',
-      id: 'display_name',
-      name: 'display_name',
+      input: input5,
       description: 'Имя в чате',
+      class: 'error-message',
       attr: {
         class: 'form__content',
       },
@@ -88,13 +152,11 @@ const forma = new Form('form', {
     }),
     new FormSection('div', {
       for: 'tel',
-      type: 'tel',
-      id: 'tel',
-      name: 'phone',
+      input: input6,
       description: 'Телефон',
+      class: 'error-message',
       attr: {
         class: 'form__content',
-        events: CheckPhone,
       },
       SpanID: 'phoneError',
     }),
@@ -102,6 +164,12 @@ const forma = new Form('form', {
   button: button,
   events: {
     submit: DataCollection,
+    blur: CheckPhone,
+    blur2: CheckEmail,
+    blur3: CheckSurname,
+    blur4: CheckName,
+    blur5: CheckLogin,
+    blur6: CheckEmail,
   },
   attr: {
     class: 'form',

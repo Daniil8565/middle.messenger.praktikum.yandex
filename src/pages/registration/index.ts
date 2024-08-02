@@ -12,7 +12,8 @@ import CheckLogin from '../../utils/CheckingData/CheckLogin/index.ts';
 import CheckName from '../../utils/CheckingData/CheckName/index.ts';
 import CheckSurname from '../../utils/CheckingData/CheckSurname/index.ts';
 import CheckPhone from '../../utils/CheckingData/CheckPhone/index.ts';
-import CheckPassword from '../../utils/CheckingData/CheckPassword/index.ts';
+import CheckOldPassword from '../../utils/CheckingData/CheckOldPassword/index.ts';
+import CheckRepeatPassword from '../../utils/CheckingData/CheckRepeatPassword/index.ts';
 
 const button = new Button('button', {
   title: 'Зарегестрироваться',
@@ -147,15 +148,15 @@ const forma = new Form('form', {
       attr: {
         class: 'entrance__input',
         type: 'password',
-        id: 'password',
+        id: 'oldPassword',
         name: 'password',
       },
       events: {
-        blur: CheckPassword,
+        blur: CheckOldPassword,
       },
     }),
     new Error('span', {
-      attr: { id: 'passwordError', class: 'error-message' },
+      attr: { id: 'oldPasswordError', class: 'error-message' },
     }),
     new Label('label', {
       description: 'Пароль(ещё раз)',
@@ -168,26 +169,27 @@ const forma = new Form('form', {
       attr: {
         class: 'entrance__input',
         type: 'password',
-        id: 'PasswordRepeat',
+        id: 'repeatPassword',
         name: 'password',
       },
       events: {
-        blur: CheckPassword,
+        blur: CheckRepeatPassword,
       },
     }),
     new Error('span', {
-      attr: { id: 'passwordError', class: 'error-message' },
+      attr: { id: 'repeatPasswordError', class: 'error-message' },
     }),
   ],
   button: button,
   events: {
     submit: DataCollection,
-    blurPassword: CheckPassword,
+    blurPassword: CheckOldPassword,
     blurPhone: CheckPhone,
     blurSurname: CheckSurname,
     blurName: CheckName,
     blurLogin: CheckLogin,
     blurEmail: CheckEmail,
+    blurRepeatPassword: CheckRepeatPassword,
   },
   attr: {
     class: 'registration__form',

@@ -1,28 +1,15 @@
-import { resolve } from 'path';
-import { defineConfig } from 'vite';
-import handlebars from 'vite-plugin-handlebars';
-import checker from 'vite-plugin-checker';
+import { resolve } from "path";
+import { defineConfig } from "vite";
+import handlebars from "vite-plugin-handlebars";
+import checker from "vite-plugin-checker";
 
 export default defineConfig({
-  root: resolve(__dirname, 'src'),
+  root: resolve(__dirname, "src"),
   build: {
-    outDir: resolve(__dirname, 'dist'),
+    outDir: resolve(__dirname, "dist"),
     rollupOptions: {
       input: {
-        index: resolve(__dirname, './src/index.html'),
-        entrance: resolve(__dirname, './src/entrance/entrance.html'),
-        registration: resolve(
-          __dirname,
-          './src/registration/registration.html'
-        ),
-        error: resolve(__dirname, './src/404/404.html'),
-        error2: resolve(__dirname, './src/500/500.html'),
-        profile: resolve(__dirname, './src/profile/profile.html'),
-        changeData: resolve(__dirname, './src/changeData/changeData.html'),
-        changePassword: resolve(
-          __dirname,
-          './src/changePassword/changePassword.html'
-        ),
+        index: resolve(__dirname, "./src/index.html"),
       },
     },
   },
@@ -31,10 +18,13 @@ export default defineConfig({
   },
   plugins: [
     handlebars({
-      partialDirectory: resolve(__dirname, 'src/partials'),
+      partialDirectory: resolve(__dirname, "src/partials"),
     }),
     checker({
       typescript: true,
+      eslint: {
+        lintCommand: 'eslint "./**/*.{ts,tsx}"',
+      },
     }),
   ],
 });

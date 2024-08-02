@@ -1,8 +1,8 @@
-import IBlock from '../services/IBlock';
+import IBlock from "../services/IBlock";
 
 export default function render(
   query: string,
-  component: IBlock
+  component: IBlock,
 ): HTMLElement | null {
   const root = document.querySelector(query) as HTMLElement;
 

@@ -1,5 +1,5 @@
-import Component from '../../services/Block.ts';
-import tpl from './tpl.ts';
+import Component from "../../services/Block.ts";
+import tpl from "./tpl.ts";
 
 export default class Avatar extends Component {
   render(): HTMLDivElement {

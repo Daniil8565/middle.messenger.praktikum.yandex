@@ -8,7 +8,7 @@ import Input from '../../components/input/index.ts';
 import Error from '../../components/Error/index.ts';
 import './style.sass';
 import CheckLogin from '../../utils/CheckingData/CheckLogin/index.ts';
-import CheckPassword from '../../utils/CheckingData/CheckPassword/index.ts';
+import CheckOldPassword from '../../utils/CheckingData/CheckOldPassword/index.ts';
 
 const button = new Button('button', {
   title: 'Авторизоваться',
@@ -62,23 +62,24 @@ const forma = new Form('form', {
       attr: {
         class: 'entrance__input',
         type: 'password',
-        id: 'password',
+        id: 'oldPassword',
         name: 'password',
       },
       events: {
-        blur: CheckPassword,
+        blur: CheckOldPassword,
       },
     }),
     new Error('span', {
       attr: {
         class: 'error-message',
-        id: 'passwordError',
+        id: 'oldPasswordError',
       },
     }),
   ],
   button: button,
   events: {
     submit: DataCollection,
+    blurPassword: CheckOldPassword,
   },
   attr: {
     class: 'entrance__form',

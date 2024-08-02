@@ -1,7 +1,9 @@
 const tpl: string = `
   <label class='label' for='{{for}}'>{{description}}</label>
-  <input class='input' type='{{type}}' id='{{id}}' name='{{name}}' />
-  <span id={{SpanID}}></span>
-`;
+  <div class="input__span">
+  {{{input}}}
+  <span class={{class}} id={{SpanID}}></span>
+  </div>
+  `;
 
 export default tpl;
