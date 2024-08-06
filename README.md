@@ -5,14 +5,12 @@
   <li>npm run build - сборка приложения</li>
   <li>npm run start - сборка и запуск приложения</li>
 </ul>
-<h2>Ссылки на готовые страницы проекта</h2>
+<p>Ссылка на проект: https://serene-salmiakki-eebcdb.netlify.app</p>
+<h3>Добавил следующие функции</h3>
 <ul>
-  <li>https://serene-salmiakki-eebcdb.netlify.app - оснувная страница</li>
-  <li>https://serene-salmiakki-eebcdb.netlify.app/entrance/entrance - вход</li>
-  <li>https://serene-salmiakki-eebcdb.netlify.app/registration/registration - регистрация</li>
-  <li>https://serene-salmiakki-eebcdb.netlify.app/404/404 - 404</li>
-  <li>https://serene-salmiakki-eebcdb.netlify.app/500/500 - 500</li>
-  <li>https://serene-salmiakki-eebcdb.netlify.app/profile/profile - профиль</li>
-  <li>https://serene-salmiakki-eebcdb.netlify.app/changedata/changedata - изменение данных</li>
-  <li>https://serene-salmiakki-eebcdb.netlify.app/changepassword/changepassword - изменение пароля</li>
+  <li>Подключил typescript</li>
+  <li>Реализовал компонентный подход</li>
+  <li>При отправке формы, данные выводятся в консоль</li>
+  <li>Добавил валидацию форм</li>
+  <li>Подключил линтеры</li>
 </ul>

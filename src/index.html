@@ -3,23 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./normalize.css" />
+    <title>Песочница компонентного подхода</title>
     <link rel="stylesheet" href="./style.css" />
-    <title>Vite App</title>
   </head>
   <body>
     <main>
-      <div class="container">
-        <nav>
-          <ul>
-            {{> link URL="./entrance/entrance.html" label="Вход"}} {{> link
-            URL="./registration/registration.html" label="Регистрация"}} {{>
-            link URL="./404/404.html" label="404"}} {{> link
-            URL="./500/500.html" label="500"}} {{> link
-            URL="./profile/profile.html" label="profile"}}
-          </ul>
-        </nav>
-      </div>
+      <nav class="nav">
+        <ul class="list">
+          <li class="item"><a class="link" href="">404</a></li>
+          <li class="item"><a class="link" href="">500</a></li>
+          <li class="item"><a class="link" href="">Изменение данных</a></li>
+          <li class="item"><a class="link" href="">Изменения пароля</a></li>
+          <li class="item"><a class="link" href="#entrance">Вход</a></li>
+          <li class="item"><a class="link" href="#profile">Профиль</a></li>
+          <li class="item">
+            <a class="link" href="#registration">Регистрация</a>
+          </li>
+          <li class="item"><a class="link" href="">Мессенджер</a></li>
+        </ul>
+      </nav>
+      <div class="app"></div>
+      <script type="module" src="./index.ts"></script>
     </main>
   </body>
 </html>
