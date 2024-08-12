@@ -1,13 +1,13 @@
-import { v4 as makeUUID } from 'uuid';
-import Handlebars from 'handlebars';
-import EventBus from './EventBus.ts';
-import IBlock from './IBlock.ts';
+import { v4 as makeUUID } from "uuid";
+import Handlebars from "handlebars";
+import EventBus from "./EventBus.ts";
+import IBlock from "./IBlock.ts";
 
 export default class Block implements IBlock {
-  static EVENT_INIT = 'init';
-  static EVENT_FLOW_CDM = 'flow:component-did-mount';
-  static EVENT_FLOW_CDU = 'flow:component-did-update';
-  static EVENT_FLOW_RENDER = 'flow:render';
+  static EVENT_INIT = "init";
+  static EVENT_FLOW_CDM = "flow:component-did-mount";
+  static EVENT_FLOW_CDU = "flow:component-did-update";
+  static EVENT_FLOW_RENDER = "flow:render";
 
   private _props: Record<string, any>;
   private _children: Record<string, Block>;
@@ -19,7 +19,7 @@ export default class Block implements IBlock {
   private _setUpdate = false;
 
   constructor(
-    tag: string = 'div',
+    tag: string = "div",
     propsAndChilds: Record<string, unknown> = {}
   ) {
     const { children, props, lists } = this.getChildren(propsAndChilds);
@@ -57,7 +57,7 @@ export default class Block implements IBlock {
     const element = document.createElement(tag);
 
     if (this._props.settings?.withInternalID) {
-      element.setAttribute('data-id', this._id);
+      element.setAttribute("data-id", this._id);
     }
     return element;
   }
@@ -66,7 +66,7 @@ export default class Block implements IBlock {
     const block = this.render();
     if (this._element) {
       this.removeEvents();
-      this._element.innerHTML = '';
+      this._element.innerHTML = "";
       if (block) {
         this._element.appendChild(block);
       }
@@ -76,7 +76,7 @@ export default class Block implements IBlock {
   }
 
   render() {
-    const element = document.createElement('div');
+    const element = document.createElement("div");
     return element;
   }
 
@@ -101,7 +101,7 @@ export default class Block implements IBlock {
   private addAttribute() {
     const { attr = {} } = this._props;
     Object.entries(attr).forEach(([key, value]) => {
-      if (this._element && typeof value == 'string') {
+      if (this._element && typeof value == "string") {
         this._element.setAttribute(key, value);
       }
     });
@@ -125,7 +125,7 @@ export default class Block implements IBlock {
   }
 
   compile(template: string, props?: Record<string, any>) {
-    if (typeof props == 'undefined') {
+    if (typeof props == "undefined") {
       props = this._props;
     }
     const propsAndStubs = { ...props };
@@ -139,7 +139,7 @@ export default class Block implements IBlock {
     });
 
     const fragment = this.createDocumentElement(
-      'template'
+      "template"
     ) as HTMLTemplateElement;
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
 
@@ -157,7 +157,7 @@ export default class Block implements IBlock {
       }
 
       const listContent = this.createDocumentElement(
-        'template'
+        "template"
       ) as HTMLTemplateElement;
       child.forEach((item) => {
         if (item instanceof Block) {
@@ -216,21 +216,21 @@ export default class Block implements IBlock {
   show() {
     const content = this.getContent();
     if (content) {
-      content.style.display = 'block';
+      content.style.display = "block";
     }
   }
 
   hide() {
     const content = this.getContent();
     if (content) {
-      content.style.display = 'none';
+      content.style.display = "none";
     }
   }
 
   flex() {
     const content = this.getContent();
     if (content) {
-      content.style.display = 'flex';
+      content.style.display = "flex";
     }
   }
 
@@ -259,7 +259,7 @@ export default class Block implements IBlock {
     return new Proxy(props, {
       get(target, prop: string | symbol) {
         const value = target[prop as keyof typeof target];
-        return typeof value === 'function' ? value.bind(target) : value;
+        return typeof value === "function" ? value.bind(target) : value;
       },
       set: (target, prop: string | symbol, value) => {
         if (target[prop as keyof typeof target] !== value) {

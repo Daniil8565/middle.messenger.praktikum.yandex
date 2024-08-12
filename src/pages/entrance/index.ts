@@ -1,78 +1,90 @@
-import Button from '../../components/button/index.ts';
-import IndexEntrance from './IndexEntrance/index.ts';
-import Link from '../../components/link/index.ts';
-import DataCollection from '../../utils/DataCollection/index.ts';
-import Form from '../../components/form/index.ts';
-import Label from '../../components/label/index.ts';
-import Input from '../../components/input/index.ts';
-import Error from '../../components/Error/index.ts';
-import './style.sass';
-import CheckLogin from '../../utils/CheckingData/CheckLogin/index.ts';
-import CheckOldPassword from '../../utils/CheckingData/CheckOldPassword/index.ts';
+import Button from "../../components/button/index.ts";
+import IndexEntrance from "./IndexEntrance/index.ts";
+import Link from "../../components/link/index.ts";
+import DataCollection from "../../utils/DataCollection/index.ts";
+import Form from "../../components/form/index.ts";
+import Label from "../../components/label/index.ts";
+import Input from "../../components/input/index.ts";
+import Error from "../../components/Error/index.ts";
+// import page from "../404/index.ts";
+import "./style.sass";
+import CheckLogin from "../../utils/CheckingData/CheckLogin/index.ts";
+import CheckOldPassword from "../../utils/CheckingData/CheckOldPassword/index.ts";
+// import { handleLinkClick } from "../../index.ts";
+// import router from "../../index.ts";
+// import router from "../../utils/Router/Router.ts";
 
-const button = new Button('button', {
-  title: 'Авторизоваться',
+// import registration from "../registration/index.ts";
+// import used from "../../index.ts";
+// import page from "../404/index.ts";
+// import router from "../../index.ts";
+
+const button = new Button("button", {
+  title: "Авторизоваться",
   attr: {
-    class: 'entrance__button',
+    class: "entrance__button",
   },
 });
 
-const link = new Link('a', {
+const link = new Link("a", {
   attr: {
-    href: '../index.html',
-    class: 'entrance__link',
+    href: "../index.html",
+    class: "entrance__link",
   },
-  title: 'Нет аккаунта?',
+  title: "Нет аккаунта?",
+  // evets: {
+  //   click: handleLinkClick,
+  // },
 });
 
-const forma = new Form('form', {
+const forma = new Form("form", {
   items: [
-    new Label('label', {
-      description: 'Логин',
+    new Label("label", {
+      description: "Логин",
       attr: {
-        class: 'labelEntrance',
-        for: 'text',
+        class: "labelEntrance",
+        for: "text",
       },
     }),
-    new Input('input', {
+    new Input("input", {
       attr: {
-        class: 'entrance__input',
-        type: 'text',
-        id: 'login',
-        name: 'login',
+        class: "entrance__input",
+        type: "text",
+        id: "login",
+        name: "login",
       },
       events: {
         blur: CheckLogin,
       },
     }),
-    new Error('span', {
+    new Error("span", {
       attr: {
-        class: 'error-message',
-        id: 'loginError',
+        class: "error-message",
+        id: "loginError",
       },
     }),
-    new Label('label', {
-      description: 'Пароль',
+    new Label("label", {
+      description: "Пароль",
       attr: {
-        class: 'labelEntrance',
-        for: 'password',
+        class: "labelEntrance",
+        for: "password",
       },
     }),
-    new Input('input', {
+    new Input("input", {
       attr: {
-        class: 'entrance__input',
-        type: 'password',
-        id: 'oldPassword',
-        name: 'password',
+        class: "entrance__input",
+        type: "password",
+        id: "oldPassword",
+        name: "password",
       },
       events: {
         blur: CheckOldPassword,
       },
     }),
-    new Error('span', {
+    new Error("span", {
       attr: {
-        class: 'error-message',
-        id: 'oldPasswordError',
+        class: "error-message",
+        id: "oldPasswordError",
       },
     }),
   ],
@@ -82,17 +94,17 @@ const forma = new Form('form', {
     blurPassword: CheckOldPassword,
   },
   attr: {
-    class: 'entrance__form',
-    id: 'Form',
+    class: "entrance__form",
+    id: "Form",
   },
 });
 
-const Entrance = new IndexEntrance('div', {
-  title: 'Вход',
+const Entrance = new IndexEntrance("div", {
+  title: "Вход",
   form: forma,
   link: link,
   attr: {
-    class: 'container',
+    class: "container",
   },
 });
 
