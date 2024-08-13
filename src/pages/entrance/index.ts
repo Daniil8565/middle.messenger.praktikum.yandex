@@ -7,6 +7,7 @@ import Label from "../../components/label/index.ts";
 import Input from "../../components/input/index.ts";
 import Error from "../../components/Error/index.ts";
 // import page from "../404/index.ts";
+import handleLinkClick from "../../utils/handleClick/index.ts";
 import "./style.sass";
 import CheckLogin from "../../utils/CheckingData/CheckLogin/index.ts";
 import CheckOldPassword from "../../utils/CheckingData/CheckOldPassword/index.ts";
@@ -28,13 +29,13 @@ const button = new Button("button", {
 
 const link = new Link("a", {
   attr: {
-    href: "../index.html",
+    href: "/registration",
     class: "entrance__link",
   },
   title: "Нет аккаунта?",
-  // evets: {
-  //   click: handleLinkClick,
-  // },
+  events: {
+    click: handleLinkClick,
+  },
 });
 
 const forma = new Form("form", {

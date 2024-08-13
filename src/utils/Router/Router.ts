@@ -42,6 +42,7 @@ export default class Router {
 
   private _onRoute(pathname: string): void {
     const route = this.getRoute(pathname);
+    console.log(route);
 
     if (!route) {
       return;
@@ -62,13 +63,12 @@ export default class Router {
   }
 
   back(): void {
-    let tmp: History = this.history as History;
-    tmp.back();
+    console.log(this.history);
+    if (this.history) this.history.back();
   }
 
   forward(): void {
-    let tmp: History = this.history as History;
-    tmp.forward();
+    if (this.history) this.history.forward();
   }
 
   getRoute(pathname: string): Route | undefined {

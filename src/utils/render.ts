@@ -5,7 +5,7 @@ export default function render(
   component: IBlock
 ): HTMLElement | null {
   const root = document.querySelector(query) as HTMLElement;
-  console.log("render");
+  // console.log("render");
 
   if (root && component.getContent() instanceof HTMLElement) {
     root.appendChild(component.getContent() as Node);

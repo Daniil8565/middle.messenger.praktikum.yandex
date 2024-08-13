@@ -2,10 +2,7 @@ const tpl: string = `
         <div class="container__nav">
           <nav class="nav">
             <div class="message__link">
-              <a class="mes__link" href=""
-                ><p class="link__description">Профиль</p>
-                <span class="link__image"></span
-              ></a>
+              {{{link}}}
             </div>
             <button class="button__search">
               <div class="container__search">

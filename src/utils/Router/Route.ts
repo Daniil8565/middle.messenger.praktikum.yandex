@@ -35,9 +35,11 @@ export default class Route {
   }
 
   render() {
-    console.log("render");
+    // console.log("render");
+    console.log(this._block);
     if (this._block) {
       render(this._props.rootQuery, this._block);
+      // this._block.show();
       return;
     }
     // this._block.show();
