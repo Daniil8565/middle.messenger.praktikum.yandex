@@ -14,6 +14,9 @@ import CheckSurname from "../../utils/CheckingData/CheckSurname/index.ts";
 import CheckPhone from "../../utils/CheckingData/CheckPhone/index.ts";
 import CheckOldPassword from "../../utils/CheckingData/CheckOldPassword/index.ts";
 import CheckRepeatPassword from "../../utils/CheckingData/CheckRepeatPassword/index.ts";
+import handleLinkClick from "../../utils/handleClick/index.ts";
+
+let registration: IndexRegistration;
 
 const button = new Button("button", {
   title: "Зарегестрироваться",
@@ -24,10 +27,13 @@ const button = new Button("button", {
 
 const link = new Link("a", {
   attr: {
-    href: "../index.html",
+    href: "/main",
     class: "entrance__link",
   },
   title: "Войти",
+  events: {
+    click: handleLinkClick,
+  },
 });
 
 const forma = new Form("form", {
@@ -197,7 +203,7 @@ const forma = new Form("form", {
   },
 });
 
-const registration = new IndexRegistration("div", {
+registration = new IndexRegistration("div", {
   title: "Регистрация",
   form: forma,
   link: link,

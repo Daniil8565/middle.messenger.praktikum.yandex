@@ -6,6 +6,7 @@ export default function handleLinkClick(event: MouseEvent): void {
   if (link) {
     const href = link.getAttribute("href");
     if (href) {
+      console.log(href);
       router.go(href);
     }
   }

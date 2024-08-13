@@ -20,6 +20,8 @@ import CheckOldPassword from "../../utils/CheckingData/CheckOldPassword/index.ts
 // import page from "../404/index.ts";
 // import router from "../../index.ts";
 
+let Entrance: IndexEntrance;
+
 const button = new Button("button", {
   title: "Авторизоваться",
   attr: {
@@ -100,7 +102,7 @@ const forma = new Form("form", {
   },
 });
 
-const Entrance = new IndexEntrance("div", {
+Entrance = new IndexEntrance("div", {
   title: "Вход",
   form: forma,
   link: link,

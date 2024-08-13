@@ -5,6 +5,8 @@ import handleLinkClick from "../../utils/handleClick/index.ts";
 import Index500 from "./Index500/index.ts";
 import "../404/404.sass";
 
+let index500: Index500;
+
 const h1 = new Header("h1", {
   title: "500",
   attr: {
@@ -30,7 +32,7 @@ const link = new Link("a", {
   },
 });
 
-const index500 = new Index500("div", {
+index500 = new Index500("div", {
   H1: h1,
   description: data,
   Link: link,

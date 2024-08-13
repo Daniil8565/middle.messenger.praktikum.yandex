@@ -5,6 +5,8 @@ import Link from "../../components/link/index.ts";
 import "./style.sass";
 import handleLinkClick from "../../utils/handleClick/index.ts";
 
+let Profile: IndexProfile;
+
 const avatar = new Avatar("div", {
   attr: { class: "avatar" },
 });
@@ -90,7 +92,7 @@ const exit = new Link("a", {
   },
 });
 
-const Profile = new IndexProfile("div", {
+Profile = new IndexProfile("div", {
   avatar: avatar,
   name: "Иван",
   profileData1: profileData1,

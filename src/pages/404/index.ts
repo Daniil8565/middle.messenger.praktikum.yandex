@@ -5,6 +5,8 @@ import Index404 from "./Index404/index.ts";
 import "./404.sass";
 import handleLinkClick from "../../utils/handleClick/index.ts";
 
+let page: Index404;
+
 const h1 = new Header("h1", {
   title: "404",
   attr: {
@@ -30,7 +32,7 @@ const link = new Link("a", {
   },
 });
 
-const page = new Index404("div", {
+page = new Index404("div", {
   H1: h1,
   description: data,
   Link: link,

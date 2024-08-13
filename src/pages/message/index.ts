@@ -10,6 +10,8 @@ import CheckMessage from "../../utils/CheckingData/CheckMessage/index.ts";
 import LinkMessage from "../../components/linkMessage/index.ts";
 import handleLinkClick from "../../utils/handleClick/index.ts";
 
+let message: IndexMessage;
+
 let item = new ItemMessage("li", {
   header: "Андрей",
   description: "Изображение",
@@ -66,7 +68,7 @@ const forma = new Form("form", {
   },
 });
 
-let message = new IndexMessage("div", {
+message = new IndexMessage("div", {
   link: link,
   item: item,
   form: forma,
