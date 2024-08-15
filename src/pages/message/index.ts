@@ -7,8 +7,9 @@ import Button from "../../components/button/index.ts";
 import DataCollection from "../../utils/DataCollection/index.ts";
 import "./style.sass";
 import CheckMessage from "../../utils/CheckingData/CheckMessage/index.ts";
-import LinkMessage from "../../components/linkMessage/index.ts";
+// import LinkMessage from "../../components/linkMessage/index.ts";
 import handleLinkClick from "../../utils/handleClick/index.ts";
+import Link from "../../components/link/index.ts";
 
 let message: IndexMessage;
 
@@ -21,15 +22,27 @@ let item = new ItemMessage("li", {
   },
 });
 
-let link = new LinkMessage("a", {
-  title: "Профиль",
+let link = new Link("a", {
   attr: {
+    href: "/Profile",
     class: "mes__link",
   },
+  title: "Профиль",
   events: {
     click: handleLinkClick,
   },
 });
+
+// let link2 = new LinkMessage("a", {
+//   attr: {
+//     href: "/Profile",
+//     class: "mes__link",
+//   },
+//   title: "Профиль",
+//   events: {
+//     click: handleLinkClick,
+//   },
+// });
 
 let button = new Button("button", {
   attr: {

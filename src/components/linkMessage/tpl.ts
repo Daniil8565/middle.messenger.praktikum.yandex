@@ -1,5 +1,5 @@
 const tpl: string = `
-    <p class="link__description">{{ title }}</p>
+    <div class="link__description">{{ title }}</div>
     <span class="link__image"></span>
 `;
 

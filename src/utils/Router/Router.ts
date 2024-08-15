@@ -1,8 +1,17 @@
+import page from "../../pages/404/index.ts";
+import Entrance from "../../pages/entrance/index.ts";
+import index500 from "../../pages/500/index.ts";
+import ChangeData from "../../pages/changeData/index.ts";
+import ChangePassword from "../../pages/changePassword/index.ts";
+import message from "../../pages/message/index.ts";
+import Profile from "../../pages/profile/index.ts";
+import registration from "../../pages/registration/index.ts";
 import Route from "./Route.ts";
 import Block from "../../services/Block.ts";
 import IBlock from "../../services/IBlock.ts";
+import "../../style.sass";
 
-export default class Router {
+class Router {
   private static __instance: Router | null = null;
   private routes: Route[] = [];
   private history;
@@ -33,6 +42,25 @@ export default class Router {
   }
 
   start(): void {
+    // Сохраняем состояние в localStorage
+    window.addEventListener("beforeunload", () => {
+      // Сохраняем текущий маршрут
+      const currentPath = window.location.pathname;
+      localStorage.setItem("currentRoute", currentPath);
+    });
+
+    // Загружаем состояние из localStorage
+    window.addEventListener("load", () => {
+      const storedRoute = localStorage.getItem("currentRoute");
+      if (storedRoute) {
+        this.go(storedRoute);
+        localStorage.removeItem("currentRoute"); // Удаляем после восстановления
+      } else {
+        // Если маршрут не сохранен, загружаем по умолчанию
+        this._onRoute(window.location.pathname);
+      }
+    });
+
     window.onpopstate = () => {
       this._onRoute(window.location.pathname);
     };
@@ -42,7 +70,7 @@ export default class Router {
 
   private _onRoute(pathname: string): void {
     const route = this.getRoute(pathname);
-    console.log(route);
+    // console.log(route);
 
     if (!route) {
       return;
@@ -50,6 +78,7 @@ export default class Router {
 
     if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave();
+      // console.log(this._currentRoute);
     }
 
     this._currentRoute = route;
@@ -78,3 +107,19 @@ export default class Router {
     new Block();
   }
 }
+
+const router = new Router(".app");
+router
+  .use("/404", page)
+  .use("/", Entrance)
+  .use("/500", index500)
+  .use("/ChangeData", ChangeData)
+  .use("/ChangePassword", ChangePassword)
+  .use("/message", message)
+  .use("/Profile", Profile)
+  .use("/registration", registration)
+  .start();
+
+router.go("/");
+
+export default router;

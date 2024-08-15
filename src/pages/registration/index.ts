@@ -27,7 +27,7 @@ const button = new Button("button", {
 
 const link = new Link("a", {
   attr: {
-    href: "/main",
+    href: "/",
     class: "entrance__link",
   },
   title: "Войти",

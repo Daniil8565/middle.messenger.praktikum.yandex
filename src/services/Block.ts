@@ -220,6 +220,10 @@ export default class Block implements IBlock {
     }
   }
 
+  remove() {
+    this._element?.remove();
+  }
+
   hide() {
     const content = this.getContent();
     if (content) {

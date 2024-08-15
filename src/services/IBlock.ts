@@ -19,6 +19,7 @@ export default interface IBlock {
   show(): void;
   hide(): void;
   flex(): void;
+  remove(): void;
   setProps(newProps: Record<string, any>): void;
   makePropsProxy(props: Record<string, any>): Record<string, any>;
 }

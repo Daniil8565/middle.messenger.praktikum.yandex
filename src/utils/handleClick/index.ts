@@ -1,4 +1,4 @@
-import router from "../../index.ts";
+import router from "../Router/Router";
 
 export default function handleLinkClick(event: MouseEvent): void {
   event.preventDefault();

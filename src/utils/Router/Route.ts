@@ -26,7 +26,7 @@ export default class Route {
 
   leave() {
     if (this._block) {
-      this._block.hide();
+      this._block.remove();
     }
   }
 
@@ -39,7 +39,7 @@ export default class Route {
     console.log(this._block);
     if (this._block) {
       render(this._props.rootQuery, this._block);
-      // this._block.show();
+      this._block.flex();
       return;
     }
     // this._block.show();
