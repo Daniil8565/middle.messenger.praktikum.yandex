@@ -120,6 +120,6 @@ router
   .use("/registration", registration)
   .start();
 
-router.go("/");
+router.go("/404");
 
 export default router;

@@ -10,7 +10,7 @@ export default class Request {
     method: string = "GET",
     headers: Headers = new Headers(),
     body?: any,
-    queryString?: string,
+    queryString?: string
   ) {
     this._method = method.toUpperCase();
     this._url = url;
@@ -37,7 +37,7 @@ export default class Request {
       // Исправленная строка:
       xhr.open(
         this._method,
-        this._url + (this._queryString ? `?${this._queryString}` : ""),
+        this._url + (this._queryString ? `?${this._queryString}` : "")
       );
       this._headers.forEach((value, key) => {
         xhr.setRequestHeader(key, value);
@@ -57,7 +57,7 @@ export default class Request {
                   acc.set(key.trim(), value.trim());
                 }
                 return acc;
-              }, new Headers()),
+              }, new Headers())
           ),
         });
         resolve(response);
@@ -75,19 +75,19 @@ export default class Request {
     });
   }
 
-  static get(url: string, headers?: Headers, queryString?: string): Request {
+  get(url: string, headers?: Headers, queryString?: string): Request {
     return new Request(url, "GET", headers, undefined, queryString);
   }
 
-  static post(url: string, body: any, headers?: Headers): Request {
+  post(url: string, body: any, headers?: Headers): Request {
     return new Request(url, "POST", headers, body);
   }
 
-  static put(url: string, body: any, headers?: Headers): Request {
+  put(url: string, body: any, headers?: Headers): Request {
     return new Request(url, "PUT", headers, body);
   }
 
-  static delete(url: string, headers?: Headers): Request {
+  delete(url: string, headers?: Headers): Request {
     return new Request(url, "DELETE", headers);
   }
 }

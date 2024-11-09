@@ -50,7 +50,7 @@ export default class Block implements IBlock {
 
   private init() {
     this._element = this.createDocumentElement(this._meta?.tag);
-    this._eventBus.emit(Block.EVENT_FLOW_RENDER);
+    this._eventBus.emit(Block.EVENT_FLOW_RENDER, this._meta?.tag);
   }
 
   private createDocumentElement(tag: string): HTMLElement {
@@ -62,8 +62,8 @@ export default class Block implements IBlock {
     return element;
   }
 
-  private _render() {
-    const block = this.render();
+  private _render(tag: string) {
+    const block = this.render(tag);
     if (this._element) {
       this.removeEvents();
       this._element.innerHTML = "";
@@ -75,8 +75,8 @@ export default class Block implements IBlock {
     }
   }
 
-  render() {
-    const element = document.createElement("div");
+  render(tag: string) {
+    const element = document.createElement(tag);
     return element;
   }
 
@@ -124,62 +124,8 @@ export default class Block implements IBlock {
     return { children, props, lists };
   }
 
-  compile(template: string, props?: Record<string, any>) {
-    if (typeof props == "undefined") {
-      props = this._props;
-    }
-    const propsAndStubs = { ...props };
-
-    Object.entries(this._children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
-    });
-
-    Object.entries(this._lists).forEach(([key]) => {
-      propsAndStubs[key] = `<div data-id="__1_${key}"></div>`;
-    });
-
-    const fragment = this.createDocumentElement(
-      "template"
-    ) as HTMLTemplateElement;
-    fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
-
-    Object.values(this._children).forEach((child) => {
-      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-      if (stub) {
-        stub.replaceWith(child.getContent()!);
-      }
-    });
-
-    Object.entries(this._lists).forEach(([key, child]) => {
-      const stub = fragment.content.querySelector(`[data-id="__1_${key}"]`);
-      if (!stub) {
-        return;
-      }
-
-      const listContent = this.createDocumentElement(
-        "template"
-      ) as HTMLTemplateElement;
-      child.forEach((item) => {
-        if (item instanceof Block) {
-          listContent.content.append(item.getContent()!);
-        } else {
-          listContent.content.append(`${item}`);
-        }
-      });
-
-      stub.replaceWith(listContent.content);
-    });
-
-    let tmp: unknown = fragment.content;
-
-    return tmp as HTMLDivElement;
-  }
-
-  getContent(): HTMLElement | null {
-    return this._element;
-  }
-
   _componentDidMount() {
+    console.log('_componentDidMount')
     this.componentDidMount();
     Object.values(this._children).forEach((child) => {
       child.dispatchBlockDidMount();
@@ -209,8 +155,35 @@ export default class Block implements IBlock {
     oldProps: Record<string, any>,
     newProps: Record<string, any>
   ) {
-    console.log(newProps, oldProps);
+
+    const isChanged = !this.deepEqual(oldProps, newProps);
+    return isChanged;
+  }
+
+  deepEqual(obj1: Record<string, any>, obj2: Record<string, any>): boolean {
+    if (obj1 === obj2) return true; // Если объекты одинаковые по ссылке
+  
+    if (typeof obj1 !== 'object' || typeof obj2 !== 'object') return false;
+  
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
+  
+    if (keys1.length !== keys2.length) return false;
+  
+    for (let key of keys1) {
+      if (!keys2.includes(key)) return false;
+      if (!this.deepEqual(obj1[key], obj2[key])) return false;
+    }
+  
     return true;
+  }
+
+  remove() {
+    this._element?.remove();
+  }
+
+  getContent(): HTMLElement | null {
+    return this._element;
   }
 
   show() {
@@ -218,10 +191,6 @@ export default class Block implements IBlock {
     if (content) {
       content.style.display = "block";
     }
-  }
-
-  remove() {
-    this._element?.remove();
   }
 
   hide() {
@@ -273,5 +242,56 @@ export default class Block implements IBlock {
         return true;
       },
     });
+  }
+
+  compile(template: string, props?: Record<string, any>) {
+    if (typeof props == "undefined") {
+      props = this._props;
+    }
+    const propsAndStubs = { ...props };
+
+    Object.entries(this._children).forEach(([key, child]) => {
+      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+    });
+
+    Object.entries(this._lists).forEach(([key]) => {
+      propsAndStubs[key] = `<div data-id="__1_${key}"></div>`;
+    });
+
+    const fragment = this.createDocumentElement(
+      "template"
+    ) as HTMLTemplateElement;
+    fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
+
+    Object.values(this._children).forEach((child) => {
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+      if (stub) {
+        stub.replaceWith(child.getContent()!);
+      }
+    });
+
+    Object.entries(this._lists).forEach(([key, child]) => {
+      const stub = fragment.content.querySelector(`[data-id="__1_${key}"]`);
+      if (!stub) {
+        return;
+      }
+
+      const listContent = this.createDocumentElement(
+        "template"
+      ) as HTMLTemplateElement;
+      child.forEach((item) => {
+        if (item instanceof Block) {
+          listContent.content.append(item.getContent()!);
+        } else {
+          listContent.content.append(`${item}`);
+        }
+      });
+
+      stub.replaceWith(listContent.content);
+    });
+
+    let tmp: unknown = fragment.content;
+
+    return tmp as HTMLDivElement;
   }
 }

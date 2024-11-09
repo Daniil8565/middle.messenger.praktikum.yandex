@@ -4,7 +4,7 @@ interface IBlockProps {
 
 export default interface IBlock {
   // Методы
-  render(): HTMLElement;
+  render(tag:string): HTMLElement;
   compile(template: string, props?: IBlockProps): void;
   getContent(): HTMLElement | null;
   _componentDidUpdate(
