@@ -3,12 +3,12 @@ import FormSection from "../../components/formSection/index.ts";
 import Input from "../../components/input/index.ts";
 import Button from "../../components/button/index.ts";
 import IndexChangePassword from "./IndexChangePassword/index.ts";
-import DataCollection from "../../utils/DataCollection/index.ts";
 import Form from "../../components/form/index.ts";
 import "./style.sass";
 import { CheckOldPassword } from "../../utils/CheckingData/CheckOldPassword/index.ts";
 import CheckNewPassword from "../../utils/CheckingData/CheckNewPassword/index.ts";
-import CheckRepeatPassword from "../../utils/CheckingData/CheckRepeatPassword/index.ts";
+import CheckNewAndRepeatPasword from "../../utils/CheckingData/CheckNewAndRepeatPasword/index.ts";
+import CheckChangePassword from "../../utils/CheckingData/CheckChangePassword/index.ts";
 
 let ChangePassword: IndexChangePassword;
 
@@ -57,7 +57,7 @@ const input3 = new Input("input", {
     name: "repeatPassword",
   },
   events: {
-    blur: CheckRepeatPassword,
+    blur: CheckNewAndRepeatPasword,
   },
 });
 
@@ -96,10 +96,7 @@ const forma = new Form("form", {
   ],
   button: button,
   events: {
-    submit: DataCollection,
-    blur: CheckOldPassword,
-    blur2: CheckNewPassword,
-    blur3: CheckRepeatPassword,
+    submit: CheckChangePassword,
   },
   attr: {
     class: "form",
