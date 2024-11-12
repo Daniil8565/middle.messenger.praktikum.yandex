@@ -6,7 +6,7 @@ import IndexChangePassword from "./IndexChangePassword/index.ts";
 import DataCollection from "../../utils/DataCollection/index.ts";
 import Form from "../../components/form/index.ts";
 import "./style.sass";
-import CheckOldPassword from "../../utils/CheckingData/CheckOldPassword/index.ts";
+import { CheckOldPassword } from "../../utils/CheckingData/CheckOldPassword/index.ts";
 import CheckNewPassword from "../../utils/CheckingData/CheckNewPassword/index.ts";
 import CheckRepeatPassword from "../../utils/CheckingData/CheckRepeatPassword/index.ts";
 

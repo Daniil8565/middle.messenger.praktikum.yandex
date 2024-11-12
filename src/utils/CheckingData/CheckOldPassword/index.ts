@@ -1,30 +1,21 @@
-export default function CheckOldPassword() {
-  const form = document.getElementById('Form') as HTMLFormElement;
-  const passwordInput = document.getElementById(
-    'oldPassword'
-  ) as HTMLInputElement;
+let CheckPassword = false;
+let password: string;
+
+export function CheckOldPassword(e: FocusEvent) {
   const passwordError = document.getElementById(
-    'oldPasswordError'
+    "oldPasswordError"
   ) as HTMLSpanElement;
-  console.log(passwordError);
-  const validatePassword = (password: string) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,40}$/;
-    if (regex.test(password)) {
-      passwordError.textContent = '';
-      return true;
-    } else {
-      passwordError.textContent =
-        'Пароль должен быть не менее 8 символов, содержать хотя бы одну заглавную букву и цифру.';
-      return false;
-    }
-  };
+  password = (e.target as HTMLInputElement).value;
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,40}$/;
 
-  passwordInput.addEventListener('blur', () => {
-    validatePassword(passwordInput.value);
-  });
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    validatePassword(passwordInput.value);
-  });
+  if (regex.test(password)) {
+    passwordError.textContent = "";
+    CheckPassword = true;
+  } else {
+    passwordError.textContent = `Пароль должен быть не менее 8 символов, содержать хотя бы одну заглавную букву и цифру.`;
+    CheckPassword = false;
+  }
 }
+
+// Экспортируем переменную отдельно
+export { CheckPassword, password };

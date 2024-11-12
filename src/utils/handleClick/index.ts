@@ -1,4 +1,4 @@
-import router from "../Router/Router";
+import router from "../../index.ts";
 
 export default function handleLinkClick(event: MouseEvent): void {
   event.preventDefault();
@@ -6,7 +6,6 @@ export default function handleLinkClick(event: MouseEvent): void {
   if (link) {
     const href = link.getAttribute("href");
     if (href) {
-      console.log(href);
       router.go(href);
     }
   }

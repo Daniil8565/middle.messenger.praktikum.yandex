@@ -1,25 +1,16 @@
-export default function CheckLogin() {
-  const form = document.getElementById('Form') as HTMLFormElement;
-  const loginInput = document.getElementById('login') as HTMLInputElement;
-  const loginError = document.getElementById('loginError') as HTMLSpanElement;
+let FlagLogin = false;
 
-  const validateLogin = (login: string) => {
-    const regex = /^[a-zA-Z0-9_-]{3,20}$/;
-    if (regex.test(login) && !login.match(/^\d+$/)) {
-      loginError.textContent = '';
-      return true;
-    } else {
-      loginError.textContent = 'Некорректный логин.';
-      return false;
-    }
-  };
-
-  loginInput.addEventListener('blur', () => {
-    validateLogin(loginInput.value);
-  });
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    validateLogin(loginInput.value);
-  });
+export function CheckLogin(e: FocusEvent) {
+  const login = (e.target as HTMLInputElement).value;
+  const loginError = document.getElementById("loginError") as HTMLSpanElement;
+  const regex = /^[a-zA-Z0-9_-]{3,20}$/;
+  if (regex.test(login) && !login.match(/^\d+$/)) {
+    loginError.textContent = "";
+    FlagLogin = true;
+  } else {
+    loginError.textContent = "Неверный логин";
+    FlagLogin = false;
+  }
 }
+
+export { FlagLogin };

@@ -3,14 +3,15 @@ import FormSection from "../../components/formSection/index.ts";
 import IndexChangeData from "./IndexChahgeData/index.ts";
 import Button from "../../components/button/index.ts";
 import "./style.sass";
-import DataCollection from "../../utils/DataCollection/index.ts";
 import Form from "../../components/form/index.ts";
 import Input from "../../components/input/index.ts";
 import CheckEmail from "../../utils/CheckingData/CheckEmail/index.ts";
-import CheckLogin from "../../utils/CheckingData/CheckLogin/index.ts";
+import { CheckLogin } from "../../utils/CheckingData/CheckLogin/index.ts";
 import CheckName from "../../utils/CheckingData/CheckName/index.ts";
 import CheckSurname from "../../utils/CheckingData/CheckSurname/index.ts";
 import CheckPhone from "../../utils/CheckingData/CheckPhone/index.ts";
+import CheckNameChat from "../../utils/CheckingData/CheckNameChat/index.ts";
+import CheckChangeData from "../../utils/CheckingData/CheckChangeData/index.ts";
 
 let ChangeData: IndexChangeData;
 
@@ -84,7 +85,7 @@ const input5 = new Input("input", {
     name: "display_name",
   },
   events: {
-    blur: CheckEmail,
+    blur: CheckNameChat,
   },
 });
 
@@ -109,14 +110,14 @@ const forma = new Form("form", {
       attr: {
         class: "form__content",
       },
-      class: "error-message",
+      class: "error__ChangeData",
       SpanID: "emailError",
     }),
     new FormSection("div", {
       for: "login",
       input: input2,
       description: "Логин",
-      class: "error-message",
+      class: "error__ChangeData",
       attr: {
         class: "form__content",
       },
@@ -126,7 +127,7 @@ const forma = new Form("form", {
       for: "first_name",
       input: input3,
       description: "Имя",
-      class: "error-message",
+      class: "error__ChangeData",
       attr: {
         class: "form__content",
       },
@@ -136,7 +137,7 @@ const forma = new Form("form", {
       for: "second_name",
       input: input4,
       description: "Фамилия",
-      class: "error-message",
+      class: "error__ChangeData",
       attr: {
         class: "form__content",
       },
@@ -146,17 +147,17 @@ const forma = new Form("form", {
       for: "display_name",
       input: input5,
       description: "Имя в чате",
-      class: "error-message",
+      class: "error__ChangeData",
       attr: {
         class: "form__content",
       },
-      SpanID: "",
+      SpanID: "Name__chat",
     }),
     new FormSection("div", {
       for: "tel",
       input: input6,
       description: "Телефон",
-      class: "error-message",
+      class: "error__ChangeData",
       attr: {
         class: "form__content",
       },
@@ -165,13 +166,7 @@ const forma = new Form("form", {
   ],
   button: button,
   events: {
-    submit: DataCollection,
-    blur: CheckPhone,
-    blur2: CheckEmail,
-    blur3: CheckSurname,
-    blur4: CheckName,
-    blur5: CheckLogin,
-    blur6: CheckEmail,
+    submit: CheckChangeData,
   },
   attr: {
     class: "form",

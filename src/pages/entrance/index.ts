@@ -1,25 +1,15 @@
 import Button from "../../components/button/index.ts";
 import IndexEntrance from "./IndexEntrance/index.ts";
 import Link from "../../components/link/index.ts";
-import DataCollection from "../../utils/DataCollection/index.ts";
 import Form from "../../components/form/index.ts";
 import Label from "../../components/label/index.ts";
 import Input from "../../components/input/index.ts";
 import Error from "../../components/Error/index.ts";
-// import page from "../404/index.ts";
 import handleLinkClick from "../../utils/handleClick/index.ts";
 import "./style.sass";
-import CheckLogin from "../../utils/CheckingData/CheckLogin/index.ts";
-import CheckOldPassword from "../../utils/CheckingData/CheckOldPassword/index.ts";
-// import { handleLinkClick } from "../../index.ts";
-// import router from "../../index.ts";
-// import router from "../../utils/Router/Router.ts";
-
-// import registration from "../registration/index.ts";
-// import used from "../../index.ts";
-// import page from "../404/index.ts";
-// import router from "../../index.ts";
-
+import { CheckLogin } from "../../utils/CheckingData/CheckLogin/index.ts";
+import { CheckOldPassword } from "../../utils/CheckingData/CheckOldPassword/index.ts";
+import CheckData from "../../utils/CheckingData/CheckData/index.ts";
 let Entrance: IndexEntrance;
 
 const button = new Button("button", {
@@ -93,8 +83,8 @@ const forma = new Form("form", {
   ],
   button: button,
   events: {
-    submit: DataCollection,
-    blurPassword: CheckOldPassword,
+    submit: CheckData,
+    // blurPassword: CheckOldPassword,
   },
   attr: {
     class: "entrance__form",

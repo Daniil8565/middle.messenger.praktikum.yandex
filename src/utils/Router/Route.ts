@@ -4,16 +4,12 @@ import render from "../render";
 
 export default class Route {
   private _pathname: string;
-  private _block: IBlock | null;
   private _props: Record<string, any>;
+  private _block: IBlock | null;
 
-  constructor(
-    pathname: string,
-    indexBlock: IBlock,
-    props: Record<string, any>
-  ) {
+  constructor(pathname: string, Block: IBlock, props: Record<string, any>) {
     this._pathname = pathname;
-    this._block = indexBlock;
+    this._block = Block;
     this._props = props;
   }
 
@@ -35,13 +31,10 @@ export default class Route {
   }
 
   render() {
-    // console.log("render");
-    console.log(this._block);
     if (this._block) {
       render(this._props.rootQuery, this._block);
-      this._block.flex();
+      // this._block.show();
       return;
     }
-    // this._block.show();
   }
 }
