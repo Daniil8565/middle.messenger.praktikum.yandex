@@ -35,6 +35,9 @@ export default class Request {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       // Исправленная строка:
+      console.log(
+        this._url + (this._queryString ? `?${this._queryString}` : "")
+      );
       xhr.open(
         this._method,
         this._url + (this._queryString ? `?${this._queryString}` : "")

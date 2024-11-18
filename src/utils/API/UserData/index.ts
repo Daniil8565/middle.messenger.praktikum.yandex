@@ -1,4 +1,4 @@
-import Request from "../../Request";
+import Request from "../Request";
 import { BaseAPI } from "../BaseAPI";
 
 const chatAPIInstance = new Request("/auth/signup");

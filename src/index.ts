@@ -60,7 +60,7 @@ class Router {
         localStorage.removeItem("currentRoute"); // Удаляем после восстановления
       } else {
         // Если маршрут не сохранен, загружаем по умолчанию
-        this._onRoute("/message");
+        this._onRoute(window.location.pathname);
       }
     });
 
