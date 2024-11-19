@@ -5,6 +5,7 @@ export function CheckOldPassword(e: FocusEvent) {
   const passwordError = document.getElementById(
     "oldPasswordError"
   ) as HTMLSpanElement;
+  passwordError.style.fontSize = "8px";
   password = (e.target as HTMLInputElement).value;
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,40}$/;
 

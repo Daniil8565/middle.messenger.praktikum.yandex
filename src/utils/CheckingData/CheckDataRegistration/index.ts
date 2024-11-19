@@ -5,6 +5,7 @@ import { FlagSurname } from "../CheckSurname";
 import { Flagphone } from "../CheckPhone";
 import { password } from "../CheckOldPassword";
 import { FlagRepeatPassword } from "../CheckRepeatPassword";
+import UserLoginController from "../../API/UserLoginController";
 
 export default function CheckDataRegistration(event: SubmitEvent) {
   event.preventDefault();
@@ -17,6 +18,7 @@ export default function CheckDataRegistration(event: SubmitEvent) {
     password &&
     FlagRepeatPassword
   ) {
+    const registrationController = new UserLoginController();
     const form = document.getElementById("Form") as HTMLFormElement;
     const data: { [key: string]: string } = {}; // Создаем объект для хранения данных
     const inputs = form.querySelectorAll("input");
@@ -25,6 +27,6 @@ export default function CheckDataRegistration(event: SubmitEvent) {
       input.value = "";
     });
     console.log(data); // Выводим объект в консоль
-  } else {
+    registrationController.registration(data);
   }
 }

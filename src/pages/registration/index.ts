@@ -5,7 +5,6 @@ import Link from "../../components/link/index.ts";
 import Form from "../../components/form/index.ts";
 import Label from "../../components/label/index.ts";
 import Input from "../../components/input/index.ts";
-// import DataCollection from "../../utils/DataCollection/index.ts";
 import "./style.sass";
 import CheckEmail from "../../utils/CheckingData/CheckEmail/index.ts";
 import { CheckLogin } from "../../utils/CheckingData/CheckLogin/index.ts";
@@ -185,6 +184,9 @@ const forma = new Form("form", {
     }),
     new Error("span", {
       attr: { id: "repeatPasswordError", class: "error-message" },
+    }),
+    new Error("span", {
+      attr: { id: "ErrorRequest", class: "ErrorRequest" },
     }),
   ],
   button: button,

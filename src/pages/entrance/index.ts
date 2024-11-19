@@ -82,6 +82,12 @@ const forma = new Form("form", {
         id: "oldPasswordError",
       },
     }),
+    new Error("span", {
+      attr: {
+        class: "ErrorRequest",
+        id: "ErrorRequest",
+      },
+    }),
   ],
   button: button,
   events: {

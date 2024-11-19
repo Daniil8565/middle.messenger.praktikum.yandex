@@ -31,10 +31,9 @@ export default class Request {
     this._queryString = queryString;
   }
 
-  async send(): Promise<Response> {
+  async send(): Promise<XMLHttpRequest> {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      // Исправленная строка:
       console.log(
         this._url + (this._queryString ? `?${this._queryString}` : "")
       );
@@ -42,34 +41,32 @@ export default class Request {
         this._method,
         this._url + (this._queryString ? `?${this._queryString}` : "")
       );
+
+      // Установить заголовок Content-Type для POST-запросов с JSON
+      if (this._method !== "GET") {
+        this._headers.set("Content-Type", "application/json");
+      }
+
+      // Установить все заголовки
       this._headers.forEach((value, key) => {
         xhr.setRequestHeader(key, value);
       });
 
       xhr.onload = () => {
-        const response = new Response(xhr.responseText, {
-          status: xhr.status,
-          statusText: xhr.statusText,
-          headers: new Headers(
-            xhr
-              .getAllResponseHeaders()
-              .split("\n")
-              .reduce((acc, header) => {
-                const [key, value] = header.split(": ");
-                if (key && value) {
-                  acc.set(key.trim(), value.trim());
-                }
-                return acc;
-              }, new Headers())
-          ),
-        });
-        resolve(response);
+        const status = xhr.status || 0;
+        if (status >= 200 && status < 300) {
+          resolve(xhr);
+        } else {
+          console.log(xhr.response);
+          reject({ reason: xhr.response });
+        }
       };
 
       xhr.onerror = () => {
         reject(new Error("Network Error"));
       };
 
+      // Отправка данных в теле запроса
       if (this._method === "GET") {
         xhr.send();
       } else {
