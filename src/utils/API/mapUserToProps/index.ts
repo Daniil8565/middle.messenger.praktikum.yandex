@@ -1,7 +1,11 @@
 import { Indexed } from "../store";
 
-export default function mapUserToProps(state: Indexed) {
+export default function mapUserToProps(
+  state: Indexed
+): Record<string, unknown> {
+  console.log("mapUserToProps", state?.user);
+  console.log("mapUserToProps", state?.user?.email);
   return {
-    name: state.user,
+    email: state?.user?.email,
   };
 }

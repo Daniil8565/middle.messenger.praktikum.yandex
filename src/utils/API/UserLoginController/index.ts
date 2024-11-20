@@ -16,7 +16,7 @@ class UserLoginController {
     if (!data) {
       throw new Error(data);
     }
-    console.log(data);
+    this.logout();
     loginApi
       .request(data)
       .then(() => {
@@ -51,8 +51,7 @@ class UserLoginController {
   public async getData() {
     loginApi.requestDataUser().then((data) => {
       const dataJSON = data.response;
-      console.log(dataJSON);
-      store.set("user", dataJSON);
+      store.set("user", JSON.parse(dataJSON));
     });
   }
 
@@ -65,8 +64,8 @@ class UserLoginController {
         document.cookie = "uuid=; Max-Age=0; path=/; domain=ya-praktikum.tech;";
 
         // Перенаправление на страницу входа или другую
-        // router.go("/");
-        window.location.reload();
+        router.go("/");
+        // window.location.reload();
         const elemError = document.getElementById(
           "ErrorRequest"
         ) as HTMLSpanElement;

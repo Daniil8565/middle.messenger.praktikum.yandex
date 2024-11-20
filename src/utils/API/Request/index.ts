@@ -34,9 +34,6 @@ export default class Request {
   async send(): Promise<XMLHttpRequest> {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      console.log(
-        this._url + (this._queryString ? `?${this._queryString}` : "")
-      );
       xhr.open(
         this._method,
         this._url + (this._queryString ? `?${this._queryString}` : "")

@@ -4,6 +4,8 @@ import IndexProfile from "./IndexProfile/index.ts";
 import Link from "../../components/link/index.ts";
 import "./style.sass";
 import handleLinkClick from "../../utils/handleClick/index.ts";
+import mapUserToProps from "../../utils/API/mapUserToProps/index.ts";
+import connect from "../../utils/API/HOC/index.ts";
 
 let Profile: IndexProfile;
 
@@ -13,7 +15,7 @@ const avatar = new Avatar("div", {
 
 const profileData1 = new ProfileData("div", {
   label: "Почта",
-  description: "pochta@yandex.ru",
+  description: "",
   attr: {
     class: "section",
   },
@@ -92,7 +94,9 @@ const exit = new Link("a", {
   },
 });
 
-Profile = new IndexProfile("div", {
+let newIndexProfile = connect(mapUserToProps)(IndexProfile);
+
+Profile = new newIndexProfile("div", {
   avatar: avatar,
   name: "Иван",
   profileData1: profileData1,

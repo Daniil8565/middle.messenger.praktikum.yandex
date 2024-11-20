@@ -1,8 +1,12 @@
 import EventBus from "../../services/EventBus";
-import set from "./set";
+// import set from "./set";
+
+type Ivalue = {
+  [key: string]: unknown;
+};
 
 export type Indexed = {
-  [key: string]: string;
+  [key: string]: Ivalue;
 };
 
 export enum StoreEvents {
@@ -16,17 +20,10 @@ class Store extends EventBus {
     return this.state;
   }
 
-  public set(path: string, value: unknown) {
-    console.log(
-      "this.state = ",
-      this.state,
-      "path = ",
-      path,
-      "value = ",
-      value
-    );
-    set(this.state, path, value);
+  public set(path: string, value: Ivalue) {
+    this.state[path] = value;
     console.log(this.state);
+    // set(this.state, path, value);
     // метод EventBus
     this.emit(StoreEvents.Updated);
   }

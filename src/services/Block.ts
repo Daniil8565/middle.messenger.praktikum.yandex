@@ -62,8 +62,8 @@ export default class Block implements IBlock {
     return element;
   }
 
-  private _render(tag: string) {
-    const block = this.render(tag);
+  private _render() {
+    const block = this.render();
     if (this._element) {
       this.removeEvents();
       this._element.innerHTML = "";
@@ -75,8 +75,8 @@ export default class Block implements IBlock {
     }
   }
 
-  render(tag: string) {
-    const element = document.createElement(tag);
+  render() {
+    const element = document.createElement("div");
     return element;
   }
 
