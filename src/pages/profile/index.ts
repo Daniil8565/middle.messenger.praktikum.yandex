@@ -83,7 +83,7 @@ const link2 = new Link("a", {
 
 const exit = new Link("a", {
   attr: {
-    href: "/message",
+    href: "/",
     class: "exit",
   },
   title: "Выйти",

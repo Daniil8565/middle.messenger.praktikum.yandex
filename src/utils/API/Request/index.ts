@@ -52,6 +52,9 @@ export default class Request {
         xhr.setRequestHeader(key, value);
       });
 
+      // Включить передачу cookies
+      xhr.withCredentials = true;
+
       xhr.onload = () => {
         const status = xhr.status || 0;
         if (status >= 200 && status < 300) {

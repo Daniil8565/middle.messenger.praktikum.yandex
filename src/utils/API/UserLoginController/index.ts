@@ -19,9 +19,11 @@ class UserLoginController {
     console.log(data);
     loginApi
       .request(data)
-      .then((data) => {
-        store.set("user", data);
+      .then(() => {
         router.go("/message");
+      })
+      .then(() => {
+        this.getData();
       })
       .catch((error) => {
         errorMessage(error);
@@ -35,12 +37,43 @@ class UserLoginController {
     console.log(data);
     loginApi
       .create(data)
-      .then((data) => {
-        store.set("user", data);
+      .then(() => {
         router.go("/message");
+      })
+      .then(() => {
+        this.getData();
       })
       .catch((error) => {
         errorMessage(error);
+      });
+  }
+
+  public async getData() {
+    loginApi.requestDataUser().then((data) => {
+      const dataJSON = data.response;
+      console.log(dataJSON);
+      store.set("user", dataJSON);
+    });
+  }
+
+  public async logout() {
+    loginApi
+      .logout()
+      .then(() => {
+        document.cookie =
+          "authCookie=; Max-Age=0; path=/; domain=ya-praktikum.tech;";
+        document.cookie = "uuid=; Max-Age=0; path=/; domain=ya-praktikum.tech;";
+
+        // Перенаправление на страницу входа или другую
+        // router.go("/");
+        window.location.reload();
+        const elemError = document.getElementById(
+          "ErrorRequest"
+        ) as HTMLSpanElement;
+        elemError.textContent = "";
+      })
+      .catch((error) => {
+        console.error("Ошибка при выходе: ", error);
       });
   }
 }

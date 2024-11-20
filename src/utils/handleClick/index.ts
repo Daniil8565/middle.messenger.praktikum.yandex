@@ -1,12 +1,18 @@
 import router from "../../index.ts";
+import UserLoginController from "../API/UserLoginController/index.ts";
 
 export default function handleLinkClick(event: MouseEvent): void {
   event.preventDefault();
   const link = event.target as HTMLAnchorElement | null;
   if (link) {
-    const href = link.getAttribute("href");
-    if (href) {
-      router.go(href);
+    if (link.className == "exit") {
+      let ExitController = new UserLoginController();
+      ExitController.logout();
+    } else {
+      const href = link.getAttribute("href");
+      if (href) {
+        router.go(href);
+      }
     }
   }
 }

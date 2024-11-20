@@ -12,6 +12,14 @@ class LoginAPI {
   create(data: { [key: string]: string }) {
     return entranceAPI.post(`${URL}/auth/signup`, data).send();
   }
+
+  requestDataUser() {
+    return entranceAPI.get(`${URL}/auth/user`).send();
+  }
+
+  logout() {
+    return entranceAPI.post(`${URL}/auth/logout`, {}).send();
+  }
 }
 
 export default LoginAPI;
