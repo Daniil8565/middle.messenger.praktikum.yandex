@@ -57,7 +57,6 @@ export default class Request {
         if (status >= 200 && status < 300) {
           resolve(xhr);
         } else {
-          console.log(xhr.response);
           reject({ reason: xhr.response });
         }
       };

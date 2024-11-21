@@ -11,22 +11,36 @@ function errorMessage(error: Record<string, string>) {
   ErrorElem.textContent = errorMessage;
 }
 
+// Функция для установки cookies
+function setCookie(name: string, value: string, days: number) {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000); // Устанавливаем срок действия cookie (в днях)
+  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+}
+
+// Функция для удаления cookies
+function deleteCookie(name: string) {
+  document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
+}
+
 class UserLoginController {
   public async login(data: { [key: string]: string }) {
     if (!data) {
       throw new Error(data);
     }
-    this.logout();
     loginApi
       .request(data)
       .then(() => {
-        router.go("/message");
+        // Сохраняем флаг авторизации в cookies
+        setCookie("isAuthenticated", "true", 7); // Флаг сохраняем на 7 дней
+
+        router.go("/message"); // Перенаправление на страницу после успешного входа
       })
       .then(() => {
         this.getData();
       })
       .catch((error) => {
-        errorMessage(error);
+        errorMessage(error); // Обработка ошибки
       });
   }
 
@@ -34,36 +48,41 @@ class UserLoginController {
     if (!data) {
       throw new Error(data);
     }
-    console.log(data);
     loginApi
       .create(data)
       .then(() => {
-        router.go("/message");
+        // Сохраняем флаг авторизации в cookies
+        setCookie("isAuthenticated", "true", 7); // Флаг сохраняем на 7 дней
+        router.go("/message"); // Перенаправление на страницу после регистрации
       })
       .then(() => {
         this.getData();
       })
       .catch((error) => {
-        errorMessage(error);
+        errorMessage(error); // Обработка ошибки
       });
   }
 
   public async getData() {
     loginApi.requestDataUser().then((data) => {
       const dataJSON = data.response;
-      store.set("user", JSON.parse(dataJSON));
+      store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
     });
   }
 
   public async logout() {
+    // Удаляем флаг авторизации из cookies
+    deleteCookie("isAuthenticated"); // Удаление флага авторизации
+
     loginApi
       .logout()
       .then(() => {
+        // Также очищаем другие cookies
         document.cookie =
           "authCookie=; Max-Age=0; path=/; domain=ya-praktikum.tech;";
         document.cookie = "uuid=; Max-Age=0; path=/; domain=ya-praktikum.tech;";
 
-        // Перенаправление на страницу входа или другую
+        // Перенаправляем на страницу входа
         router.go("/");
         // window.location.reload();
         const elemError = document.getElementById(

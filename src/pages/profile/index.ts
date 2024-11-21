@@ -1,11 +1,11 @@
 import Avatar from "../../components/avatar/index.ts";
-import ProfileData from "../../components/ProfileData/index.ts";
 import IndexProfile from "./IndexProfile/index.ts";
 import Link from "../../components/link/index.ts";
 import "./style.sass";
 import handleLinkClick from "../../utils/handleClick/index.ts";
 import mapUserToProps from "../../utils/API/mapUserToProps/index.ts";
 import connect from "../../utils/API/HOC/index.ts";
+import GlobalProfileData from "../../components/GlobalProfileData/index.ts";
 
 let Profile: IndexProfile;
 
@@ -13,52 +13,71 @@ const avatar = new Avatar("div", {
   attr: { class: "avatar" },
 });
 
-const profileData1 = new ProfileData("div", {
-  label: "Почта",
-  description: "",
-  attr: {
-    class: "section",
-  },
-});
+// let newProfileData = connect(mapUserToProps)(ProfileData);
 
-const profileData2 = new ProfileData("div", {
-  label: "Логин",
-  description: "ivanivanov",
-  attr: {
-    class: "section",
-  },
-});
+// const profileData1 = new ProfileData("div", {
+//   label: "Почта",
+//   email: "",
+//   attr: {
+//     class: "section",
+//   },
+// });
 
-const profileData3 = new ProfileData("div", {
-  label: "Имя",
-  description: "Иван",
-  attr: {
-    class: "section",
-  },
-});
+// const profileData2 = new ProfileData("div", {
+//   label: "Логин",
+//   login: "",
+//   attr: {
+//     class: "section",
+//   },
+// });
 
-const profileData4 = new ProfileData("div", {
-  label: "Фамилия",
-  description: "Иванов",
-  attr: {
-    class: "section",
-  },
-});
+// const profileData3 = new ProfileData("div", {
+//   label: "Имя",
+//   description: "Иван",
+//   attr: {
+//     class: "section",
+//   },
+// });
 
-const profileData5 = new ProfileData("div", {
-  label: "Имя в чате",
-  description: "Иван",
-  attr: {
-    class: "section",
-  },
-});
+// const profileData4 = new ProfileData("div", {
+//   label: "Фамилия",
+//   description: "Иванов",
+//   attr: {
+//     class: "section",
+//   },
+// });
 
-const profileData6 = new ProfileData("div", {
-  label: "Телефон",
-  description: "+7(909) 967 30 30",
-  attr: {
-    class: "section",
-  },
+// const profileData5 = new ProfileData("div", {
+//   label: "Имя в чате",
+//   description: "Иван",
+//   attr: {
+//     class: "section",
+//   },
+// });
+
+// const profileData6 = new ProfileData("div", {
+//   label: "Телефон",
+//   description: "+7(909) 967 30 30",
+//   attr: {
+//     class: "section",
+//   },
+// });
+
+let newGlobalProfileData = connect(mapUserToProps)(GlobalProfileData);
+
+const GlProfileData = new newGlobalProfileData("div", {
+  labelEmail: "Почта",
+  email: "",
+  labelLogin: "Логин",
+  login: "",
+  labelFirstName: "Имя",
+  first_name: "",
+  labelSecondName: "Фамилия",
+  second_name: "",
+  labelDisplayName: "Имя в чате",
+  display_name: "",
+  labelPhone: "Телефон",
+  phone: "",
 });
 
 const link1 = new Link("a", {
@@ -99,12 +118,7 @@ let newIndexProfile = connect(mapUserToProps)(IndexProfile);
 Profile = new newIndexProfile("div", {
   avatar: avatar,
   name: "Иван",
-  profileData1: profileData1,
-  profileData2: profileData2,
-  profileData3: profileData3,
-  profileData4: profileData4,
-  profileData5: profileData5,
-  profileData6: profileData6,
+  GlobalProfileData: GlProfileData,
   link1: link1,
   link2: link2,
   exit: exit,

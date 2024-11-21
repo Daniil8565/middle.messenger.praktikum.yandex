@@ -206,6 +206,7 @@ export default class Block implements IBlock {
   }
 
   setProps(newProps: Record<string, any>) {
+    console.log("newProps = ", newProps);
     if (!newProps) {
       return;
     }
