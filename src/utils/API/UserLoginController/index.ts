@@ -1,14 +1,18 @@
 import LoginAPI from "../LoginAPI";
 import router from "../../..";
-const loginApi = new LoginAPI();
 import store from "../store";
+import UserAPI from "../UserAPI";
 
+const loginApi = new LoginAPI();
+const UserApi = new UserAPI();
 function errorMessage(error: Record<string, string>) {
   const responseText = error.reason;
   const responseObject = JSON.parse(responseText);
   const errorMessage = responseObject.reason;
   const ErrorElem = document.getElementById("ErrorRequest") as HTMLElement;
+  ErrorElem.style.color = "red";
   ErrorElem.textContent = errorMessage;
+  return ErrorElem;
 }
 
 // Функция для установки cookies
@@ -92,6 +96,33 @@ class UserLoginController {
       })
       .catch((error) => {
         console.error("Ошибка при выходе: ", error);
+      });
+  }
+  public async userRequest(data: { [key: string]: string }) {
+    if (!data) {
+      throw new Error(data);
+    }
+    UserApi.userRequest(data)
+      .then((data) => {
+        const dataJSON = data.response;
+        const ErrorElem = document.getElementById(
+          "ErrorRequest"
+        ) as HTMLElement;
+        ErrorElem.textContent = "";
+        store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
+      })
+      .catch((error) => {
+        errorMessage(error);
+      });
+  }
+  public async changePasswordRequest(data: { [key: string]: string }) {
+    if (!data) {
+      throw new Error(data);
+    }
+    UserApi.changePasswordRequest(data)
+      .then(() => {})
+      .catch((error) => {
+        errorMessage(error);
       });
   }
 }

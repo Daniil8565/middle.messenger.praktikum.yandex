@@ -4,6 +4,7 @@ import { FlagName } from "../CheckName";
 import { FlagSurname } from "../CheckSurname";
 import { flagNameChat } from "../CheckNameChat";
 import { Flagphone } from "../CheckPhone";
+import UserLoginController from "../../API/UserLoginController";
 
 export default function CheckChangeData(event: SubmitEvent) {
   event.preventDefault();
@@ -15,6 +16,7 @@ export default function CheckChangeData(event: SubmitEvent) {
     flagNameChat &&
     Flagphone
   ) {
+    let DataUserController = new UserLoginController();
     const form = document.getElementById("Form") as HTMLFormElement;
     const data: { [key: string]: string } = {}; // Создаем объект для хранения данных
     const inputs = form.querySelectorAll("input");
@@ -23,5 +25,6 @@ export default function CheckChangeData(event: SubmitEvent) {
       input.value = "";
     });
     console.log(data); // Выводим объект в консоль
+    DataUserController.userRequest(data);
   }
 }

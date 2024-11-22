@@ -5,6 +5,7 @@ import Button from "../../components/button/index.ts";
 import "./style.sass";
 import Form from "../../components/form/index.ts";
 import Input from "../../components/input/index.ts";
+import Error from "../../components/Error/index.ts";
 import CheckEmail from "../../utils/CheckingData/CheckEmail/index.ts";
 import { CheckLogin } from "../../utils/CheckingData/CheckLogin/index.ts";
 import CheckName from "../../utils/CheckingData/CheckName/index.ts";
@@ -162,6 +163,12 @@ const forma = new Form("form", {
         class: "form__content",
       },
       SpanID: "phoneError",
+    }),
+    new Error("span", {
+      attr: {
+        class: "ErrorRequest",
+        id: "ErrorRequest",
+      },
     }),
   ],
   button: button,

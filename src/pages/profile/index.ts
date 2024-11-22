@@ -13,56 +13,6 @@ const avatar = new Avatar("div", {
   attr: { class: "avatar" },
 });
 
-// let newProfileData = connect(mapUserToProps)(ProfileData);
-
-// const profileData1 = new ProfileData("div", {
-//   label: "Почта",
-//   email: "",
-//   attr: {
-//     class: "section",
-//   },
-// });
-
-// const profileData2 = new ProfileData("div", {
-//   label: "Логин",
-//   login: "",
-//   attr: {
-//     class: "section",
-//   },
-// });
-
-// const profileData3 = new ProfileData("div", {
-//   label: "Имя",
-//   description: "Иван",
-//   attr: {
-//     class: "section",
-//   },
-// });
-
-// const profileData4 = new ProfileData("div", {
-//   label: "Фамилия",
-//   description: "Иванов",
-//   attr: {
-//     class: "section",
-//   },
-// });
-
-// const profileData5 = new ProfileData("div", {
-//   label: "Имя в чате",
-//   description: "Иван",
-//   attr: {
-//     class: "section",
-//   },
-// });
-
-// const profileData6 = new ProfileData("div", {
-//   label: "Телефон",
-//   description: "+7(909) 967 30 30",
-//   attr: {
-//     class: "section",
-//   },
-// });
-
 let newGlobalProfileData = connect(mapUserToProps)(GlobalProfileData);
 
 const GlProfileData = new newGlobalProfileData("div", {

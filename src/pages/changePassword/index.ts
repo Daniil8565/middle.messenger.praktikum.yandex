@@ -5,6 +5,7 @@ import Button from "../../components/button/index.ts";
 import IndexChangePassword from "./IndexChangePassword/index.ts";
 import Form from "../../components/form/index.ts";
 import "./style.sass";
+import Error from "../../components/Error/index.ts";
 import { CheckOldPassword } from "../../utils/CheckingData/CheckOldPassword/index.ts";
 import CheckNewPassword from "../../utils/CheckingData/CheckNewPassword/index.ts";
 import CheckNewAndRepeatPasword from "../../utils/CheckingData/CheckNewAndRepeatPasword/index.ts";
@@ -91,6 +92,12 @@ const forma = new Form("form", {
       class: "error-message",
       attr: {
         class: "form__content",
+      },
+    }),
+    new Error("span", {
+      attr: {
+        class: "ErrorRequest",
+        id: "ErrorRequest",
       },
     }),
   ],
