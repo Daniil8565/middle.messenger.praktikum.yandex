@@ -81,7 +81,7 @@ export default class Request {
       } else if (this._body instanceof FormData) {
         xhr.send(this._body); // FormData отправляется как есть
       } else {
-        xhr.send(JSON.stringify(this._body));
+        xhr.send(JSON.stringify(this._body)); // Отправка JSON
       }
     });
   }
@@ -98,7 +98,7 @@ export default class Request {
     return new Request(url, "PUT", headers, body);
   }
 
-  delete(url: string, headers?: Headers): Request {
-    return new Request(url, "DELETE", headers);
+  delete(url: string, body?: any, headers?: Headers): Request {
+    return new Request(url, "DELETE", headers, body); // теперь принимаем body
   }
 }

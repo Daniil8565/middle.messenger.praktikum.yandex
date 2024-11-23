@@ -12,8 +12,12 @@ import Link from "../../components/link/index.ts";
 import messageHeader from "../../components/message__header/index.ts";
 import ClickButtonHeader from "../../utils/MessageClickButton/index.ts";
 import modalMessage from "../../components/modalMessage/index.ts";
-import ModalClick from "../../utils/modalClick/index.ts";
-import ModalAddAndDelete from "../../components/modalAddAndDelete/index.ts";
+// import ModalClick from "../../utils/modalClick/index.ts";
+import ContainerLink from "../../components/ContainerMessageLink/index.ts";
+import ModalAdd from "../../utils/modalAdd/index.ts";
+import ModalDelete from "../../utils/ModalDelete/index.ts";
+import DataInput from "../../utils/DataInput/index.ts";
+import DataDelete from "../../utils/DataDelete/index.ts";
 
 let message: IndexMessage;
 
@@ -26,26 +30,37 @@ let item = new ItemMessage("li", {
   },
 });
 
-// let linkAdd = new Link("div", {
-//   title: "Добавить пользователя",
-//   attr: {
-//     href: "#",
-//     id: "add-user",
-//     class: "menu-item",
-//   },
-// });
+let linkAdd = new Link("div", {
+  title: "Добавить пользователя",
+  attr: {
+    href: "#",
+    id: "add-user",
+    class: "menu-item",
+  },
+  events: {
+    click: ModalAdd,
+  },
+});
 
-// let linkDelete = new Link("div", {
-//   title: "Удалить пользователя",
-//   attr: {
-//     href: "#",
-//     id: "remove-user",
-//     class: "menu-item",
-//   },
-// });
+let linkDelete = new Link("div", {
+  title: "Удалить пользователя",
+  attr: {
+    href: "#",
+    id: "remove-user",
+    class: "menu-item",
+  },
+  events: {
+    click: ModalDelete,
+  },
+});
 
-let TwoButton = new ModalAddAndDelete("div", {
-  title: "Нашёл",
+let ContLink = new ContainerLink("div", {
+  link1: linkAdd,
+  link2: linkDelete,
+  attr: {
+    class: "dropdown-menu hidden",
+    id: "dropdown-menu",
+  },
 });
 
 let link = new Link("a", {
@@ -72,7 +87,7 @@ let buttonHeader = new Button("button", {
 
 let header = new messageHeader("div", {
   Button: buttonHeader,
-  ModalAddAndDelete: TwoButton,
+  Link: ContLink,
   attr: {
     class: "content__header",
   },
@@ -126,7 +141,7 @@ let modalAdd = new modalMessage("div", {
     id: "add-user-modal",
   },
   events: {
-    click: ModalClick,
+    submit: DataInput,
   },
 });
 
@@ -139,6 +154,9 @@ let modalDelete = new modalMessage("div", {
   attr: {
     class: "modalMessage hidden",
     id: "remove-user-modal",
+  },
+  events: {
+    submit: DataDelete,
   },
 });
 

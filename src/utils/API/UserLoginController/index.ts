@@ -2,9 +2,11 @@ import LoginAPI from "../LoginAPI";
 import router from "../../..";
 import store from "../store";
 import UserAPI from "../UserAPI";
+import ChatAPI from "../ChatAPI";
 
 const loginApi = new LoginAPI();
 const UserApi = new UserAPI();
+const ChatApi = new ChatAPI();
 function errorMessage(error: Record<string, string>) {
   const responseText = error.reason;
   const responseObject = JSON.parse(responseText);
@@ -136,6 +138,17 @@ class UserLoginController {
       .catch((error) => {
         errorMessage(error);
       });
+  }
+
+  public async createChatRequest(data: { [key: string]: string }) {
+    ChatApi.createChatRequest(data).then((data) => {
+      console.log(data);
+    });
+  }
+  public async deleteChatRequest(data: { [key: string]: number }) {
+    ChatApi.deleteChatRequest(data).then((data) => {
+      console.log(data);
+    });
   }
 }
 
