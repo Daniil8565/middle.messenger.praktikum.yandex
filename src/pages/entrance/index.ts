@@ -10,8 +10,6 @@ import "./style.sass";
 import { CheckLogin } from "../../utils/CheckingData/CheckLogin/index.ts";
 import { CheckOldPassword } from "../../utils/CheckingData/CheckOldPassword/index.ts";
 import CheckData from "../../utils/CheckingData/CheckData/index.ts";
-// import connect from "../../utils/API/HOC/index.ts";
-// import mapUserToProps from "../../utils/API/mapUserToProps/index.ts";
 let Entrance: IndexEntrance;
 
 const button = new Button("button", {

@@ -125,6 +125,18 @@ class UserLoginController {
         errorMessage(error);
       });
   }
+
+  public async avatar(data: FormData) {
+    console.log(data);
+    UserApi.avatar(data)
+      .then((data) => {
+        const dataJSON = data.response;
+        store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
+      })
+      .catch((error) => {
+        errorMessage(error);
+      });
+  }
 }
 
 export default UserLoginController;

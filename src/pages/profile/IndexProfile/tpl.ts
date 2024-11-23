@@ -1,10 +1,6 @@
 const tpl: string = `
 <div class="content">
-        {{{avatar}}}
-        <div class="name">{{name}}</div>
-        <div class="container__data">
         {{{GlobalProfileData}}}
-        </div>
         <div class='container__link'>
         {{{link1}}}
         {{{link2}}}

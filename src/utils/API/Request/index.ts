@@ -39,17 +39,15 @@ export default class Request {
         this._url + (this._queryString ? `?${this._queryString}` : "")
       );
 
-      // Установить заголовок Content-Type для POST-запросов с JSON
-      if (this._method !== "GET") {
+      // Установить заголовки, если тело запроса не FormData
+      if (this._body && !(this._body instanceof FormData)) {
         this._headers.set("Content-Type", "application/json");
       }
 
-      // Установить все заголовки
       this._headers.forEach((value, key) => {
         xhr.setRequestHeader(key, value);
       });
 
-      // Включить передачу cookies
       xhr.withCredentials = true;
 
       xhr.onload = () => {
@@ -65,9 +63,23 @@ export default class Request {
         reject(new Error("Network Error"));
       };
 
-      // Отправка данных в теле запроса
+      if (this._body) {
+        console.log("Тип данных тела запроса:", this._body.constructor.name);
+        if (this._body instanceof FormData) {
+          console.log("FormData содержимое:");
+          this._body.forEach((value, key) => {
+            console.log(`${key}:`, value);
+          });
+        } else {
+          console.log("Тело запроса (JSON):", this._body);
+        }
+      }
+
+      // Отправка данных
       if (this._method === "GET") {
         xhr.send();
+      } else if (this._body instanceof FormData) {
+        xhr.send(this._body); // FormData отправляется как есть
       } else {
         xhr.send(JSON.stringify(this._body));
       }

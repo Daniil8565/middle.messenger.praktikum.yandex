@@ -1,4 +1,3 @@
-import Avatar from "../../components/avatar/index.ts";
 import FormSection from "../../components/formSection/index.ts";
 import IndexChangeData from "./IndexChahgeData/index.ts";
 import Button from "../../components/button/index.ts";
@@ -13,12 +12,19 @@ import CheckSurname from "../../utils/CheckingData/CheckSurname/index.ts";
 import CheckPhone from "../../utils/CheckingData/CheckPhone/index.ts";
 import CheckNameChat from "../../utils/CheckingData/CheckNameChat/index.ts";
 import CheckChangeData from "../../utils/CheckingData/CheckChangeData/index.ts";
-
 let ChangeData: IndexChangeData;
+import avatarChangeData from "../../components/avatarChangeData/index.ts";
+import TextDisplay from "../../utils/TextDisplay/index.ts";
+import modal from "../../components/modal/index.ts";
+import ModalShow from "../../utils/ModalShow/index.ts";
 
-const avatar = new Avatar("div", {
+const avatar = new avatarChangeData("div", {
   attr: {
-    class: "avatar",
+    class: "avatarChangeData",
+  },
+  events: {
+    mouseover: TextDisplay,
+    click: ModalShow,
   },
 });
 
@@ -181,9 +187,21 @@ const forma = new Form("form", {
   },
 });
 
+const Modal = new modal("div", {
+  header: "Загрузите файл",
+  description: "Выбрать файл на компьютере",
+  button_description: "Поменять",
+  buttonClose__description: "Закрыть",
+  attr: {
+    class: "modal",
+    id: "uploadModal",
+  },
+});
+
 ChangeData = new IndexChangeData("div", {
   avatar: avatar,
   form: forma,
+  modal: Modal,
   attr: {
     class: "container",
   },

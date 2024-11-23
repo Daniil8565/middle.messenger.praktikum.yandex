@@ -1,6 +1,5 @@
 const tpl: string = `
-<span class='avatar__image'></span>
-
+    {{title}}
 `;
 
 export default tpl;

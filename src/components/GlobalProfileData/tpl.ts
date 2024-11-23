@@ -1,4 +1,6 @@
 const tpl: string = `
+    <img id="avatar" src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" alt="Добавьте картинку" class="avatar__image" onerror="this.onerror=null; this.src='../../image/avatar.svg';" />
+    <div class="name">{{first_name}}</div>
     <div class="section">
         <div class='label'>{{labelEmail}}</div>
         <div class='description'>{{email}}</div>

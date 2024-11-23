@@ -7,9 +7,13 @@ import Button from "../../components/button/index.ts";
 import DataCollection from "../../utils/DataCollection/index.ts";
 import "./style.sass";
 import CheckMessage from "../../utils/CheckingData/CheckMessage/index.ts";
-// import LinkMessage from "../../components/linkMessage/index.ts";
 import handleLinkClick from "../../utils/handleClick/index.ts";
 import Link from "../../components/link/index.ts";
+import messageHeader from "../../components/message__header/index.ts";
+import ClickButtonHeader from "../../utils/MessageClickButton/index.ts";
+import modalMessage from "../../components/modalMessage/index.ts";
+import ModalClick from "../../utils/modalClick/index.ts";
+import ModalAddAndDelete from "../../components/modalAddAndDelete/index.ts";
 
 let message: IndexMessage;
 
@@ -20,6 +24,28 @@ let item = new ItemMessage("li", {
   attr: {
     class: "list__item",
   },
+});
+
+// let linkAdd = new Link("div", {
+//   title: "Добавить пользователя",
+//   attr: {
+//     href: "#",
+//     id: "add-user",
+//     class: "menu-item",
+//   },
+// });
+
+// let linkDelete = new Link("div", {
+//   title: "Удалить пользователя",
+//   attr: {
+//     href: "#",
+//     id: "remove-user",
+//     class: "menu-item",
+//   },
+// });
+
+let TwoButton = new ModalAddAndDelete("div", {
+  title: "Нашёл",
 });
 
 let link = new Link("a", {
@@ -33,16 +59,24 @@ let link = new Link("a", {
   },
 });
 
-// let link2 = new LinkMessage("a", {
-//   attr: {
-//     href: "/Profile",
-//     class: "mes__link",
-//   },
-//   title: "Профиль",
-//   events: {
-//     click: handleLinkClick,
-//   },
-// });
+let buttonHeader = new Button("button", {
+  title: "⋮",
+  attr: {
+    class: "menu-icon",
+    id: "menu-icon",
+  },
+  events: {
+    click: ClickButtonHeader,
+  },
+});
+
+let header = new messageHeader("div", {
+  Button: buttonHeader,
+  ModalAddAndDelete: TwoButton,
+  attr: {
+    class: "content__header",
+  },
+});
 
 let button = new Button("button", {
   attr: {
@@ -81,10 +115,40 @@ const forma = new Form("form", {
   },
 });
 
+let modalAdd = new modalMessage("div", {
+  Header: "Добавить пользователя",
+  for: "username",
+  id: "username",
+  name: "title",
+  buttonDescription: "Добавить",
+  attr: {
+    class: "modalMessage hidden",
+    id: "add-user-modal",
+  },
+  events: {
+    click: ModalClick,
+  },
+});
+
+let modalDelete = new modalMessage("div", {
+  Header: "Удалить пользователя",
+  for: "username-remove",
+  id: "username-remove",
+  name: "username-remove",
+  buttonDescription: "Удалить",
+  attr: {
+    class: "modalMessage hidden",
+    id: "remove-user-modal",
+  },
+});
+
 message = new IndexMessage("div", {
   link: link,
   item: item,
+  Header: header,
   form: forma,
+  ModalADD: modalAdd,
+  ModalDELETE: modalDelete,
   attr: {
     class: "con",
   },

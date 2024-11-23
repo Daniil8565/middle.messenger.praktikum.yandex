@@ -1,4 +1,3 @@
-import Avatar from "../../components/avatar/index.ts";
 import IndexProfile from "./IndexProfile/index.ts";
 import Link from "../../components/link/index.ts";
 import "./style.sass";
@@ -9,13 +8,10 @@ import GlobalProfileData from "../../components/GlobalProfileData/index.ts";
 
 let Profile: IndexProfile;
 
-const avatar = new Avatar("div", {
-  attr: { class: "avatar" },
-});
-
 let newGlobalProfileData = connect(mapUserToProps)(GlobalProfileData);
 
 const GlProfileData = new newGlobalProfileData("div", {
+  avatar: "",
   labelEmail: "Почта",
   email: "",
   labelLogin: "Логин",
@@ -28,6 +24,9 @@ const GlProfileData = new newGlobalProfileData("div", {
   display_name: "",
   labelPhone: "Телефон",
   phone: "",
+  attr: {
+    class: "container__data",
+  },
 });
 
 const link1 = new Link("a", {
@@ -66,8 +65,6 @@ const exit = new Link("a", {
 let newIndexProfile = connect(mapUserToProps)(IndexProfile);
 
 Profile = new newIndexProfile("div", {
-  avatar: avatar,
-  name: "Иван",
   GlobalProfileData: GlProfileData,
   link1: link1,
   link2: link2,

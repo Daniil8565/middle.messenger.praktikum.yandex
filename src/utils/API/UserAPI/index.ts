@@ -12,6 +12,15 @@ class UserAPI {
   changePasswordRequest(data: { [key: string]: string }) {
     return entranceAPI.put(`${URL}/user/password`, data).send();
   }
+
+  avatar(data: FormData) {
+    return entranceAPI.put(`${URL}/user/profile/avatar`, data).send();
+  }
+
+  path(path: string) {
+    console.log("path", path);
+    return entranceAPI.get(`${URL}/resources/${path}`).send();
+  }
 }
 
 export default UserAPI;

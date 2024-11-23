@@ -226,3 +226,156 @@ main
 
 .mes__link:jover
   cursor: pointer
+
+
+.content__header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding-bottom: 10px
+  border-bottom: 1px solid #EAEAEA 
+
+.menu-container 
+  position: relative
+  display: inline-block
+
+
+.menu-icon 
+  background: none
+  border: none
+  font-size: 24px
+  cursor: pointer
+
+
+.dropdown-menu 
+  position: absolute
+  top: 100%
+  right: 0
+  background-color: white
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1)
+  border-radius: 4px
+  z-index: 100
+  display: block
+
+
+.dropdown-menu.hidden 
+  display: none
+
+.dropdown-menu .menu-item 
+  display: block
+  padding: 10px 15px
+  color: #333
+  text-decoration: none
+  font-size: 14px
+
+
+.dropdown-menu .menu-item:hover 
+  background-color: #f0f0f0
+
+
+/* Основной стиль модального окна */
+.modalMessage 
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: rgba(0, 0, 0, 0.5)
+  display: flex
+  align-items: center
+  justify-content: center
+  z-index: 9999
+  visibility: hidden
+  opacity: 0
+  transition: visibility 0s, opacity 0.3s ease
+
+
+/* Показываем модальное окно */
+.modal.visible 
+  visibility: visible
+  opacity: 1
+
+
+/* Контейнер для содержимого модального окна */
+.modal-content 
+  background-color: #fff
+  border-radius: 10px
+  padding: 20px
+  width: 400px
+  max-width: 90%
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2)
+  text-align: center
+  animation: scaleIn 0.3s ease
+
+
+/* Заголовок модального окна */
+.modal-content h2 
+  margin-bottom: 20px
+  font-size: 1.5rem
+  color: #333
+
+
+/* Стили формы */
+.modal-content form 
+  display: flex
+  flex-direction: column
+  gap: 10px
+
+
+/* Метки для полей */
+.modal-content label 
+  font-size: 1rem
+  color: #555
+  text-align: left
+
+
+/* Поля ввода */
+.modal-content input 
+  width: 100%
+  padding: 8px 10px
+  font-size: 1rem
+  border: 1px solid #ccc
+  border-radius: 5px
+  outline: none
+  transition: border-color 0.2s ease
+
+
+.modal-content input:focus 
+  border-color: #3498db
+
+
+/* Кнопки */
+.modal-content button 
+  padding: 10px 15px
+  font-size: 1rem
+  border: none
+  border-radius: 5px
+  cursor: pointer
+  transition: background-color 0.2s ease
+
+
+/* Кнопка "Добавить/Удалить" */
+.modal-content button[type="submit"] 
+  background-color: #3498db
+  color: #fff
+
+
+.modal-content button[type="submit"]:hover 
+  background-color: #2980b9
+
+
+/* Кнопка "Закрыть" */
+.modal-content .close-modal 
+  background-color: #e74c3c
+  color: #fff
+  margin-top: 10px
+
+
+.modal-content .close-modal:hover 
+  background-color: #c0392b
+
+
+/* Для скрытого состояния */
+.hidden 
+  display: none
+
