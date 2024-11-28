@@ -141,13 +141,19 @@ class UserLoginController {
   }
 
   public async createChatRequest(data: { [key: string]: string }) {
-    ChatApi.createChatRequest(data).then((data) => {
-      console.log(data);
+    ChatApi.createChatRequest(data).then(() => {
+      this.GetChat();
     });
   }
   public async deleteChatRequest(data: { [key: string]: number }) {
-    ChatApi.deleteChatRequest(data).then((data) => {
-      console.log(data);
+    ChatApi.deleteChatRequest(data).then(() => {
+      this.GetChat();
+    });
+  }
+  public async GetChat() {
+    ChatApi.GetChat().then((data) => {
+      const dataJSON = data.response;
+      store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
     });
   }
 }

@@ -154,26 +154,7 @@ export default class Block implements IBlock {
     oldProps: Record<string, any>,
     newProps: Record<string, any>
   ) {
-    const isChanged = !this.deepEqual(oldProps, newProps);
-    return isChanged;
-  }
-
-  deepEqual(obj1: Record<string, any>, obj2: Record<string, any>): boolean {
-    if (obj1 === obj2) return true; // Если объекты одинаковые по ссылке
-
-    if (typeof obj1 !== "object" || typeof obj2 !== "object") return false;
-
-    const keys1 = Object.keys(obj1);
-    const keys2 = Object.keys(obj2);
-
-    if (keys1.length !== keys2.length) return false;
-
-    for (let key of keys1) {
-      if (!keys2.includes(key)) return false;
-      if (!this.deepEqual(obj1[key], obj2[key])) return false;
-    }
-
-    return true;
+    return !!(oldProps && newProps);
   }
 
   remove() {
@@ -213,13 +194,16 @@ export default class Block implements IBlock {
     this._setUpdate = false;
     const oldValue = { ...this._props };
 
-    const { children, props } = this.getChildren(newProps);
+    const { children, props, lists } = this.getChildren(newProps);
 
     if (Object.values(children).length) {
       Object.assign(this._children, children);
     }
     if (Object.values(props).length) {
       Object.assign(this._props, props);
+    }
+    if (Object.values(lists).length) {
+      Object.assign(this._lists, lists);
     }
     if (this._setUpdate) {
       this._eventBus.emit(Block.EVENT_FLOW_CDU, oldValue, this._props);
@@ -271,6 +255,7 @@ export default class Block implements IBlock {
 
     Object.entries(this._lists).forEach(([key, child]) => {
       const stub = fragment.content.querySelector(`[data-id="__1_${key}"]`);
+      console.log("Ищем элемент по ", `[data-id="__1_${key}"]`);
       if (!stub) {
         return;
       }

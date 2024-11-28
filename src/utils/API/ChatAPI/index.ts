@@ -12,6 +12,11 @@ class ChatAPI {
   deleteChatRequest(data: { [key: string]: number }) {
     return entranceAPI.delete(`${URL}/chats`, data).send();
   }
+
+  GetChat() {
+    const queryString = `limit=10`;
+    return entranceAPI.get(`${URL}/chats`, undefined, queryString).send();
+  }
 }
 
 export default ChatAPI;

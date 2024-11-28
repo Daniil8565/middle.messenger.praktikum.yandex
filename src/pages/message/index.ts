@@ -18,17 +18,9 @@ import ModalAdd from "../../utils/modalAdd/index.ts";
 import ModalDelete from "../../utils/ModalDelete/index.ts";
 import DataInput from "../../utils/DataInput/index.ts";
 import DataDelete from "../../utils/DataDelete/index.ts";
+import connect from "../../utils/API/HOC/index.ts";
 
 let message: IndexMessage;
-
-let item = new ItemMessage("li", {
-  header: "Андрей",
-  description: "Изображение",
-  time: "10:49",
-  attr: {
-    class: "list__item",
-  },
-});
 
 let linkAdd = new Link("div", {
   title: "Добавить пользователя",
@@ -160,9 +152,19 @@ let modalDelete = new modalMessage("div", {
   },
 });
 
-message = new IndexMessage("div", {
+type ChatItem = Record<string, unknown>;
+
+let newIndexMessage = connect((state) => {
+  if (Array.isArray(state.user)) {
+    const chatList = state.user as ChatItem[];
+    const newItems = chatList.map((chat) => new ItemMessage("li", chat));
+    return { items: newItems };
+  }
+  return { items: "Ошибка" };
+})(IndexMessage);
+
+message = new newIndexMessage("div", {
   link: link,
-  item: item,
   Header: header,
   form: forma,
   ModalADD: modalAdd,

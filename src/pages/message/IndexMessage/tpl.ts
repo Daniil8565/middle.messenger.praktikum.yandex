@@ -11,7 +11,7 @@ const tpl: string = `
               </div>
             </button>
             <ul class="list__chats">
-                {{{item}}}
+              {{{items}}}
             </ul>
           </nav>
         </div>
