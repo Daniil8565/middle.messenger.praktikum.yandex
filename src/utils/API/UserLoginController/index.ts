@@ -43,7 +43,7 @@ class UserLoginController {
         router.go("/message"); // Перенаправление на страницу после успешного входа
       })
       .then(() => {
-        this.getData();
+        this.GetChat();
       })
       .catch((error) => {
         errorMessage(error); // Обработка ошибки
@@ -62,7 +62,7 @@ class UserLoginController {
         router.go("/message"); // Перенаправление на страницу после регистрации
       })
       .then(() => {
-        this.getData();
+        this.GetChat();
       })
       .catch((error) => {
         errorMessage(error); // Обработка ошибки
@@ -72,6 +72,7 @@ class UserLoginController {
   public async getData() {
     loginApi.requestDataUser().then((data) => {
       const dataJSON = data.response;
+      console.log("getData");
       store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
     });
   }

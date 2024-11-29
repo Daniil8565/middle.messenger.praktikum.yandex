@@ -1,6 +1,10 @@
-type PlainObject<T = any> = {
+type PlainObject<T = unknown> = {
   [k in string]: T;
 };
+
+function isArray(value: unknown): value is [] {
+  return Array.isArray(value);
+}
 
 function isPlainObject(value: unknown): value is PlainObject {
   return (
@@ -11,34 +15,42 @@ function isPlainObject(value: unknown): value is PlainObject {
   );
 }
 
-function isArray(value: unknown): value is [] {
-  return Array.isArray(value);
-}
-
 function isArrayOrObject(value: unknown): value is [] | PlainObject {
   return isPlainObject(value) || isArray(value);
 }
 
-function isEqual(lhs: PlainObject, rhs: PlainObject) {
-  if (Object.keys(lhs).length !== Object.keys(rhs).length) {
+export default function isEqual(
+  lhs: PlainObject | [],
+  rhs: PlainObject | []
+): boolean {
+  // Если оба значения - массивы
+  if (isArray(lhs) && isArray(rhs)) {
+    if (lhs.length !== rhs.length) return false;
+    for (let i = 0; i < lhs.length; i++) {
+      if (!isEqual(lhs[i], rhs[i])) return false;
+    }
+    return true;
+  }
+
+  // Если один из них массив, а другой нет - не равны
+  if (isArray(lhs) || isArray(rhs)) return false;
+
+  // Сравнение количества ключей объектов
+  const lhsKeys = Object.keys(lhs);
+  const rhsKeys = Object.keys(rhs);
+  if (lhsKeys.length !== rhsKeys.length) {
     return false;
   }
 
-  for (const [key, value] of Object.entries(lhs)) {
-    const rightValue = rhs[key];
-    if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
-      if (isEqual(value, rightValue)) {
-        continue;
-      }
-      return false;
-    }
-
-    if (value !== rightValue) {
+  for (const key of lhsKeys) {
+    const lhsValue = lhs[key];
+    const rhsValue = rhs[key];
+    if (isArrayOrObject(lhsValue) && isArrayOrObject(rhsValue)) {
+      if (!isEqual(lhsValue, rhsValue)) return false;
+    } else if (lhsValue !== rhsValue) {
       return false;
     }
   }
 
   return true;
 }
-
-export default isEqual;

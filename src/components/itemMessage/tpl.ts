@@ -1,5 +1,5 @@
 const tpl: string = `
-    {{avatar}}
+    <img class="chat__avatar" src="../../image/Ellipse.svg"/>
     <div class="container__name">
         <h3 class="message__name">{{title}}</h3>
         <p class="message">{{last_message}}</p>

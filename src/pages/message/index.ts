@@ -12,7 +12,6 @@ import Link from "../../components/link/index.ts";
 import messageHeader from "../../components/message__header/index.ts";
 import ClickButtonHeader from "../../utils/MessageClickButton/index.ts";
 import modalMessage from "../../components/modalMessage/index.ts";
-// import ModalClick from "../../utils/modalClick/index.ts";
 import ContainerLink from "../../components/ContainerMessageLink/index.ts";
 import ModalAdd from "../../utils/modalAdd/index.ts";
 import ModalDelete from "../../utils/ModalDelete/index.ts";
@@ -124,6 +123,7 @@ const forma = new Form("form", {
 
 let modalAdd = new modalMessage("div", {
   Header: "Добавить пользователя",
+  description: "Имя пользователя",
   for: "username",
   id: "username",
   name: "title",
@@ -139,6 +139,7 @@ let modalAdd = new modalMessage("div", {
 
 let modalDelete = new modalMessage("div", {
   Header: "Удалить пользователя",
+  description: "Введите id пользователя",
   for: "username-remove",
   id: "username-remove",
   name: "username-remove",

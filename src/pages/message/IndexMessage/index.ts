@@ -1,5 +1,5 @@
-import tpl from './tpl.ts';
-import Component from '../../../services/Block.ts';
+import tpl from "./tpl.ts";
+import Component from "../../../services/Block.ts";
 
 export default class IndexMessage extends Component {
   render(): HTMLDivElement {

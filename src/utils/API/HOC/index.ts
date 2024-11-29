@@ -2,6 +2,7 @@ import store, { StoreEvents } from "../store";
 import { Indexed } from "../store";
 // import isEqual from "../isEqual";
 import Block from "../../../services/Block";
+import isEqual from "../isEqual";
 
 export default function connect(
   mapStateToProps: (state: Indexed) => Record<string, unknown>
@@ -13,9 +14,10 @@ export default function connect(
         super(tagName, { ...props, ...state });
         store.attach(StoreEvents.Updated, () => {
           const newState = mapStateToProps(store.getState());
-          // if (!isEqual(state, newState)) {
-          this.setProps({ ...newState });
-          // }
+          console.log(state, newState);
+          if (!isEqual(state, newState)) {
+            this.setProps({ ...newState });
+          }
           // не забываем сохранить новое состояние
           state = newState;
         });

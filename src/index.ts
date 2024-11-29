@@ -9,6 +9,7 @@ import registration from "./pages/registration/index.ts";
 import Route from "./utils/Router/Route.ts";
 import IBlock from "./services/IBlock.ts";
 import "./style.sass";
+import UserLoginController from "./utils/API/UserLoginController/index.ts";
 
 // Функция для получения значения cookie
 function getCookie(name: string): string | null {
@@ -51,6 +52,8 @@ class Router {
     const isAuthenticated = getCookie("isAuthenticated");
     if (isAuthenticated === "true") {
       // Если авторизован, перенаправляем на страницу мессенджера
+      const controller = new UserLoginController();
+      controller.GetChat();
       this.go("/message");
     } else {
       // Если не авторизован, перенаправляем на страницу входа
