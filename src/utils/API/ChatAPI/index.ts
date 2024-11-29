@@ -4,6 +4,11 @@ import Request from "../Request";
 const entranceAPI = new Request("");
 const URL = "https://ya-praktikum.tech/api/v2";
 
+type UsersRequest = {
+  users: number[] | number; // Массив чисел, представляющий ID пользователей
+  chatId: number; // Число, представляющее ID чата
+};
+
 class ChatAPI {
   createChatRequest(data: { [key: string]: string }) {
     return entranceAPI.post(`${URL}/chats`, data).send();
@@ -16,6 +21,14 @@ class ChatAPI {
   GetChat() {
     const queryString = `limit=10`;
     return entranceAPI.get(`${URL}/chats`, undefined, queryString).send();
+  }
+
+  token(id: string) {
+    return entranceAPI.post(`${URL}/chats/token/${id}`).send();
+  }
+
+  usersRequest(data: UsersRequest) {
+    return entranceAPI.put(`${URL}/chats/users`, data).send();
   }
 }
 

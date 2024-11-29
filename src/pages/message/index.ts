@@ -18,6 +18,7 @@ import ModalDelete from "../../utils/ModalDelete/index.ts";
 import DataInput from "../../utils/DataInput/index.ts";
 import DataDelete from "../../utils/DataDelete/index.ts";
 import connect from "../../utils/API/HOC/index.ts";
+import getTitleAndAvatar from "../../utils/getTitleAndAvatar/index.ts";
 
 let message: IndexMessage;
 
@@ -158,7 +159,14 @@ type ChatItem = Record<string, unknown>;
 let newIndexMessage = connect((state) => {
   if (Array.isArray(state.user)) {
     const chatList = state.user as ChatItem[];
-    const newItems = chatList.map((chat) => new ItemMessage("li", chat));
+    const newItems = chatList.map((chat) => {
+      return new ItemMessage("li", {
+        ...chat,
+        events: {
+          click: getTitleAndAvatar,
+        },
+      });
+    });
     return { items: newItems };
   }
   return { items: "Ошибка" };

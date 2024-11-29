@@ -187,7 +187,6 @@ export default class Block implements IBlock {
   }
 
   setProps(newProps: Record<string, any>) {
-    console.log("newProps = ", newProps);
     if (!newProps) {
       return;
     }
@@ -255,7 +254,6 @@ export default class Block implements IBlock {
 
     Object.entries(this._lists).forEach(([key, child]) => {
       const stub = fragment.content.querySelector(`[data-id="__1_${key}"]`);
-      console.log("Ищем элемент по ", `[data-id="__1_${key}"]`);
       if (!stub) {
         return;
       }

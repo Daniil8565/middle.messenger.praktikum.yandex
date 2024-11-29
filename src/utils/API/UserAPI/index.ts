@@ -18,8 +18,12 @@ class UserAPI {
   }
 
   path(path: string) {
-    console.log("path", path);
     return entranceAPI.get(`${URL}/resources/${path}`).send();
+  }
+
+  findUserRequest(login: Record<string, string>) {
+    console.log(login);
+    return entranceAPI.post(`${URL}/user/search`, login).send();
   }
 }
 

@@ -6,12 +6,14 @@ export default function DataInput(event: Event) {
   // Получаем значение из поля ввода
   const username = usernameInput.value;
 
-  console.log("Имя пользователя:", username);
   const ChatData = {
     title: username,
   };
+  const UserData = {
+    login: username,
+  };
   const DataController = new UserLoginController();
   DataController.createChatRequest(ChatData);
-  console.log("Имя пользователя:", ChatData);
+  DataController.findUserRequest(UserData);
   usernameInput.value = "";
 }

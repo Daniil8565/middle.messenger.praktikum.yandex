@@ -90,7 +90,7 @@ export default class Request {
     return new Request(url, "GET", headers, undefined, queryString);
   }
 
-  post(url: string, body: any, headers?: Headers): Request {
+  post(url: string, body?: any, headers?: Headers): Request {
     return new Request(url, "POST", headers, body);
   }
 

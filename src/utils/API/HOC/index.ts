@@ -14,7 +14,6 @@ export default function connect(
         super(tagName, { ...props, ...state });
         store.attach(StoreEvents.Updated, () => {
           const newState = mapStateToProps(store.getState());
-          console.log(state, newState);
           if (!isEqual(state, newState)) {
             this.setProps({ ...newState });
           }

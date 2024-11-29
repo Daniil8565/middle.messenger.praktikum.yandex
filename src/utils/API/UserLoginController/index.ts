@@ -3,6 +3,7 @@ import router from "../../..";
 import store from "../store";
 import UserAPI from "../UserAPI";
 import ChatAPI from "../ChatAPI";
+import socket from "../../socket";
 
 const loginApi = new LoginAPI();
 const UserApi = new UserAPI();
@@ -23,6 +24,11 @@ function setCookie(name: string, value: string, days: number) {
   expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000); // Устанавливаем срок действия cookie (в днях)
   document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
 }
+
+type UsersRequest = {
+  users: number[] | number; // Массив чисел, представляющий ID пользователей
+  chatId: number; // Число, представляющее ID чата
+};
 
 // Функция для удаления cookies
 function deleteCookie(name: string) {
@@ -73,7 +79,7 @@ class UserLoginController {
     loginApi.requestDataUser().then((data) => {
       const dataJSON = data.response;
       console.log("getData");
-      store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
+      store.set("userName", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
     });
   }
 
@@ -142,8 +148,11 @@ class UserLoginController {
   }
 
   public async createChatRequest(data: { [key: string]: string }) {
-    ChatApi.createChatRequest(data).then(() => {
+    ChatApi.createChatRequest(data).then((data) => {
+      const dataJSON = data.response;
+      const dataObj = JSON.parse(dataJSON);
       this.GetChat();
+      this.token(dataObj.id);
     });
   }
   public async deleteChatRequest(data: { [key: string]: number }) {
@@ -155,6 +164,27 @@ class UserLoginController {
     ChatApi.GetChat().then((data) => {
       const dataJSON = data.response;
       store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
+    });
+  }
+
+  public async token(id: string) {
+    ChatApi.token(id).then((data) => {
+      const dataJSON = data.response;
+      const token = JSON.parse(dataJSON);
+      socket(token, id);
+    });
+  }
+
+  public async findUserRequest(login: Record<string, string>) {
+    UserApi.findUserRequest(login).then((data) => {
+      const dataJSON = data.response;
+      store.set("AnotherUser", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
+    });
+  }
+
+  public async usersRequest(data: UsersRequest) {
+    ChatApi.usersRequest(data).then((data) => {
+      console.log("put Chat", data);
     });
   }
 }
