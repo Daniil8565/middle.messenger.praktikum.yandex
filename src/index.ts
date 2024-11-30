@@ -54,6 +54,7 @@ class Router {
       // Если авторизован, перенаправляем на страницу мессенджера
       const controller = new UserLoginController();
       controller.GetChat();
+      controller.getData();
       this.go("/message");
     } else {
       // Если не авторизован, перенаправляем на страницу входа

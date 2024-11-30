@@ -4,7 +4,7 @@ import Form from "../../components/form/index.ts";
 import Error from "../../components/Error/index.ts";
 import Input from "../../components/input/index.ts";
 import Button from "../../components/button/index.ts";
-import DataCollection from "../../utils/DataCollection/index.ts";
+// import DataCollection from "../../utils/DataCollection/index.ts";
 import "./style.sass";
 import CheckMessage from "../../utils/CheckingData/CheckMessage/index.ts";
 import handleLinkClick from "../../utils/handleClick/index.ts";
@@ -19,6 +19,7 @@ import DataInput from "../../utils/DataInput/index.ts";
 import DataDelete from "../../utils/DataDelete/index.ts";
 import connect from "../../utils/API/HOC/index.ts";
 import getTitleAndAvatar from "../../utils/getTitleAndAvatar/index.ts";
+import socket from "../../utils/socket/index.ts";
 
 let message: IndexMessage;
 
@@ -108,13 +109,12 @@ const forma = new Form("form", {
       },
     }),
     new Error("span", {
-      attr: { id: "messageError", class: "error-message" },
+      attr: { id: "messageError", class: "errorChat" },
     }),
   ],
   button: button,
   events: {
-    submit: DataCollection,
-    blur: CheckMessage,
+    submit: socket,
   },
   attr: {
     class: "form__message",
@@ -162,6 +162,9 @@ let newIndexMessage = connect((state) => {
     const newItems = chatList.map((chat) => {
       return new ItemMessage("li", {
         ...chat,
+        attr: {
+          class: "listItem",
+        },
         events: {
           click: getTitleAndAvatar,
         },

@@ -3,7 +3,7 @@ import router from "../../..";
 import store from "../store";
 import UserAPI from "../UserAPI";
 import ChatAPI from "../ChatAPI";
-import socket from "../../socket";
+// import socket from "../../socket";
 
 const loginApi = new LoginAPI();
 const UserApi = new UserAPI();
@@ -78,7 +78,6 @@ class UserLoginController {
   public async getData() {
     loginApi.requestDataUser().then((data) => {
       const dataJSON = data.response;
-      console.log("getData");
       store.set("userName", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
     });
   }
@@ -148,11 +147,8 @@ class UserLoginController {
   }
 
   public async createChatRequest(data: { [key: string]: string }) {
-    ChatApi.createChatRequest(data).then((data) => {
-      const dataJSON = data.response;
-      const dataObj = JSON.parse(dataJSON);
+    ChatApi.createChatRequest(data).then(() => {
       this.GetChat();
-      this.token(dataObj.id);
     });
   }
   public async deleteChatRequest(data: { [key: string]: number }) {
@@ -171,7 +167,7 @@ class UserLoginController {
     ChatApi.token(id).then((data) => {
       const dataJSON = data.response;
       const token = JSON.parse(dataJSON);
-      socket(token, id);
+      store.set("token", token);
     });
   }
 
@@ -183,9 +179,7 @@ class UserLoginController {
   }
 
   public async usersRequest(data: UsersRequest) {
-    ChatApi.usersRequest(data).then((data) => {
-      console.log("put Chat", data);
-    });
+    ChatApi.usersRequest(data).then(() => {});
   }
 }
 
