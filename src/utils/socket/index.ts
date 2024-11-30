@@ -18,7 +18,15 @@ export default function socket(e: SubmitEvent) {
     const chats = state.user;
     const objCHat = chats[0] as Record<string, unknown>;
     const idChat = objCHat["id"];
-    const IdUserName = state.userName.id;
+    const ArrayUserName = state.userName as Record<string, unknown>;
+    const IdUserName = ArrayUserName["id"];
+    const leftSection = document.querySelector(".left-section") as HTMLElement;
+    const rightSection = document.querySelector(
+      ".right-section"
+    ) as HTMLElement;
+    // const ArrayIdUserName = state.AnotherUser;
+    // const one = ArrayIdUserName[0] as Record<string, unknown>;
+    // const IdUserName = one["id"];
     console.log(IdUserName, idChat, Token);
     const socket = new WebSocket(
       `wss://ya-praktikum.tech/ws/chats/${IdUserName}/${idChat}/${Token}`
@@ -26,7 +34,7 @@ export default function socket(e: SubmitEvent) {
 
     socket.addEventListener("open", () => {
       console.log("Соединение установлено");
-
+      rightSection.textContent = message;
       socket.send(
         JSON.stringify({
           content: message,
@@ -46,6 +54,8 @@ export default function socket(e: SubmitEvent) {
     });
 
     socket.addEventListener("message", (event) => {
+      const objData = event.data;
+      leftSection.textContent = objData["content"];
       console.log("Получены данные", event.data);
     });
   } else {

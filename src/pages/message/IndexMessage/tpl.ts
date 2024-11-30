@@ -17,7 +17,10 @@ const tpl: string = `
         </div>
         <div class="content__message">
           {{{Header}}}
-          <div class="content__main"></div>
+          <div class="content__main">
+            <div class="left-section"></div>
+            <div class="right-section"></div>
+          </div>
           <div class="content__footer">
             <a href=""><span class="footer__Investment"></span></a>
             {{{form}}}

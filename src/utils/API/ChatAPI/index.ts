@@ -19,8 +19,8 @@ class ChatAPI {
   }
 
   GetChat() {
-    const queryString = `limit=10`;
-    return entranceAPI.get(`${URL}/chats`, undefined, queryString).send();
+    // const queryString = `l`;
+    return entranceAPI.get(`${URL}/chats`, undefined).send();
   }
 
   token(id: string) {
