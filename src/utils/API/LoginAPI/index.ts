@@ -1,8 +1,8 @@
 import Request from "../Request";
+import { URL } from "../BaseAPI";
 // import { BaseAPI } from "../BaseAPI";
 
 const entranceAPI = new Request("");
-const URL = "https://ya-praktikum.tech/api/v2";
 
 class LoginAPI {
   request(data: { [key: string]: string }) {
