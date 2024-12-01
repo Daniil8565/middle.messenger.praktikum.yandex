@@ -3,7 +3,7 @@ import UserLoginController from "../API/UserLoginController";
 
 export default function putRequest() {
   const controller = new UserLoginController();
-  //   console.log(controller);
+
   const state = store.getState();
   const AnotherData = state.AnotherUser;
   const AnotherOne = AnotherData[0] as Record<string, unknown>;
@@ -16,7 +16,6 @@ export default function putRequest() {
 
   const ArrayNumberIdUser = [];
   ArrayNumberIdUser.push(NumberIdUser);
-  console.log(NumberIdUser, NumberIdChats);
 
   const data = {
     users: ArrayNumberIdUser,

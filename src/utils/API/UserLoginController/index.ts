@@ -3,37 +3,29 @@ import router from "../../..";
 import store from "../store";
 import UserAPI from "../UserAPI";
 import ChatAPI from "../ChatAPI";
-// import socket from "../../socket";
 
 const loginApi = new LoginAPI();
 const UserApi = new UserAPI();
 const ChatApi = new ChatAPI();
+
 function errorMessage(error: Record<string, string>) {
+  const ErrorElem = document.getElementById("ErrorRequest") as HTMLElement;
   const responseText = error.reason;
   const responseObject = JSON.parse(responseText);
   const errorMessage = responseObject.reason;
-  const ErrorElem = document.getElementById("ErrorRequest") as HTMLElement;
-  ErrorElem.style.color = "red";
-  ErrorElem.textContent = errorMessage;
+  if (errorMessage == "User already in system") {
+    router.go("/message");
+  } else {
+    ErrorElem.style.color = "red";
+    ErrorElem.textContent = errorMessage;
+  }
   return ErrorElem;
 }
 
-// Функция для установки cookies
-function setCookie(name: string, value: string, days: number) {
-  const expires = new Date();
-  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000); // Устанавливаем срок действия cookie (в днях)
-  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-}
-
 type UsersRequest = {
-  users: number[] | number; // Массив чисел, представляющий ID пользователей
-  chatId: number; // Число, представляющее ID чата
+  users: number[] | number;
+  chatId: number;
 };
-
-// Функция для удаления cookies
-function deleteCookie(name: string) {
-  document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
-}
 
 class UserLoginController {
   public async login(data: { [key: string]: string }) {
@@ -43,15 +35,15 @@ class UserLoginController {
     loginApi
       .request(data)
       .then(() => {
-        // Сохраняем флаг авторизации в cookies
-        setCookie("isAuthenticated", "true", 7); // Флаг сохраняем на 7 дней
-
         router.go("/message"); // Перенаправление на страницу после успешного входа
       })
       .then(() => {
         this.GetChat();
+        this.getData();
       })
       .catch((error) => {
+        this.GetChat();
+        this.getData();
         errorMessage(error); // Обработка ошибки
       });
   }
@@ -63,15 +55,16 @@ class UserLoginController {
     loginApi
       .create(data)
       .then(() => {
-        // Сохраняем флаг авторизации в cookies
-        setCookie("isAuthenticated", "true", 7); // Флаг сохраняем на 7 дней
-        router.go("/message"); // Перенаправление на страницу после регистрации
+        router.go("/message");
       })
       .then(() => {
         this.GetChat();
+        this.getData();
       })
       .catch((error) => {
-        errorMessage(error); // Обработка ошибки
+        this.GetChat();
+        this.getData();
+        errorMessage(error);
       });
   }
 
@@ -83,9 +76,6 @@ class UserLoginController {
   }
 
   public async logout() {
-    // Удаляем флаг авторизации из cookies
-    deleteCookie("isAuthenticated"); // Удаление флага авторизации
-
     loginApi
       .logout()
       .then(() => {
@@ -95,7 +85,10 @@ class UserLoginController {
         document.cookie = "uuid=; Max-Age=0; path=/; domain=ya-praktikum.tech;";
 
         // Перенаправляем на страницу входа
-        router.go("/");
+        // router.go("/");
+        window.history.replaceState({}, "", "/");
+        // console.log(window.history);
+        window.location.replace("/");
         // window.location.reload();
         const elemError = document.getElementById(
           "ErrorRequest"
@@ -117,7 +110,7 @@ class UserLoginController {
           "ErrorRequest"
         ) as HTMLElement;
         ErrorElem.textContent = "";
-        store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
+        store.set("userName", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
       })
       .catch((error) => {
         errorMessage(error);
@@ -135,11 +128,10 @@ class UserLoginController {
   }
 
   public async avatar(data: FormData) {
-    console.log(data);
     UserApi.avatar(data)
       .then((data) => {
         const dataJSON = data.response;
-        store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
+        store.set("userName", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
       })
       .catch((error) => {
         errorMessage(error);

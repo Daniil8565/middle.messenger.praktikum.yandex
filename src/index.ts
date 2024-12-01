@@ -9,13 +9,6 @@ import registration from "./pages/registration/index.ts";
 import Route from "./utils/Router/Route.ts";
 import IBlock from "./services/IBlock.ts";
 import "./style.sass";
-import UserLoginController from "./utils/API/UserLoginController/index.ts";
-
-// Функция для получения значения cookie
-function getCookie(name: string): string | null {
-  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-  return match ? decodeURIComponent(match[2]) : null;
-}
 
 class Router {
   private static __instance: Router | null = null;
@@ -48,18 +41,6 @@ class Router {
   }
 
   start(): void {
-    // Проверяем авторизацию при загрузке
-    const isAuthenticated = getCookie("isAuthenticated");
-    if (isAuthenticated === "true") {
-      // Если авторизован, перенаправляем на страницу мессенджера
-      const controller = new UserLoginController();
-      controller.GetChat();
-      controller.getData();
-      this.go("/message");
-    } else {
-      // Если не авторизован, перенаправляем на страницу входа
-      this.go("/");
-    }
     window.onpopstate = () => {
       this._onRoute(window.location.pathname);
     };
@@ -130,6 +111,6 @@ router
   .use("/Profile", Profile)
   .start();
 
-// router.go("/");
+router.go("/");
 
 export default router;

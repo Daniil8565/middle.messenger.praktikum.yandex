@@ -63,18 +63,6 @@ export default class Request {
         reject(new Error("Network Error"));
       };
 
-      if (this._body) {
-        console.log("Тип данных тела запроса:", this._body.constructor.name);
-        if (this._body instanceof FormData) {
-          console.log("FormData содержимое:");
-          this._body.forEach((value, key) => {
-            console.log(`${key}:`, value);
-          });
-        } else {
-          console.log("Тело запроса (JSON):", this._body);
-        }
-      }
-
       // Отправка данных
       if (this._method === "GET") {
         xhr.send();

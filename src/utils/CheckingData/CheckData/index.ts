@@ -13,7 +13,6 @@ export default function CheckData(event: SubmitEvent) {
       data[input.name] = input.value;
       input.value = "";
     });
-    console.log(data); // Выводим объект в консоль
     LoginController.login(data);
   }
 }

@@ -11,7 +11,6 @@ export default function handleLinkClick(event: MouseEvent): void {
       controller.logout();
     } else {
       const href = link.getAttribute("href");
-      console.log(href);
       if (href === "/Profile") {
         controller.getData();
       }

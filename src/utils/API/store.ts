@@ -1,5 +1,4 @@
 import EventBus from "../../services/EventBus";
-// import set from "./set";
 
 type Ivalue = {
   [key: string]: unknown;
@@ -22,9 +21,6 @@ class Store extends EventBus {
 
   public set(path: string, value: Ivalue) {
     this.state[path] = value;
-    console.log("Данные добавлены в состояние", this.state);
-    // set(this.state, path, value);
-    // метод EventBus
     this.emit(StoreEvents.Updated);
   }
 }

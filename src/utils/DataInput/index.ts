@@ -25,7 +25,7 @@ export default async function DataInput(event: Event) {
     await DataController.findUserRequest(UserData);
 
     // Добавляем задержку перед вызовом putRequest
-    await stTimeout(5000);
+    await stTimeout(2000);
 
     // Вызываем putRequest после выполнения всех предыдущих операций
     putRequest();

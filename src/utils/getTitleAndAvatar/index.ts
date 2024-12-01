@@ -30,7 +30,6 @@ async function getTitleAndAvatar(e: MouseEvent) {
     // Обновляем отображение имени пользователя
     const username = document.querySelector(".Header__username") as HTMLElement;
     username.textContent = titleElement.textContent;
-    console.log("ChatIDToken", ChatID);
     controller.token(ChatID);
   } catch (error) {
     console.error("Ошибка при выполнении запросов:", error);

@@ -62,9 +62,9 @@ const exit = new Link("a", {
   },
 });
 
-let newIndexProfile = connect(mapUserToProps)(IndexProfile);
+// let newIndexProfile = connect(mapUserToProps)(IndexProfile);
 
-Profile = new newIndexProfile("div", {
+Profile = new IndexProfile("div", {
   GlobalProfileData: GlProfileData,
   link1: link1,
   link2: link2,

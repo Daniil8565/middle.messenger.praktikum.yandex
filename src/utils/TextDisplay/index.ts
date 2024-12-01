@@ -1,12 +1,10 @@
-export default function TextDisplay(event: FocusEvent) {
+export default function TextDisplay() {
   // Найти элемент с классом avatar
   const avatar = document.querySelector(".avatarChangeData") as HTMLElement;
   const avatarText = document.querySelector(".avatar__text") as HTMLElement;
   const avataImage = document.querySelector(
     ".avatarChangeDataImage"
   ) as HTMLElement;
-  console.log("TextDisplay");
-  console.log(event);
   // Добавить событие при наведении
 
   avataImage.style.opacity = "0";
