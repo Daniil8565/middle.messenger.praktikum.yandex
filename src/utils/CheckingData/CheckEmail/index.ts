@@ -1,26 +1,16 @@
-export default function CheckEmail() {
-  const form = document.getElementById('Form') as HTMLFormElement;
-  const emailInput = document.getElementById('email') as HTMLInputElement;
-  const emailError = document.getElementById('emailError') as HTMLSpanElement;
+let FlagEmail = false;
 
-  // Валидация email
-  const validateEmail = (email: string) => {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (regex.test(email)) {
-      emailError.textContent = '';
-      return true;
-    } else {
-      emailError.textContent = 'Некорректный email.';
-      return false;
-    }
-  };
-
-  emailInput.addEventListener('blur', () => {
-    validateEmail(emailInput.value);
-  });
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    validateEmail(emailInput.value);
-  });
+export default function CheckEmail(e: FocusEvent) {
+  const emailError = document.getElementById("emailError") as HTMLSpanElement;
+  const email = (e.target as HTMLInputElement).value;
+  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (regex.test(email)) {
+    emailError.textContent = "";
+    FlagEmail = true;
+  } else {
+    emailError.textContent = "Некорректный email.";
+    FlagEmail = false;
+  }
 }
+
+export { FlagEmail };

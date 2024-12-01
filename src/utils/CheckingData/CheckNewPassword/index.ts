@@ -1,30 +1,21 @@
-export default function CheckNewPassword() {
-  const form = document.getElementById('Form') as HTMLFormElement;
-  const passwordInput = document.getElementById(
-    'newPassword'
-  ) as HTMLInputElement;
+let flagNewPassword = false;
+let NewPassword: string;
+
+export default function CheckNewPassword(e: FocusEvent) {
   const passwordError = document.getElementById(
     'newPasswordError'
-  ) as HTMLSpanElement;
+    ) as HTMLSpanElement;
+    NewPassword = (e.target as HTMLInputElement).value;
 
-  const validatePassword = (password: string) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,40}$/;
-    if (regex.test(password)) {
+    if (regex.test(NewPassword)) {
       passwordError.textContent = '';
-      return true;
+      flagNewPassword = true;
     } else {
       passwordError.textContent =
         'Пароль должен быть не менее 8 символов, содержать хотя бы одну заглавную букву и цифру.';
-      return false;
+        flagNewPassword = false
     }
-  };
-
-  passwordInput.addEventListener('blur', () => {
-    validatePassword(passwordInput.value);
-  });
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    validatePassword(passwordInput.value);
-  });
 }
+
+export {NewPassword, flagNewPassword}
