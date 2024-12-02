@@ -5,6 +5,10 @@ import handleLinkClick from "../../utils/handleClick/index.ts";
 import mapUserToProps from "../../utils/API/mapUserToProps/index.ts";
 import connect from "../../utils/API/HOC/index.ts";
 import GlobalProfileData from "../../components/GlobalProfileData/index.ts";
+import UserLoginController from "../../utils/API/UserLoginController/index.ts";
+
+const controller = new UserLoginController();
+controller.getData();
 
 let Profile: IndexProfile;
 

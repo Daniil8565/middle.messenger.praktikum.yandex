@@ -4,7 +4,7 @@ import Form from "../../components/form/index.ts";
 import Error from "../../components/Error/index.ts";
 import Input from "../../components/input/index.ts";
 import Button from "../../components/button/index.ts";
-// import DataCollection from "../../utils/DataCollection/index.ts";
+
 import "./style.sass";
 import CheckMessage from "../../utils/CheckingData/CheckMessage/index.ts";
 import handleLinkClick from "../../utils/handleClick/index.ts";
@@ -20,8 +20,19 @@ import DataDelete from "../../utils/DataDelete/index.ts";
 import connect from "../../utils/API/HOC/index.ts";
 import getTitleAndAvatar from "../../utils/getTitleAndAvatar/index.ts";
 import socket from "../../utils/socket/index.ts";
+import UserLoginController from "../../utils/API/UserLoginController/index.ts";
+import FlagAuthorization from "../../utils/FlagAuthorization/index.ts";
 
-let message: IndexMessage;
+if (
+  window.location.pathname !== "/" &&
+  window.location.pathname !== "/registration"
+) {
+  FlagAuthorization.flag = true;
+}
+
+const contoller = new UserLoginController();
+contoller.GetChat();
+contoller.getData();
 
 let linkAdd = new Link("div", {
   title: "Добавить пользователя",
@@ -172,10 +183,10 @@ let newIndexMessage = connect((state) => {
     });
     return { items: newItems };
   }
-  return { items: "Ошибка" };
+  return { items: "" };
 })(IndexMessage);
 
-message = new newIndexMessage("div", {
+let message = new newIndexMessage("div", {
   link: link,
   Header: header,
   form: forma,

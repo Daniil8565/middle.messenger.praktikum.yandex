@@ -44,27 +44,9 @@ class Router {
     window.onpopstate = () => {
       this._onRoute(window.location.pathname);
     };
-    // Сохраняем состояние в localStorage
-    window.addEventListener("beforeunload", () => {
-      // Сохраняем текущий маршрут
-      const currentPath = window.location.pathname;
-      localStorage.setItem("currentRoute", currentPath);
-    });
 
-    // Загружаем состояние из localStorage
-    window.addEventListener("load", () => {
-      const storedRoute = localStorage.getItem("currentRoute");
-      if (storedRoute && this.history) {
-        this.history.replaceState({}, "", storedRoute);
-        this._onRoute(storedRoute);
-        localStorage.removeItem("currentRoute"); // Удаляем после восстановления
-      } else {
-        // Если маршрут не сохранен, загружаем по умолчанию
-        this._onRoute(window.location.pathname);
-      }
-    });
-
-    // this._onRoute(window.location.pathname);
+    // this.history?.pushState({}, "", window.location.pathname);
+    this._onRoute(window.location.pathname);
   }
 
   private _onRoute(pathname: string): void {
@@ -76,7 +58,6 @@ class Router {
     if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave();
     }
-
     this._currentRoute = route;
     route.render();
   }
@@ -107,10 +88,10 @@ router
   .use("/ChangePassword", ChangePassword)
   .use("/message", message)
   .use("/registration", registration)
-  .use("/", Entrance)
   .use("/Profile", Profile)
+  .use("/", Entrance)
   .start();
 
-router.go("/");
+// router.go("/");
 
 export default router;

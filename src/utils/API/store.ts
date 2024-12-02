@@ -21,6 +21,7 @@ class Store extends EventBus {
 
   public set(path: string, value: Ivalue) {
     this.state[path] = value;
+    console.log("Данные добавлены в состояние:", this.state);
     this.emit(StoreEvents.Updated);
   }
 }

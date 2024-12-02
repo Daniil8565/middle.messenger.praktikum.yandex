@@ -3,6 +3,7 @@ import router from "../../..";
 import store from "../store";
 import UserAPI from "../UserAPI";
 import ChatAPI from "../ChatAPI";
+import FlagAuthorization from "../../FlagAuthorization";
 
 const loginApi = new LoginAPI();
 const UserApi = new UserAPI();
@@ -13,7 +14,12 @@ function errorMessage(error: Record<string, string>) {
   const responseText = error.reason;
   const responseObject = JSON.parse(responseText);
   const errorMessage = responseObject.reason;
+  console.log(errorMessage);
   if (errorMessage == "User already in system") {
+    FlagAuthorization.flag = true;
+    const controller = new UserLoginController();
+    controller.GetChat();
+    controller.getData();
     router.go("/message");
   } else {
     ErrorElem.style.color = "red";
@@ -34,17 +40,17 @@ class UserLoginController {
     }
     loginApi
       .request(data)
-      .then(() => {
-        router.go("/message"); // Перенаправление на страницу после успешного входа
+      .then((data) => {
+        console.log(data);
+        FlagAuthorization.flag = true;
+        router.go("/message");
       })
       .then(() => {
         this.GetChat();
         this.getData();
       })
       .catch((error) => {
-        this.GetChat();
-        this.getData();
-        errorMessage(error); // Обработка ошибки
+        errorMessage(error);
       });
   }
 
@@ -55,6 +61,7 @@ class UserLoginController {
     loginApi
       .create(data)
       .then(() => {
+        FlagAuthorization.flag = true;
         router.go("/message");
       })
       .then(() => {
@@ -62,17 +69,20 @@ class UserLoginController {
         this.getData();
       })
       .catch((error) => {
-        this.GetChat();
-        this.getData();
         errorMessage(error);
       });
   }
 
   public async getData() {
-    loginApi.requestDataUser().then((data) => {
-      const dataJSON = data.response;
-      store.set("userName", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
-    });
+    console.log("getData");
+    if (FlagAuthorization.flag) {
+      loginApi.requestDataUser().then((data) => {
+        const dataJSON = data.response;
+        store.set("userName", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
+      });
+    } else {
+      console.log("ПОЛЬЗОВАТЕЛЬ НЕ АВТОРИЗОВАН");
+    }
   }
 
   public async logout() {
@@ -86,6 +96,7 @@ class UserLoginController {
 
         // Перенаправляем на страницу входа
         // router.go("/");
+        FlagAuthorization.flag = false;
         window.history.replaceState({}, "", "/");
         // console.log(window.history);
         window.location.replace("/");
@@ -149,10 +160,15 @@ class UserLoginController {
     });
   }
   public async GetChat() {
-    ChatApi.GetChat().then((data) => {
-      const dataJSON = data.response;
-      store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
-    });
+    console.log("getChat");
+    if (FlagAuthorization.flag) {
+      ChatApi.GetChat().then((data) => {
+        const dataJSON = data.response;
+        store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
+      });
+    } else {
+      console.log("Пользователь не авторизован");
+    }
   }
 
   public async token(id: string) {
