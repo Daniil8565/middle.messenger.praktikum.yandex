@@ -1,16 +1,15 @@
-let Flagphone = false;
-
-export default function CheckPhone(e: FocusEvent) {
+export default function CheckPhone() {
+  const loginInput = document.querySelector(
+    'input[name="phone"]'
+  ) as HTMLInputElement;
   const phoneError = document.getElementById("phoneError") as HTMLSpanElement;
-  const phone = (e.target as HTMLInputElement).value;
+  const phone = loginInput.value;
   const regex = /^\+?\d{10,15}$/;
   if (regex.test(phone)) {
     phoneError.textContent = "";
-    Flagphone = true;
+    return true;
   } else {
     phoneError.textContent = "Некорректный номер телефона.";
-    Flagphone = false;
+    return false;
   }
 }
-
-export { Flagphone };

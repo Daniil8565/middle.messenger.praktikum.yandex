@@ -1,12 +1,9 @@
-import FormSection from "../../components/formSection/index.ts";
 import IndexChangeData from "./IndexChahgeData/index.ts";
 import Button from "../../components/button/index.ts";
 import "./style.sass";
-import Form from "../../components/form/index.ts";
 import Input from "../../components/input/index.ts";
-import Error from "../../components/Error/index.ts";
 import CheckEmail from "../../utils/CheckingData/CheckEmail/index.ts";
-import { CheckLogin } from "../../utils/CheckingData/CheckLogin/index.ts";
+import CheckLogin from "../../utils/CheckingData/CheckLogin/index.ts";
 import CheckName from "../../utils/CheckingData/CheckName/index.ts";
 import CheckSurname from "../../utils/CheckingData/CheckSurname/index.ts";
 import CheckPhone from "../../utils/CheckingData/CheckPhone/index.ts";
@@ -17,6 +14,8 @@ import avatarChangeData from "../../components/avatarChangeData/index.ts";
 import TextDisplay from "../../utils/TextDisplay/index.ts";
 import modal from "../../components/modal/index.ts";
 import ModalShow from "../../utils/ModalShow/index.ts";
+import connect from "../../utils/API/HOC/index.ts";
+import FormChangeData from "../../components/formChangeData/index.ts";
 
 const avatar = new avatarChangeData("div", {
   attr: {
@@ -36,147 +35,125 @@ const button = new Button("button", {
   },
 });
 
-const input = new Input("input", {
-  attr: {
-    class: "input",
-    type: "email",
-    id: "email",
-    name: "email",
-  },
-  events: {
-    blur: CheckEmail,
-  },
-});
+let newFormChangeData = connect((state) => {
+  const dataUser = state.userName;
+  let newObj: Record<string, unknown> = {};
+  let resultInput: Record<string, Input> = {};
+  if (dataUser) {
+    for (let i in dataUser) {
+      if (i != "id" && i != "avatar") {
+        newObj[i] = dataUser[i];
+      }
+    }
+  }
 
-const input2 = new Input("input", {
-  attr: {
-    class: "input",
-    type: "text",
-    id: "login",
-    name: "login",
-  },
-  events: {
-    blur: CheckLogin,
-  },
-});
+  for (let i in newObj) {
+    if (i == "email") {
+      let input = new Input("input", {
+        attr: {
+          class: "input",
+          type: "email",
+          id: "email",
+          name: "email",
+          value: newObj[i],
+        },
+        events: {
+          blur: CheckEmail,
+        },
+      });
+      resultInput[i] = input;
+    } else if (i == "phone") {
+      let input = new Input("input", {
+        attr: {
+          class: "input",
+          type: "tel",
+          id: "phone",
+          name: "phone",
+          value: newObj[i],
+        },
+        events: {
+          blur: CheckPhone,
+        },
+      });
+      resultInput[i] = input;
+    } else if (i == "display_name") {
+      let input = new Input("input", {
+        attr: {
+          class: "input",
+          type: "text",
+          id: "display_name",
+          name: "display_name",
+          value: newObj[i],
+        },
+        events: {
+          blur: CheckNameChat,
+        },
+      });
+      resultInput[i] = input;
+    } else if (i == "first_name") {
+      let input = new Input("input", {
+        attr: {
+          class: "input",
+          type: "text",
+          id: "first_name",
+          name: "first_name",
+          value: newObj[i],
+        },
+        events: {
+          blur: CheckName,
+        },
+      });
+      resultInput[i] = input;
+    } else if (i == "second_name") {
+      let input = new Input("input", {
+        attr: {
+          class: "input",
+          type: "text",
+          id: "second_name",
+          name: "second_name",
+          value: newObj[i],
+        },
+        events: {
+          blur: CheckSurname,
+        },
+      });
+      resultInput[i] = input;
+    } else if (i == "login") {
+      let input = new Input("input", {
+        attr: {
+          class: "input",
+          type: "text",
+          id: "login",
+          name: "login",
+          value: newObj[i],
+        },
+        events: {
+          blur: CheckLogin,
+        },
+      });
+      resultInput[i] = input;
+    }
+  }
+  let objInput: Record<string, Input> = {};
+  for (let i in resultInput) {
+    if (i == "login") {
+      objInput["input3"] = resultInput[i];
+    } else if (i == "second_name") {
+      objInput["input1"] = resultInput[i];
+    } else if (i == "first_name") {
+      objInput["input0"] = resultInput[i];
+    } else if (i == "display_name") {
+      objInput["input2"] = resultInput[i];
+    } else if (i == "phone") {
+      objInput["input5"] = resultInput[i];
+    } else if (i == "email") {
+      objInput["input4"] = resultInput[i];
+    }
+  }
+  return objInput;
+})(FormChangeData);
 
-const input3 = new Input("input", {
-  attr: {
-    class: "input",
-    type: "text",
-    id: "first_name",
-    name: "first_name",
-  },
-  events: {
-    blur: CheckName,
-  },
-});
-
-const input4 = new Input("input", {
-  attr: {
-    class: "input",
-    type: "text",
-    id: "second_name",
-    name: "second_name",
-  },
-  events: {
-    blur: CheckSurname,
-  },
-});
-
-const input5 = new Input("input", {
-  attr: {
-    class: "input",
-    type: "text",
-    id: "display_name",
-    name: "display_name",
-  },
-  events: {
-    blur: CheckNameChat,
-  },
-});
-
-const input6 = new Input("input", {
-  attr: {
-    class: "input",
-    type: "tel",
-    id: "phone",
-    name: "phone",
-  },
-  events: {
-    blur: CheckPhone,
-  },
-});
-
-const forma = new Form("form", {
-  items: [
-    new FormSection("div", {
-      for: "email",
-      input: input,
-      description: "Почта",
-      attr: {
-        class: "form__content",
-      },
-      class: "error__ChangeData",
-      SpanID: "emailError",
-    }),
-    new FormSection("div", {
-      for: "login",
-      input: input2,
-      description: "Логин",
-      class: "error__ChangeData",
-      attr: {
-        class: "form__content",
-      },
-      SpanID: "loginError",
-    }),
-    new FormSection("div", {
-      for: "first_name",
-      input: input3,
-      description: "Имя",
-      class: "error__ChangeData",
-      attr: {
-        class: "form__content",
-      },
-      SpanID: "firstNameError",
-    }),
-    new FormSection("div", {
-      for: "second_name",
-      input: input4,
-      description: "Фамилия",
-      class: "error__ChangeData",
-      attr: {
-        class: "form__content",
-      },
-      SpanID: "secondNameError",
-    }),
-    new FormSection("div", {
-      for: "display_name",
-      input: input5,
-      description: "Имя в чате",
-      class: "error__ChangeData",
-      attr: {
-        class: "form__content",
-      },
-      SpanID: "Name__chat",
-    }),
-    new FormSection("div", {
-      for: "tel",
-      input: input6,
-      description: "Телефон",
-      class: "error__ChangeData",
-      attr: {
-        class: "form__content",
-      },
-      SpanID: "phoneError",
-    }),
-    new Error("span", {
-      attr: {
-        class: "ErrorRequest",
-        id: "ErrorRequest",
-      },
-    }),
-  ],
+const forma = new newFormChangeData("form", {
   button: button,
   events: {
     submit: CheckChangeData,

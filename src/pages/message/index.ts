@@ -4,7 +4,7 @@ import Form from "../../components/form/index.ts";
 import Error from "../../components/Error/index.ts";
 import Input from "../../components/input/index.ts";
 import Button from "../../components/button/index.ts";
-
+import CreateChatLook from "../../utils/CreateChatLook/index.ts";
 import "./style.sass";
 import CheckMessage from "../../utils/CheckingData/CheckMessage/index.ts";
 import handleLinkClick from "../../utils/handleClick/index.ts";
@@ -22,6 +22,7 @@ import getTitleAndAvatar from "../../utils/getTitleAndAvatar/index.ts";
 import socket from "../../utils/socket/index.ts";
 import UserLoginController from "../../utils/API/UserLoginController/index.ts";
 import FlagAuthorization from "../../utils/FlagAuthorization/index.ts";
+import CreateChat from "../../components/CreateChat/index.ts";
 
 if (
   window.location.pathname !== "/" &&
@@ -149,6 +150,19 @@ let modalAdd = new modalMessage("div", {
   },
 });
 
+let modalCreate = new modalMessage("div", {
+  Header: "Создать чат",
+  description: "Введите заголовок чата",
+  for: "title",
+  id: "title",
+  name: "title",
+  buttonDescription: "Добавить",
+  attr: {
+    class: "modalMessage hidden",
+    id: "create-user-modal",
+  },
+});
+
 let modalDelete = new modalMessage("div", {
   Header: "Удалить пользователя",
   description: "Введите id пользователя",
@@ -186,10 +200,23 @@ let newIndexMessage = connect((state) => {
   return { items: "" };
 })(IndexMessage);
 
+let createChat = new CreateChat("div", {
+  description: "Создание нового чата",
+  attr: {
+    href: "#",
+    class: "CreateChat",
+  },
+  events: {
+    click: CreateChatLook,
+  },
+});
+
 let message = new newIndexMessage("div", {
   link: link,
   Header: header,
+  CreateChatUser: createChat,
   form: forma,
+  ModalCreateUser: modalCreate,
   ModalADD: modalAdd,
   ModalDELETE: modalDelete,
   attr: {

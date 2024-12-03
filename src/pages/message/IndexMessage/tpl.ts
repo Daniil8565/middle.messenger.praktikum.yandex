@@ -10,6 +10,7 @@ const tpl: string = `
                 <p class="search__description">Поиск</p>
               </div>
             </button>
+            {{{CreateChatUser}}}
             <ul class="list__chats">
               {{{items}}}
             </ul>
@@ -28,6 +29,7 @@ const tpl: string = `
         </div>
         {{{ModalADD}}}
         {{{ModalDELETE}}}
+        {{{ModalCreateUser}}}
 `;
 
 export default tpl;

@@ -1,14 +1,14 @@
-let flagNameChat = false;
-
-export default function CheckNameChat(e: FocusEvent) {
-  let NameChat = (e.target as HTMLInputElement).value;
+export default function CheckNameChat() {
+  const loginInput = document.querySelector(
+    'input[name="display_name"]'
+  ) as HTMLInputElement;
+  let NameChat = loginInput.value;
   const error = document.getElementById("Name__chat") as HTMLSpanElement;
   if (!NameChat) {
     error.textContent = "Введите имя";
   } else {
     error.textContent = "";
-    flagNameChat = true;
+    return true;
   }
+  return false;
 }
-
-export { flagNameChat };

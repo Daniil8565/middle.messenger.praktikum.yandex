@@ -1,14 +1,19 @@
-import { FlagEmail } from "../CheckEmail";
-import { FlagLogin } from "../CheckLogin";
-import { FlagName } from "../CheckName";
-import { FlagSurname } from "../CheckSurname";
-import { Flagphone } from "../CheckPhone";
+import CheckEmail from "../CheckEmail";
+import CheckLogin from "../CheckLogin";
+import CheckName from "../CheckName";
+import CheckSurname from "../CheckSurname";
+import CheckPhone from "../CheckPhone";
 import { password } from "../CheckOldPassword";
-import { FlagRepeatPassword } from "../CheckRepeatPassword";
+import { FlagRepeatPassword } from "../CheckNewAndRepeatPasword";
 import UserLoginController from "../../API/UserLoginController";
 
 export default function CheckDataRegistration(event: SubmitEvent) {
   event.preventDefault();
+  let FlagEmail = CheckEmail();
+  let FlagLogin = CheckLogin();
+  let FlagName = CheckName();
+  let Flagphone = CheckPhone();
+  let FlagSurname = CheckSurname();
   if (
     FlagEmail &&
     FlagLogin &&

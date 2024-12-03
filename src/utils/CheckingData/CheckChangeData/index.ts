@@ -1,13 +1,18 @@
-import { FlagEmail } from "../CheckEmail";
-import { FlagLogin } from "../CheckLogin";
-import { FlagName } from "../CheckName";
-import { FlagSurname } from "../CheckSurname";
-import { flagNameChat } from "../CheckNameChat";
-import { Flagphone } from "../CheckPhone";
+import CheckEmail from "../CheckEmail";
+import CheckLogin from "../CheckLogin";
+import CheckName from "../CheckName";
+import CheckSurname from "../CheckSurname";
+import CheckNameChat from "../CheckNameChat";
+import CheckPhone from "../CheckPhone";
 import UserLoginController from "../../API/UserLoginController";
-
 export default function CheckChangeData(event: SubmitEvent) {
   event.preventDefault();
+  let FlagEmail = CheckEmail();
+  let FlagLogin = CheckLogin();
+  let FlagName = CheckName();
+  let Flagphone = CheckPhone();
+  let FlagSurname = CheckSurname();
+  let flagNameChat = CheckNameChat();
   if (
     FlagEmail &&
     FlagLogin &&

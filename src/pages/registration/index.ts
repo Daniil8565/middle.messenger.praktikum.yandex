@@ -7,7 +7,7 @@ import Label from "../../components/label/index.ts";
 import Input from "../../components/input/index.ts";
 import "./style.sass";
 import CheckEmail from "../../utils/CheckingData/CheckEmail/index.ts";
-import { CheckLogin } from "../../utils/CheckingData/CheckLogin/index.ts";
+import CheckLogin from "../../utils/CheckingData/CheckLogin/index.ts";
 import CheckName from "../../utils/CheckingData/CheckName/index.ts";
 import CheckSurname from "../../utils/CheckingData/CheckSurname/index.ts";
 import CheckPhone from "../../utils/CheckingData/CheckPhone/index.ts";

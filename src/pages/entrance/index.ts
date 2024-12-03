@@ -7,7 +7,7 @@ import Input from "../../components/input/index.ts";
 import Error from "../../components/Error/index.ts";
 import handleLinkClick from "../../utils/handleClick/index.ts";
 import "./style.sass";
-import { CheckLogin } from "../../utils/CheckingData/CheckLogin/index.ts";
+import CheckLogin from "../../utils/CheckingData/CheckLogin/index.ts";
 import { CheckOldPassword } from "../../utils/CheckingData/CheckOldPassword/index.ts";
 import CheckData from "../../utils/CheckingData/CheckData/index.ts";
 let Entrance: IndexEntrance;
