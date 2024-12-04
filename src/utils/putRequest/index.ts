@@ -22,5 +22,7 @@ export default function putRequest() {
     chatId: NumberIdChats,
   };
 
+  console.log(data);
+
   controller.usersRequest(data);
 }

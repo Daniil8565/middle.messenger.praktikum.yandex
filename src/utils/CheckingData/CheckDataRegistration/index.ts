@@ -3,8 +3,8 @@ import CheckLogin from "../CheckLogin";
 import CheckName from "../CheckName";
 import CheckSurname from "../CheckSurname";
 import CheckPhone from "../CheckPhone";
-import { password } from "../CheckOldPassword";
-import { FlagRepeatPassword } from "../CheckNewAndRepeatPasword";
+import { CheckPassword } from "../CheckOldPassword";
+import { FlagRepeatPasswordRegistration } from "../CheckRegistrationPassword";
 import UserLoginController from "../../API/UserLoginController";
 
 export default function CheckDataRegistration(event: SubmitEvent) {
@@ -14,14 +14,23 @@ export default function CheckDataRegistration(event: SubmitEvent) {
   let FlagName = CheckName();
   let Flagphone = CheckPhone();
   let FlagSurname = CheckSurname();
+  console.log(
+    FlagSurname,
+    Flagphone,
+    FlagName,
+    FlagLogin,
+    FlagEmail,
+    CheckPassword,
+    FlagRepeatPasswordRegistration
+  );
   if (
     FlagEmail &&
     FlagLogin &&
     FlagName &&
     FlagSurname &&
     Flagphone &&
-    password &&
-    FlagRepeatPassword
+    CheckPassword &&
+    FlagRepeatPasswordRegistration
   ) {
     const registrationController = new UserLoginController();
     const form = document.getElementById("Form") as HTMLFormElement;
@@ -33,5 +42,7 @@ export default function CheckDataRegistration(event: SubmitEvent) {
     });
     console.log(data); // Выводим объект в консоль
     registrationController.registration(data);
+  } else {
+    console.log("Ошибка с флагами");
   }
 }

@@ -12,9 +12,10 @@ import CheckName from "../../utils/CheckingData/CheckName/index.ts";
 import CheckSurname from "../../utils/CheckingData/CheckSurname/index.ts";
 import CheckPhone from "../../utils/CheckingData/CheckPhone/index.ts";
 import { CheckOldPassword } from "../../utils/CheckingData/CheckOldPassword/index.ts";
-import CheckRepeatPassword from "../../utils/CheckingData/CheckRepeatPassword/index.ts";
+// import CheckRepeatPassword from "../../utils/CheckingData/CheckRepeatPassword/index.ts";
 import handleLinkClick from "../../utils/handleClick/index.ts";
 import CheckDataRegistration from "../../utils/CheckingData/CheckDataRegistration/index.ts";
+import CheckRegistrationPassword from "../../utils/CheckingData/CheckRegistrationPassword/index.ts";
 
 let registration: IndexRegistration;
 
@@ -179,7 +180,7 @@ const forma = new Form("form", {
         name: "password",
       },
       events: {
-        blur: CheckRepeatPassword,
+        blur: CheckRegistrationPassword,
       },
     }),
     new Error("span", {

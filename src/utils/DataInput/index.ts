@@ -10,17 +10,13 @@ export default async function DataInput(event: Event) {
   event.preventDefault(); // Предотвращаем стандартное поведение формы
 
   const usernameInput = document.getElementById("username") as HTMLInputElement;
-  const username = usernameInput.value; // Получаем значение из поля ввода
+  const usernameLogin = usernameInput.value; // Получаем значение из поля ввода
 
-  const ChatData = { title: username };
-  const UserData = { login: username };
+  const UserData = { login: usernameLogin };
 
   const DataController = new UserLoginController();
 
   try {
-    // Дожидаемся завершения первого запроса
-    await DataController.createChatRequest(ChatData);
-
     // Дожидаемся завершения второго запроса
     await DataController.findUserRequest(UserData);
 

@@ -7,6 +7,20 @@ function getMessage() {
   return input.value;
 }
 
+function appendMessage(
+  container: HTMLElement,
+  message: string,
+  isOutgoing: boolean
+) {
+  console.log("constainer", container);
+  const messageElement = document.createElement("div");
+  messageElement.className = isOutgoing
+    ? "message message--outgoing"
+    : "message message--incoming";
+  messageElement.textContent = message;
+  container.appendChild(messageElement);
+}
+
 export default function socket(e: SubmitEvent) {
   // const controller = new UserLoginController();
   e.preventDefault();
@@ -34,7 +48,7 @@ export default function socket(e: SubmitEvent) {
 
     socket.addEventListener("open", () => {
       console.log("Соединение установлено");
-      rightSection.textContent = message;
+      // appendMessage(rightSection, message, true); // Отправленное сообщение
       socket.send(
         JSON.stringify({
           content: message,
@@ -54,9 +68,19 @@ export default function socket(e: SubmitEvent) {
     });
 
     socket.addEventListener("message", (event) => {
-      const objData = event.data;
-      leftSection.textContent = objData["content"];
-      console.log("Получены данные", event.data);
+      try {
+        const data = JSON.parse(event.data);
+        if (data.type === "message") {
+          // console.log(data, IdUserName);
+          if (data.user_id == IdUserName) {
+            appendMessage(rightSection, data.content, true);
+          } else {
+            appendMessage(leftSection, data.content, false); // Полученное сообщение
+          }
+        }
+      } catch (err) {
+        console.error("Ошибка при обработке сообщения", err);
+      }
     });
   } else {
     console.log("Введите данные");

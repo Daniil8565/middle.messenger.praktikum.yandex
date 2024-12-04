@@ -432,11 +432,42 @@ main
   border-radius: 8px
   overflow: hidden
 
-.left-section
-  flex: 3
-  padding: 16px
-  border-right: 1px solid #ccc
+.content__main 
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: flex-start
+  height: 100%
+  width: 100%
+
+
+.left-section 
+  flex: 1
+  max-width: 50%
+  padding: 10px
+
+
 
 .right-section 
   flex: 1
-  padding: 16px
+  max-width: 50%
+  padding: 10px
+
+
+.message 
+  padding: 10px
+  margin: 5px
+  border-radius: 5px
+  max-width: 70%
+  word-wrap: break-word
+
+
+.message--outgoing 
+  background-color: #d1ffd6
+  align-self: flex-end
+
+
+.message--incoming 
+  background-color: #f1f1f1
+  align-self: flex-start
+

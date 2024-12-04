@@ -18,6 +18,7 @@ import ModalDelete from "../../utils/ModalDelete/index.ts";
 import DataInput from "../../utils/DataInput/index.ts";
 import DataDelete from "../../utils/DataDelete/index.ts";
 import connect from "../../utils/API/HOC/index.ts";
+import CreateChatRequest from "../../utils/CreateChatRequest/index.ts";
 import getTitleAndAvatar from "../../utils/getTitleAndAvatar/index.ts";
 import socket from "../../utils/socket/index.ts";
 import UserLoginController from "../../utils/API/UserLoginController/index.ts";
@@ -136,7 +137,7 @@ const forma = new Form("form", {
 
 let modalAdd = new modalMessage("div", {
   Header: "Добавить пользователя",
-  description: "Имя пользователя",
+  description: "Введите логин пользователя",
   for: "username",
   id: "username",
   name: "title",
@@ -160,6 +161,9 @@ let modalCreate = new modalMessage("div", {
   attr: {
     class: "modalMessage hidden",
     id: "create-user-modal",
+  },
+  events: {
+    submit: CreateChatRequest,
   },
 });
 
