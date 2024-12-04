@@ -12,7 +12,6 @@ function appendMessage(
   message: string,
   isOutgoing: boolean
 ) {
-  console.log("constainer", container);
   const messageElement = document.createElement("div");
   messageElement.className = isOutgoing
     ? "message message--outgoing"
@@ -22,7 +21,6 @@ function appendMessage(
 }
 
 export default function socket(e: SubmitEvent) {
-  // const controller = new UserLoginController();
   e.preventDefault();
   if (flag) {
     let message = getMessage();
@@ -38,10 +36,6 @@ export default function socket(e: SubmitEvent) {
     const rightSection = document.querySelector(
       ".right-section"
     ) as HTMLElement;
-    // const ArrayIdUserName = state.AnotherUser;
-    // const one = ArrayIdUserName[0] as Record<string, unknown>;
-    // const IdUserName = one["id"];
-    console.log(IdUserName, idChat, Token);
     const socket = new WebSocket(
       `wss://ya-praktikum.tech/ws/chats/${IdUserName}/${idChat}/${Token}`
     );
