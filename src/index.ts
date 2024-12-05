@@ -1,14 +1,17 @@
-import page from "./pages/404/index.ts";
+// import page from "./pages/404/index.ts";
 import Entrance from "./pages/entrance/index.ts";
-import index500 from "./pages/500/index.ts";
+// import index500 from "./pages/500/index.ts";
+// import ChangeData from "./pages/changeData/index.ts";
+// import ChangePassword from "./pages/changePassword/index.ts";
+import FlagAuthorization from "./utils/FlagAuthorization/index.ts";
 import ChangeData from "./pages/changeData/index.ts";
-import ChangePassword from "./pages/changePassword/index.ts";
 import message from "./pages/message/index.ts";
 import Profile from "./pages/profile/index.ts";
 import registration from "./pages/registration/index.ts";
 import Route from "./utils/Router/Route.ts";
 import IBlock from "./services/IBlock.ts";
 import "./style.sass";
+import ChangePassword from "./pages/changePassword/index.ts";
 
 class Router {
   private static __instance: Router | null = null;
@@ -41,15 +44,26 @@ class Router {
   }
 
   start(): void {
-    window.onpopstate = () => {
-      this._onRoute(window.location.pathname);
+    window.onpopstate = (event) => {
+      console.log("event.state", event.state);
+      console.log(window.location.pathname);
+      if (!FlagAuthorization.flag) {
+        this._onRoute("/");
+      } else {
+        if (event.state?.pages == "/messenger") {
+          ChangeData.remove();
+          ChangePassword.remove();
+          message.flex();
+        }
+        this._onRoute(window.location.pathname);
+      }
     };
 
-    // this.history?.pushState({}, "", window.location.pathname);
     this._onRoute(window.location.pathname);
   }
 
   private _onRoute(pathname: string): void {
+    console.log(this.history);
     const route = this.getRoute(pathname);
     if (!route) {
       return;
@@ -63,7 +77,7 @@ class Router {
   }
 
   go(pathname: string): void {
-    this.history?.pushState({}, "", pathname);
+    this.history?.pushState({ pages: pathname }, "", pathname);
     this._onRoute(pathname);
   }
 
@@ -82,13 +96,13 @@ class Router {
 
 const router = new Router(".app");
 router
-  .use("/404", page)
-  .use("/500", index500)
-  .use("/ChangeData", ChangeData)
-  .use("/ChangePassword", ChangePassword)
-  .use("/message", message)
-  .use("/registration", registration)
-  .use("/Profile", Profile)
+  // .use("/404", page)
+  // .use("/500", index500)
+  // .use("/ChangeData", ChangeData)
+  // .use("/ChangePassword", ChangePassword)
+  .use("/messenger", message)
+  .use("/sign-up", registration)
+  .use("/settings", Profile)
   .use("/", Entrance)
   .start();
 

@@ -21,7 +21,7 @@ const button = new Button("button", {
 
 const link = new Link("a", {
   attr: {
-    href: "/registration",
+    href: "/sign-up",
     class: "entrance__link",
   },
   title: "Нет аккаунта?",

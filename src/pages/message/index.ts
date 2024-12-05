@@ -5,6 +5,8 @@ import Error from "../../components/Error/index.ts";
 import Input from "../../components/input/index.ts";
 import Button from "../../components/button/index.ts";
 import CreateChatLook from "../../utils/CreateChatLook/index.ts";
+import ChangeData from "../changeData/index.ts";
+import ChangePassword from "../changePassword/index.ts";
 import "./style.sass";
 import CheckMessage from "../../utils/CheckingData/CheckMessage/index.ts";
 import handleLinkClick from "../../utils/handleClick/index.ts";
@@ -24,6 +26,9 @@ import socket from "../../utils/socket/index.ts";
 import UserLoginController from "../../utils/API/UserLoginController/index.ts";
 import FlagAuthorization from "../../utils/FlagAuthorization/index.ts";
 import CreateChat from "../../components/CreateChat/index.ts";
+
+ChangeData.hide();
+ChangePassword.hide();
 
 if (
   window.location.pathname !== "/" &&
@@ -71,7 +76,7 @@ let ContLink = new ContainerLink("div", {
 
 let link = new Link("a", {
   attr: {
-    href: "/Profile",
+    href: "/settings",
     class: "mes__link",
   },
   title: "Профиль",

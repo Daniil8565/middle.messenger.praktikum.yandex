@@ -165,10 +165,6 @@ export default class Block implements IBlock {
     return this._element;
   }
 
-  get id() {
-    return this._props?.attr?.id;
-  }
-
   show() {
     const content = this.getContent();
     if (content) {

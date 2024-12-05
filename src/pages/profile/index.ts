@@ -1,11 +1,13 @@
 import IndexProfile from "./IndexProfile/index.ts";
 import Link from "../../components/link/index.ts";
-import "./style.sass";
 import handleLinkClick from "../../utils/handleClick/index.ts";
 import mapUserToProps from "../../utils/API/mapUserToProps/index.ts";
 import connect from "../../utils/API/HOC/index.ts";
 import GlobalProfileData from "../../components/GlobalProfileData/index.ts";
 import UserLoginController from "../../utils/API/UserLoginController/index.ts";
+import "./style.sass";
+import ChangeUSERData from "../../utils/ChangePagesProfile/index.ts";
+import ChangeUSERPassword from "../../utils/ChangeUSERPassword/index.ts";
 
 const controller = new UserLoginController();
 controller.getData();
@@ -35,23 +37,23 @@ const GlProfileData = new newGlobalProfileData("div", {
 
 const link1 = new Link("a", {
   attr: {
-    href: "/ChangeData",
+    href: "",
     class: "link",
   },
   title: "Изменить данные",
   events: {
-    click: handleLinkClick,
+    click: ChangeUSERData,
   },
 });
 
 const link2 = new Link("a", {
   attr: {
-    href: "/ChangePassword",
+    href: "/#",
     class: "link",
   },
   title: "Изменить пароль",
   events: {
-    click: handleLinkClick,
+    click: ChangeUSERPassword,
   },
 });
 

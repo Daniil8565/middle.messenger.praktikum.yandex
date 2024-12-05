@@ -1,6 +1,5 @@
 import IndexChangeData from "./IndexChahgeData/index.ts";
 import Button from "../../components/button/index.ts";
-import "./style.sass";
 import Input from "../../components/input/index.ts";
 import CheckEmail from "../../utils/CheckingData/CheckEmail/index.ts";
 import CheckLogin from "../../utils/CheckingData/CheckLogin/index.ts";
@@ -16,6 +15,7 @@ import modal from "../../components/modal/index.ts";
 import ModalShow from "../../utils/ModalShow/index.ts";
 import connect from "../../utils/API/HOC/index.ts";
 import FormChangeData from "../../components/formChangeData/index.ts";
+import "./style.sass";
 
 const avatar = new avatarChangeData("div", {
   attr: {

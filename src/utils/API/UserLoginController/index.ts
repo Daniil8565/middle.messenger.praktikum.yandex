@@ -20,7 +20,7 @@ function errorMessage(error: Record<string, string>) {
     const controller = new UserLoginController();
     controller.GetChat();
     controller.getData();
-    router.go("/message");
+    router.go("/messenger");
   } else {
     ErrorElem.style.color = "red";
     ErrorElem.textContent = errorMessage;
@@ -41,9 +41,9 @@ class UserLoginController {
     loginApi
       .request(data)
       .then((data) => {
-        console.log(data);
+        console.log("login", data);
         FlagAuthorization.flag = true;
-        router.go("/message");
+        router.go("/messenger");
       })
       .then(() => {
         this.GetChat();
@@ -62,7 +62,7 @@ class UserLoginController {
       .create(data)
       .then(() => {
         FlagAuthorization.flag = true;
-        router.go("/message");
+        router.go("/messenger");
       })
       .then(() => {
         this.GetChat();
@@ -89,22 +89,21 @@ class UserLoginController {
     loginApi
       .logout()
       .then(() => {
-        // Также очищаем другие cookies
+        // Удаление cookies
         document.cookie =
           "authCookie=; Max-Age=0; path=/; domain=ya-praktikum.tech;";
         document.cookie = "uuid=; Max-Age=0; path=/; domain=ya-praktikum.tech;";
 
-        // Перенаправляем на страницу входа
-        // router.go("/");
+        // Убираем авторизационный флаг
         FlagAuthorization.flag = false;
-        window.history.replaceState({}, "", "/");
+
+        router.go("/");
+        // Заменяем текущую запись в истории
+        // window.history.replaceState({}, "", "/");
         // console.log(window.history);
-        window.location.replace("/");
         // window.location.reload();
-        const elemError = document.getElementById(
-          "ErrorRequest"
-        ) as HTMLSpanElement;
-        elemError.textContent = "";
+        // window.location.replace("/");
+        console.log("LOGOUT");
       })
       .catch((error) => {
         console.error("Ошибка при выходе: ", error);
