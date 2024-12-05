@@ -30,6 +30,10 @@ class ChatAPI {
   usersRequest(data: UsersRequest) {
     return entranceAPI.put(`${URL}/chats/users`, data).send();
   }
+
+  deleteUsersChat(data: UsersRequest) {
+    return entranceAPI.delete(`${URL}/chats/users`, data).send();
+  }
 }
 
 export default ChatAPI;

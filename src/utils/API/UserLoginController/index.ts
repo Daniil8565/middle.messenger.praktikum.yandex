@@ -189,6 +189,10 @@ class UserLoginController {
   public async usersRequest(data: UsersRequest) {
     ChatApi.usersRequest(data).then(() => {});
   }
+
+  public async deleteUserChat(data: UsersRequest) {
+    ChatApi.deleteUsersChat(data).then(() => {});
+  }
 }
 
 export default UserLoginController;

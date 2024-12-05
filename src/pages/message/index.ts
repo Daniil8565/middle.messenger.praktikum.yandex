@@ -169,7 +169,7 @@ let modalCreate = new modalMessage("div", {
 
 let modalDelete = new modalMessage("div", {
   Header: "Удалить пользователя",
-  description: "Введите id пользователя",
+  description: "Введите логин пользователя",
   for: "username-remove",
   id: "username-remove",
   name: "username-remove",

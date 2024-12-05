@@ -1,10 +1,6 @@
 import UserLoginController from "../API/UserLoginController";
 import putRequest from "../putRequest";
-
-// Вспомогательная функция для добавления задержки
-function stTimeout(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+import stTimeout from "../Timeout";
 
 export default async function DataInput(event: Event) {
   event.preventDefault(); // Предотвращаем стандартное поведение формы
