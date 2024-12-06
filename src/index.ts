@@ -1,56 +1,108 @@
-import { default as renderDOM } from './utils/render.ts';
-import page from './pages/404/index.ts';
-import Index500 from './pages/500/index.ts';
-import ChangeData from './pages/changeData/index.ts';
-import ChangePassword from './pages/changePassword/index.ts';
-import Entrance from './pages/entrance/index.ts';
-import Profile from './pages/profile/index.ts';
-import registration from './pages/registration/index.ts';
-import message from './pages/message/index.ts';
-import './normalize.sass';
-import './style.sass';
+// import page from "./pages/404/index.ts";
+import Entrance from "./pages/entrance/index.ts";
+// import index500 from "./pages/500/index.ts";
+// import ChangeData from "./pages/changeData/index.ts";
+// import ChangePassword from "./pages/changePassword/index.ts";
+import FlagAuthorization from "./utils/FlagAuthorization/index.ts";
+import ChangeData from "./pages/changeData/index.ts";
+import message from "./pages/message/index.ts";
+import Profile from "./pages/profile/index.ts";
+import registration from "./pages/registration/index.ts";
+import Route from "./utils/Router/Route.ts";
+import IBlock from "./services/IBlock.ts";
+import "./style.sass";
+import ChangePassword from "./pages/changePassword/index.ts";
 
-//  Получаем ссылки из навигации
-const links = document.querySelectorAll('nav a');
-let mas = [
-  page,
-  Index500,
-  ChangeData,
-  ChangePassword,
-  Entrance,
-  Profile,
-  registration,
-  message,
-];
-//  Обработчик событий для ссылок
-links.forEach((link, index) => {
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
-    const tegNav = document.querySelector('nav') as HTMLElement;
-    tegNav.style.display = 'none';
-    for (let i = 0; i < links.length; i++) {
-      mas[i].hide();
-      if (i == index) {
-        mas[i].flex();
-      }
-      // if (
-      //   (i == index && mas[i] == message) ||
-      //   (i == index && mas[i] == registration) ||
-      //   (i == index && mas[i] == Profile) ||
-      //   (i == index && mas[i] == Entrance) ||
-      //   (i == index && mas[i] == ChangePassword) ||
-      //   (i == index && mas[i] == ChangeData) ||
-      //   (i == index && mas[i] == Index500) ||
-      //   (i == index && mas[i] == page)
-      // ) {
-      //   mas[i].flex();
-      // }
+class Router {
+  private static __instance: Router | null = null;
+  private routes: Route[] = [];
+  private history;
+  private _currentRoute: Route | null = null;
+  private _rootQuery;
+
+  constructor(rootQuery: string) {
+    if (Router.__instance) {
+      return Router.__instance;
     }
-    // for (let i = 0; i < links.length; i++) {
-    //   if (i == index) {
-    //     mas[i].show();
-    //   }
-    // }
-    renderDOM('.app', mas[index]);
-  });
-});
+
+    this.routes = [];
+    this.history = window.history;
+    this._currentRoute = null;
+    this._rootQuery = rootQuery;
+
+    Router.__instance = this;
+  }
+
+  use(pathname: string, Block: IBlock): Router {
+    if (this._rootQuery) {
+      const route = new Route(pathname, Block, {
+        rootQuery: this._rootQuery,
+      });
+      this.routes.push(route);
+    }
+    return this;
+  }
+
+  start(): void {
+    window.onpopstate = (event) => {
+      if (!FlagAuthorization.flag) {
+        this._onRoute("/");
+      } else {
+        if (event.state?.pages == "/messenger") {
+          ChangeData.remove();
+          ChangePassword.remove();
+          message.flex();
+        }
+        this._onRoute(window.location.pathname);
+      }
+    };
+
+    this._onRoute(window.location.pathname);
+  }
+
+  private _onRoute(pathname: string): void {
+    const route = this.getRoute(pathname);
+    if (!route) {
+      return;
+    }
+
+    if (this._currentRoute && this._currentRoute !== route) {
+      this._currentRoute.leave();
+    }
+    this._currentRoute = route;
+    route.render();
+  }
+
+  go(pathname: string): void {
+    this.history?.pushState({ pages: pathname }, "", pathname);
+    this._onRoute(pathname);
+  }
+
+  back(): void {
+    if (this.history) this.history.back();
+  }
+
+  forward(): void {
+    if (this.history) this.history.forward();
+  }
+
+  getRoute(pathname: string): Route | undefined {
+    return this.routes.find((route) => route.match(pathname));
+  }
+}
+
+const router = new Router(".app");
+router
+  // .use("/404", page)
+  // .use("/500", index500)
+  // .use("/ChangeData", ChangeData)
+  // .use("/ChangePassword", ChangePassword)
+  .use("/messenger", message)
+  .use("/sign-up", registration)
+  .use("/settings", Profile)
+  .use("/", Entrance)
+  .start();
+
+// router.go("/");
+
+export default router;

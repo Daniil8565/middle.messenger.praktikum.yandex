@@ -1,99 +1,82 @@
-import Avatar from '../../components/avatar/index.ts';
-import ProfileData from '../../components/ProfileData/index.ts';
-import IndexProfile from './IndexProfile/index.ts';
-import Link from '../../components/link/index.ts';
-import './style.sass';
+import IndexProfile from "./IndexProfile/index.ts";
+import Link from "../../components/link/index.ts";
+import handleLinkClick from "../../utils/handleClick/index.ts";
+import mapUserToProps from "../../utils/API/mapUserToProps/index.ts";
+import connect from "../../utils/API/HOC/index.ts";
+import GlobalProfileData from "../../components/GlobalProfileData/index.ts";
+import UserLoginController from "../../utils/API/UserLoginController/index.ts";
+import "./style.sass";
+import ChangeUSERData from "../../utils/ChangePagesProfile/index.ts";
+import ChangeUSERPassword from "../../utils/ChangeUSERPassword/index.ts";
 
-const avatar = new Avatar('div', {
-  attr: { class: 'avatar' },
-});
+const controller = new UserLoginController();
+controller.getData();
 
-const profileData1 = new ProfileData('div', {
-  label: 'Почта',
-  description: 'pochta@yandex.ru',
+let Profile: IndexProfile;
+
+let newGlobalProfileData = connect(mapUserToProps)(GlobalProfileData);
+
+const GlProfileData = new newGlobalProfileData("div", {
+  avatar: "",
+  labelEmail: "Почта",
+  email: "",
+  labelLogin: "Логин",
+  login: "",
+  labelFirstName: "Имя",
+  first_name: "",
+  labelSecondName: "Фамилия",
+  second_name: "",
+  labelDisplayName: "Имя в чате",
+  display_name: "",
+  labelPhone: "Телефон",
+  phone: "",
   attr: {
-    class: 'section',
+    class: "container__data",
   },
 });
 
-const profileData2 = new ProfileData('div', {
-  label: 'Логин',
-  description: 'ivanivanov',
+const link1 = new Link("a", {
   attr: {
-    class: 'section',
+    href: "",
+    class: "link",
+  },
+  title: "Изменить данные",
+  events: {
+    click: ChangeUSERData,
   },
 });
 
-const profileData3 = new ProfileData('div', {
-  label: 'Имя',
-  description: 'Иван',
+const link2 = new Link("a", {
   attr: {
-    class: 'section',
+    href: "/#",
+    class: "link",
+  },
+  title: "Изменить пароль",
+  events: {
+    click: ChangeUSERPassword,
   },
 });
 
-const profileData4 = new ProfileData('div', {
-  label: 'Фамилия',
-  description: 'Иванов',
+const exit = new Link("a", {
   attr: {
-    class: 'section',
+    href: "/",
+    class: "exit",
+  },
+  title: "Выйти",
+  events: {
+    click: handleLinkClick,
   },
 });
 
-const profileData5 = new ProfileData('div', {
-  label: 'Имя в чате',
-  description: 'Иван',
-  attr: {
-    class: 'section',
-  },
-});
+// let newIndexProfile = connect(mapUserToProps)(IndexProfile);
 
-const profileData6 = new ProfileData('div', {
-  label: 'Телефон',
-  description: '+7(909) 967 30 30',
-  attr: {
-    class: 'section',
-  },
-});
-
-const link1 = new Link('a', {
-  attr: {
-    href: '../index.html',
-    class: 'link',
-  },
-  title: 'Изменить данные',
-});
-
-const link2 = new Link('a', {
-  attr: {
-    href: '../index.html',
-    class: 'link',
-  },
-  title: 'Изменить пароль',
-});
-
-const exit = new Link('a', {
-  attr: {
-    href: '../index.html',
-    class: 'exit',
-  },
-  title: 'Выйти',
-});
-
-const Profile = new IndexProfile('div', {
-  avatar: avatar,
-  name: 'Иван',
-  profileData1: profileData1,
-  profileData2: profileData2,
-  profileData3: profileData3,
-  profileData4: profileData4,
-  profileData5: profileData5,
-  profileData6: profileData6,
+Profile = new IndexProfile("div", {
+  GlobalProfileData: GlProfileData,
   link1: link1,
   link2: link2,
   exit: exit,
   attr: {
-    class: 'container',
+    class: "container",
   },
 });
 
