@@ -172,15 +172,6 @@ main
   color: #999999
 
 
-.content__message 
-  display: flex
-  flex-direction: column
-  justify-content: space-between
-  margin-left: 10px
-  margin-right: 10px
-  width: 100%
-
-
 .content__footer 
   display: flex
   align-items: center
@@ -405,6 +396,15 @@ main
   border-top: 1px solid #EAEAEA
   margin-top: 0
 
+
+.content__message 
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  margin-left: 10px
+  margin-right: 10px
+  width: 100%
+
 .chat__avatar
   width: 47px
   height: 47px
@@ -433,28 +433,13 @@ main
   overflow: hidden
 
 .content__main 
-  display: flex
-  flex-direction: row
-  justify-content: space-between
-  align-items: flex-start
+  overflow-y: auto
   height: 100%
   width: 100%
 
 
-.left-section 
-  flex: 1
-  max-width: 50%
-  padding: 10px
-
-
-
-.right-section 
-  flex: 1
-  max-width: 50%
-  padding: 10px
-
-
 .message 
+  width: 45%
   padding: 10px
   margin: 5px
   border-radius: 5px
@@ -464,10 +449,11 @@ main
 
 .message--outgoing 
   background-color: #d1ffd6
-  align-self: flex-end
+  margin-left: auto
+
+
 
 
 .message--incoming 
   background-color: #f1f1f1
-  align-self: flex-start
-
+  margin-right: auro 

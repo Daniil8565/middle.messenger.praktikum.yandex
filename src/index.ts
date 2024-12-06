@@ -45,8 +45,6 @@ class Router {
 
   start(): void {
     window.onpopstate = (event) => {
-      console.log("event.state", event.state);
-      console.log(window.location.pathname);
       if (!FlagAuthorization.flag) {
         this._onRoute("/");
       } else {
@@ -63,7 +61,6 @@ class Router {
   }
 
   private _onRoute(pathname: string): void {
-    console.log(this.history);
     const route = this.getRoute(pathname);
     if (!route) {
       return;

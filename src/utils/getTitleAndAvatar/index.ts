@@ -1,39 +1,30 @@
 import store from "../API/store";
 import UserLoginController from "../API/UserLoginController";
+import SOCKET from "../socket";
+import stTimeout from "../Timeout";
 
 async function getTitleAndAvatar(e: MouseEvent) {
   const target = e.target as HTMLElement;
-  const li = target.closest("li");
-  if (!li) {
-    console.log("Элемент <li> не найден");
-    return;
-  }
+  const li = target.closest("li") as HTMLLIElement;
+  const state = store.getState();
+  const titleElement = li.querySelector(".message__name") as HTMLElement;
+  const username = document.querySelector(".Header__username") as HTMLElement;
+  username.textContent = titleElement.textContent;
 
   try {
-    // Инициализируем контроллер
     const controller = new UserLoginController();
-    const titleElement = li.querySelector(".message__name") as HTMLElement;
-
-    if (!titleElement) {
-      console.log("Заголовок не найден");
-      return;
-    }
-
-    const state = store.getState();
     const objUserData = state.user[0] as Record<string, string> | undefined;
     if (!objUserData) {
       console.log("Пользователь не найден в состоянии");
       return;
     }
     const ChatID = objUserData["id"];
-
-    // Обновляем отображение имени пользователя
-    const username = document.querySelector(".Header__username") as HTMLElement;
-    username.textContent = titleElement.textContent;
-    controller.token(ChatID);
+    await controller.token(ChatID);
+    await stTimeout(1500);
   } catch (error) {
     console.error("Ошибка при выполнении запросов:", error);
   }
+  SOCKET();
 }
 
 export default getTitleAndAvatar;

@@ -14,7 +14,6 @@ function errorMessage(error: Record<string, string>) {
   const responseText = error.reason;
   const responseObject = JSON.parse(responseText);
   const errorMessage = responseObject.reason;
-  console.log(errorMessage);
   if (errorMessage == "User already in system") {
     FlagAuthorization.flag = true;
     const controller = new UserLoginController();
@@ -40,8 +39,7 @@ class UserLoginController {
     }
     loginApi
       .request(data)
-      .then((data) => {
-        console.log("login", data);
+      .then(() => {
         FlagAuthorization.flag = true;
         router.go("/messenger");
       })
@@ -74,14 +72,11 @@ class UserLoginController {
   }
 
   public async getData() {
-    console.log("getData");
     if (FlagAuthorization.flag) {
       loginApi.requestDataUser().then((data) => {
         const dataJSON = data.response;
         store.set("userName", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
       });
-    } else {
-      console.log("ПОЛЬЗОВАТЕЛЬ НЕ АВТОРИЗОВАН");
     }
   }
 
@@ -103,7 +98,6 @@ class UserLoginController {
         // console.log(window.history);
         // window.location.reload();
         // window.location.replace("/");
-        console.log("LOGOUT");
       })
       .catch((error) => {
         console.error("Ошибка при выходе: ", error);
@@ -159,14 +153,11 @@ class UserLoginController {
     });
   }
   public async GetChat() {
-    console.log("getChat");
     if (FlagAuthorization.flag) {
       ChatApi.GetChat().then((data) => {
         const dataJSON = data.response;
         store.set("user", JSON.parse(dataJSON)); // Сохранение данных пользователя в хранилище
       });
-    } else {
-      console.log("Пользователь не авторизован");
     }
   }
 
