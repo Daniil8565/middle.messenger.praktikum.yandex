@@ -37,9 +37,8 @@ export default function SOCKET() {
 
     console.log(`Код: ${event.code} | Причина: ${event.reason}`);
   });
-
+  let flag = false;
   socket.addEventListener("message", (event) => {
-    let flag = false;
     if (!flag) {
       const arrayMessages = JSON.parse(event.data);
       flag = true;
@@ -51,13 +50,14 @@ export default function SOCKET() {
           appendMessage(contentMain, objMessage["content"] as string, false);
         }
       }
-    }
-    const objMessage = JSON.parse(event.data);
-    console.log(objMessage);
-    if (objMessage.user_id == IdUserName) {
-      appendMessage(contentMain, objMessage.content as string, true);
     } else {
-      appendMessage(contentMain, objMessage.content as string, false);
+      const objMessage = JSON.parse(event.data);
+      console.log(objMessage);
+      if (objMessage.user_id == IdUserName) {
+        appendMessage(contentMain, objMessage.content as string, true);
+      } else {
+        appendMessage(contentMain, objMessage.content as string, false);
+      }
     }
   });
 }
