@@ -10,7 +10,7 @@ export default class Request {
     method: string = "GET",
     headers: Headers = new Headers(),
     body?: any,
-    queryString?: string,
+    queryString?: string
   ) {
     this._method = method.toUpperCase();
     this._url = url;
@@ -31,63 +31,62 @@ export default class Request {
     this._queryString = queryString;
   }
 
-  async send(): Promise<Response> {
+  async send(): Promise<XMLHttpRequest> {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      // Исправленная строка:
       xhr.open(
         this._method,
-        this._url + (this._queryString ? `?${this._queryString}` : ""),
+        this._url + (this._queryString ? `?${this._queryString}` : "")
       );
+
+      // Установить заголовки, если тело запроса не FormData
+      if (this._body && !(this._body instanceof FormData)) {
+        this._headers.set("Content-Type", "application/json");
+      }
+
       this._headers.forEach((value, key) => {
         xhr.setRequestHeader(key, value);
       });
 
+      xhr.withCredentials = true;
+
       xhr.onload = () => {
-        const response = new Response(xhr.responseText, {
-          status: xhr.status,
-          statusText: xhr.statusText,
-          headers: new Headers(
-            xhr
-              .getAllResponseHeaders()
-              .split("\n")
-              .reduce((acc, header) => {
-                const [key, value] = header.split(": ");
-                if (key && value) {
-                  acc.set(key.trim(), value.trim());
-                }
-                return acc;
-              }, new Headers()),
-          ),
-        });
-        resolve(response);
+        const status = xhr.status || 0;
+        if (status >= 200 && status < 300) {
+          resolve(xhr);
+        } else {
+          reject({ reason: xhr.response });
+        }
       };
 
       xhr.onerror = () => {
         reject(new Error("Network Error"));
       };
 
+      // Отправка данных
       if (this._method === "GET") {
         xhr.send();
+      } else if (this._body instanceof FormData) {
+        xhr.send(this._body); // FormData отправляется как есть
       } else {
-        xhr.send(JSON.stringify(this._body));
+        xhr.send(JSON.stringify(this._body)); // Отправка JSON
       }
     });
   }
 
-  static get(url: string, headers?: Headers, queryString?: string): Request {
+  get(url: string, headers?: Headers, queryString?: string): Request {
     return new Request(url, "GET", headers, undefined, queryString);
   }
 
-  static post(url: string, body: any, headers?: Headers): Request {
+  post(url: string, body?: any, headers?: Headers): Request {
     return new Request(url, "POST", headers, body);
   }
 
-  static put(url: string, body: any, headers?: Headers): Request {
+  put(url: string, body: any, headers?: Headers): Request {
     return new Request(url, "PUT", headers, body);
   }
 
-  static delete(url: string, headers?: Headers): Request {
-    return new Request(url, "DELETE", headers);
+  delete(url: string, body?: any, headers?: Headers): Request {
+    return new Request(url, "DELETE", headers, body); // теперь принимаем body
   }
 }

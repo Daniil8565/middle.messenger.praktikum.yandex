@@ -1,27 +1,22 @@
-export default function CheckMessage() {
-  const form = document.getElementById('Form') as HTMLFormElement;
-  const messageInput = document.getElementById('message') as HTMLInputElement;
+let flag: boolean;
+// import UserLoginController from "../../API/UserLoginController";
+
+let Message: string;
+
+export default function CheckMessage(e: FocusEvent) {
+  const messageInput = e.target as HTMLInputElement;
   const messageError = document.getElementById(
-    'messageError'
+    "messageError"
   ) as HTMLSpanElement;
-
-  // Валидация сообщения
-  const validateMessage = (message: string) => {
-    if (message.length) {
-      messageError.textContent = '';
-      return true;
-    } else {
-      messageError.textContent = 'Сообщение не должно быть пустым.';
-      return false;
-    }
-  };
-
-  messageInput.addEventListener('blur', () => {
-    validateMessage(messageInput.value);
-  });
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    validateMessage(messageInput.value);
-  });
+  Message = messageInput.value;
+  console.log(messageInput.value);
+  if (messageInput.value === "") {
+    messageError.textContent = "Сообщение не должно быть пустым";
+    flag = false;
+  } else {
+    messageError.textContent = "";
+    flag = true;
+  }
 }
+
+export { flag, Message };

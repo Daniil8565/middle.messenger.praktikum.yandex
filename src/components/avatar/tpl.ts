@@ -1,3 +1,6 @@
-const tpl: string = `<span class='avatar__image'></span>`;
+const tpl: string = `
+<span class='avatar__image'></span>
+
+`;
 
 export default tpl;

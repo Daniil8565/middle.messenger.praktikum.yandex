@@ -1,13 +1,13 @@
-import { v4 as makeUUID } from 'uuid';
-import Handlebars from 'handlebars';
-import EventBus from './EventBus.ts';
-import IBlock from './IBlock.ts';
+import { v4 as makeUUID } from "uuid";
+import Handlebars from "handlebars";
+import EventBus from "./EventBus.ts";
+import IBlock from "./IBlock.ts";
 
 export default class Block implements IBlock {
-  static EVENT_INIT = 'init';
-  static EVENT_FLOW_CDM = 'flow:component-did-mount';
-  static EVENT_FLOW_CDU = 'flow:component-did-update';
-  static EVENT_FLOW_RENDER = 'flow:render';
+  static EVENT_INIT = "init";
+  static EVENT_FLOW_CDM = "flow:component-did-mount";
+  static EVENT_FLOW_CDU = "flow:component-did-update";
+  static EVENT_FLOW_RENDER = "flow:render";
 
   private _props: Record<string, any>;
   private _children: Record<string, Block>;
@@ -19,7 +19,7 @@ export default class Block implements IBlock {
   private _setUpdate = false;
 
   constructor(
-    tag: string = 'div',
+    tag: string = "div",
     propsAndChilds: Record<string, unknown> = {}
   ) {
     const { children, props, lists } = this.getChildren(propsAndChilds);
@@ -50,14 +50,14 @@ export default class Block implements IBlock {
 
   private init() {
     this._element = this.createDocumentElement(this._meta?.tag);
-    this._eventBus.emit(Block.EVENT_FLOW_RENDER);
+    this._eventBus.emit(Block.EVENT_FLOW_RENDER, this._meta?.tag);
   }
 
   private createDocumentElement(tag: string): HTMLElement {
     const element = document.createElement(tag);
 
     if (this._props.settings?.withInternalID) {
-      element.setAttribute('data-id', this._id);
+      element.setAttribute("data-id", this._id);
     }
     return element;
   }
@@ -66,7 +66,7 @@ export default class Block implements IBlock {
     const block = this.render();
     if (this._element) {
       this.removeEvents();
-      this._element.innerHTML = '';
+      this._element.innerHTML = "";
       if (block) {
         this._element.appendChild(block);
       }
@@ -76,7 +76,7 @@ export default class Block implements IBlock {
   }
 
   render() {
-    const element = document.createElement('div');
+    const element = document.createElement("div");
     return element;
   }
 
@@ -101,7 +101,7 @@ export default class Block implements IBlock {
   private addAttribute() {
     const { attr = {} } = this._props;
     Object.entries(attr).forEach(([key, value]) => {
-      if (this._element && typeof value == 'string') {
+      if (this._element && typeof value == "string") {
         this._element.setAttribute(key, value);
       }
     });
@@ -122,61 +122,6 @@ export default class Block implements IBlock {
       }
     });
     return { children, props, lists };
-  }
-
-  compile(template: string, props?: Record<string, any>) {
-    if (typeof props == 'undefined') {
-      props = this._props;
-    }
-    const propsAndStubs = { ...props };
-
-    Object.entries(this._children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
-    });
-
-    Object.entries(this._lists).forEach(([key]) => {
-      propsAndStubs[key] = `<div data-id="__1_${key}"></div>`;
-    });
-
-    const fragment = this.createDocumentElement(
-      'template'
-    ) as HTMLTemplateElement;
-    fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
-
-    Object.values(this._children).forEach((child) => {
-      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-      if (stub) {
-        stub.replaceWith(child.getContent()!);
-      }
-    });
-
-    Object.entries(this._lists).forEach(([key, child]) => {
-      const stub = fragment.content.querySelector(`[data-id="__1_${key}"]`);
-      if (!stub) {
-        return;
-      }
-
-      const listContent = this.createDocumentElement(
-        'template'
-      ) as HTMLTemplateElement;
-      child.forEach((item) => {
-        if (item instanceof Block) {
-          listContent.content.append(item.getContent()!);
-        } else {
-          listContent.content.append(`${item}`);
-        }
-      });
-
-      stub.replaceWith(listContent.content);
-    });
-
-    let tmp: unknown = fragment.content;
-
-    return tmp as HTMLDivElement;
-  }
-
-  getContent(): HTMLElement | null {
-    return this._element;
   }
 
   _componentDidMount() {
@@ -209,28 +154,35 @@ export default class Block implements IBlock {
     oldProps: Record<string, any>,
     newProps: Record<string, any>
   ) {
-    console.log(newProps, oldProps);
-    return true;
+    return !!(oldProps && newProps);
+  }
+
+  remove() {
+    this._element?.remove();
+  }
+
+  getContent(): HTMLElement | null {
+    return this._element;
   }
 
   show() {
     const content = this.getContent();
     if (content) {
-      content.style.display = 'block';
+      content.style.display = "block";
     }
   }
 
   hide() {
     const content = this.getContent();
     if (content) {
-      content.style.display = 'none';
+      content.style.display = "none";
     }
   }
 
   flex() {
     const content = this.getContent();
     if (content) {
-      content.style.display = 'flex';
+      content.style.display = "flex";
     }
   }
 
@@ -241,13 +193,16 @@ export default class Block implements IBlock {
     this._setUpdate = false;
     const oldValue = { ...this._props };
 
-    const { children, props } = this.getChildren(newProps);
+    const { children, props, lists } = this.getChildren(newProps);
 
     if (Object.values(children).length) {
       Object.assign(this._children, children);
     }
     if (Object.values(props).length) {
       Object.assign(this._props, props);
+    }
+    if (Object.values(lists).length) {
+      Object.assign(this._lists, lists);
     }
     if (this._setUpdate) {
       this._eventBus.emit(Block.EVENT_FLOW_CDU, oldValue, this._props);
@@ -259,7 +214,7 @@ export default class Block implements IBlock {
     return new Proxy(props, {
       get(target, prop: string | symbol) {
         const value = target[prop as keyof typeof target];
-        return typeof value === 'function' ? value.bind(target) : value;
+        return typeof value === "function" ? value.bind(target) : value;
       },
       set: (target, prop: string | symbol, value) => {
         if (target[prop as keyof typeof target] !== value) {
@@ -269,5 +224,56 @@ export default class Block implements IBlock {
         return true;
       },
     });
+  }
+
+  compile(template: string, props?: Record<string, any>) {
+    if (typeof props == "undefined") {
+      props = this._props;
+    }
+    const propsAndStubs = { ...props };
+
+    Object.entries(this._children).forEach(([key, child]) => {
+      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+    });
+
+    Object.entries(this._lists).forEach(([key]) => {
+      propsAndStubs[key] = `<div data-id="__1_${key}"></div>`;
+    });
+
+    const fragment = this.createDocumentElement(
+      "template"
+    ) as HTMLTemplateElement;
+    fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
+
+    Object.values(this._children).forEach((child) => {
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+      if (stub) {
+        stub.replaceWith(child.getContent()!);
+      }
+    });
+
+    Object.entries(this._lists).forEach(([key, child]) => {
+      const stub = fragment.content.querySelector(`[data-id="__1_${key}"]`);
+      if (!stub) {
+        return;
+      }
+
+      const listContent = this.createDocumentElement(
+        "template"
+      ) as HTMLTemplateElement;
+      child.forEach((item) => {
+        if (item instanceof Block) {
+          listContent.content.append(item.getContent()!);
+        } else {
+          listContent.content.append(`${item}`);
+        }
+      });
+
+      stub.replaceWith(listContent.content);
+    });
+
+    let tmp: unknown = fragment.content;
+
+    return tmp as HTMLDivElement;
   }
 }

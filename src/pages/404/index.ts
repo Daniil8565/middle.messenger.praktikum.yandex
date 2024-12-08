@@ -1,37 +1,43 @@
-import Header from '../../components/Header/index.ts';
-import description from '../../components/description/index.ts';
-import Link from '../../components/link/index.ts';
-import Index404 from './Index404/index.ts';
-import './404.sass';
+import Header from "../../components/Header/index.ts";
+import description from "../../components/description/index.ts";
+import Link from "../../components/link/index.ts";
+import Index404 from "./Index404/index.ts";
+import "./404.sass";
+import handleLinkClick from "../../utils/handleClick/index.ts";
 
-const h1 = new Header('h1', {
-  title: '404',
+let page: Index404;
+
+const h1 = new Header("h1", {
+  title: "404",
   attr: {
-    class: 'header',
+    class: "header",
   },
 });
 
-const data = new description('p', {
-  title: 'Не туда попали',
+const data = new description("p", {
+  title: "Не туда попали",
   attr: {
-    class: 'descriptionError',
+    class: "descriptionError",
   },
 });
 
-const link = new Link('a', {
+const link = new Link("a", {
   attr: {
-    href: '../index.html',
-    class: 'linkExit',
+    href: "/message",
+    class: "linkExit",
   },
-  title: 'Назад к чатам',
+  title: "Назад к чатам",
+  events: {
+    click: handleLinkClick,
+  },
 });
 
-const page = new Index404('div', {
+page = new Index404("div", {
   H1: h1,
   description: data,
   Link: link,
   attr: {
-    class: 'container',
+    class: "container",
   },
 });
 

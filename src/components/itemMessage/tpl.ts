@@ -1,12 +1,10 @@
 const tpl: string = `
-    <span class="chats__image"></span>
+    <img class="chat__avatar" src="../../image/Ellipse.svg"/>
     <div class="container__name">
-        <h3 class="message__name">{{header}}</h3>
-        <p class="message">{{description}}</p>
+        <h3 class="message__name">{{title}}</h3>
     </div>
     <div class="container__time">
-        <p class="time">{{time}}</p>
-        <div class="NumberOfMessages"></div>
+        <div class="NumberOfMessages">{{unread_count}}</div>
     </div>
 `;
 
