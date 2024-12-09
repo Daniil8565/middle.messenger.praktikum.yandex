@@ -7,7 +7,6 @@ import Button from "../../components/button/index.ts";
 import CreateChatLook from "../../utils/CreateChatLook/index.ts";
 import ChangeData from "../changeData/index.ts";
 import ChangePassword from "../changePassword/index.ts";
-import "./style.sass";
 import CheckMessage from "../../utils/CheckingData/CheckMessage/index.ts";
 import handleLinkClick from "../../utils/handleClick/index.ts";
 import Link from "../../components/link/index.ts";

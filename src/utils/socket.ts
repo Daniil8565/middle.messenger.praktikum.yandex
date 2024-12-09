@@ -1,5 +1,5 @@
-import store from "./API/store";
-import appendMessage from "./appendMessage";
+import store from "./API/store.ts";
+import appendMessage from "./appendMessage/index.ts";
 
 let SOC: WebSocket;
 

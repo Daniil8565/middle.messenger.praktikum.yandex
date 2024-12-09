@@ -1,7 +1,7 @@
-import { flagNewPassword } from "../CheckNewPassword";
-import { FlagRepeatPassword } from "../CheckNewAndRepeatPasword";
-import { CheckPassword } from "../CheckOldPassword";
-import UserLoginController from "../../API/UserLoginController";
+import { flagNewPassword } from "../CheckNewPassword/index.ts";
+import { FlagRepeatPassword } from "../CheckNewAndRepeatPasword/index.ts";
+import { CheckPassword } from "../CheckOldPassword/index.ts";
+import UserLoginController from "../../API/UserLoginController/index.ts";
 
 export default function CheckChangePassword(event: SubmitEvent) {
   event.preventDefault();

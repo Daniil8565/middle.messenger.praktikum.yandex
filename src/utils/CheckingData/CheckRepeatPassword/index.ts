@@ -1,4 +1,4 @@
-import { password } from "../CheckOldPassword";
+import { password } from "../CheckOldPassword/index.ts";
 
 let FlagRepeatPassword: boolean;
 export default function CheckRepeatPassword(e: FocusEvent) {

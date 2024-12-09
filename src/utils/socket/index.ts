@@ -1,6 +1,6 @@
-import { flag } from "../CheckingData/CheckMessage";
-import { SOC } from "../socket";
-import getMessage from "../getMessage";
+import { flag } from "../CheckingData/CheckMessage/index.ts";
+import { SOC } from "../socket.ts";
+import getMessage from "../getMessage/index.ts";
 
 export default function socket(e: SubmitEvent) {
   e.preventDefault();

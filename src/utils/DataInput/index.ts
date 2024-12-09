@@ -1,6 +1,6 @@
-import UserLoginController from "../API/UserLoginController";
-import putRequest from "../putRequest";
-import stTimeout from "../Timeout";
+import UserLoginController from "../API/UserLoginController/index.ts";
+import putRequest from "../putRequest/index.ts";
+import stTimeout from "../Timeout/index.ts";
 
 export default async function DataInput(event: Event) {
   event.preventDefault(); // Предотвращаем стандартное поведение формы

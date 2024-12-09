@@ -1,6 +1,6 @@
-import ChangeData from "../../pages/changeData";
-import Profile from "../../pages/profile";
-import render from "../render";
+import ChangeData from "../../pages/changeData/index.ts";
+import Profile from "../../pages/profile/index.ts";
+import render from "../render.ts";
 
 export default function ChangeUSERData(events: MouseEvent) {
   events.preventDefault();

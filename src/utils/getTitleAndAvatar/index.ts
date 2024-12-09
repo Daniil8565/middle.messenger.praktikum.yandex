@@ -1,7 +1,7 @@
-import store from "../API/store";
-import UserLoginController from "../API/UserLoginController";
-import SOCKET from "../socket";
-import stTimeout from "../Timeout";
+import store from "../API/store.ts";
+import UserLoginController from "../API/UserLoginController/index.ts";
+import SOCKET from "../socket.ts";
+import stTimeout from "../Timeout/index.ts";
 
 async function getTitleAndAvatar(e: MouseEvent) {
   const target = e.target as HTMLElement;

@@ -4,7 +4,6 @@ import Input from "../../components/input/index.ts";
 import Button from "../../components/button/index.ts";
 import IndexChangePassword from "./IndexChangePassword/index.ts";
 import Form from "../../components/form/index.ts";
-import "./style.sass";
 import Error from "../../components/Error/index.ts";
 import { CheckOldPassword } from "../../utils/CheckingData/CheckOldPassword/index.ts";
 import CheckNewPassword from "../../utils/CheckingData/CheckNewPassword/index.ts";
