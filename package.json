@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build:sass": "sass src/style.sass src/style.css",
     "dev": "vite",
     "build": "npm run prebuild && vite build",
     "preview": "vite preview",
