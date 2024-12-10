@@ -108,6 +108,7 @@ main {
   border-radius: 5px;
   font-size: 14px;
 }
+
 .CreateChat:hover {
   cursor: pointer;
   background-color: #aca7a7;
@@ -428,6 +429,7 @@ main {
 .listItem {
   background-color: white;
 }
+
 .listItem.active {
   background-color: #E4EDFD;
 }
@@ -469,4 +471,4 @@ main {
 .message--incoming {
   background-color: #f1f1f1;
   margin-right: auro;
-}/*# sourceMappingURL=style.css.map */
+}

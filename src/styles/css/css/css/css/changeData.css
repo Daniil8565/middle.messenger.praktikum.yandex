@@ -99,13 +99,14 @@ body {
   position: relative;
   cursor: pointer;
 }
+
 .avatarChangeData:hover {
   background-color: grey;
 }
 
 .avatarChangeDataImage {
   display: inline-block;
-  background-image: url("../../image/avatar.svg");
+  background-image: url("../image/avatar.svg");
   background-size: cover;
   background-repeat: no-repeat;
   width: 40px;
@@ -128,6 +129,7 @@ body {
   opacity: 0;
   z-index: 2;
 }
+
 .avatar__text:hover {
   opacity: 1;
 }
@@ -192,4 +194,4 @@ body {
   color: #666;
   margin: 10px 0;
   text-align: center;
-}/*# sourceMappingURL=style.css.map */
+}

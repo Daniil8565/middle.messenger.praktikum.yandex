@@ -10,6 +10,8 @@
     "tsc": "tsc --noEmit",
     "start": "vite build && vite --port 3000",
     "prebuild": "tsc --noEmit",
+    "build:css": "sass src/styles:src/styles/css/css --no-source-map",
+    "watch:css": "sass --watch src/styles/css/css",
     "test": "mocha \"src/**/*.test.ts\""
   },
   "devDependencies": {
