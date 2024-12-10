@@ -1,4 +1,4 @@
-import { NewPassword } from "../CheckNewPassword";
+import { NewPassword } from "../CheckNewPassword/index.ts";
 
 let FlagRepeatPassword = false;
 

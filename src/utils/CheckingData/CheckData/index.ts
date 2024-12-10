@@ -1,6 +1,6 @@
-import { CheckPassword } from "../CheckOldPassword";
-import CheckLogin from "../CheckLogin";
-import UserLoginController from "../../API/UserLoginController";
+import { CheckPassword } from "../CheckOldPassword/index.ts";
+import CheckLogin from "../CheckLogin/index.ts";
+import UserLoginController from "../../API/UserLoginController/index.ts";
 export default function CheckData(event: SubmitEvent) {
   event.preventDefault();
   let FlagLogin = CheckLogin();

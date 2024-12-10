@@ -1,6 +1,6 @@
-import Profile from "../../pages/profile";
-import ChangePassword from "../../pages/changePassword";
-import render from "../render";
+import Profile from "../../pages/profile/index.ts";
+import ChangePassword from "../../pages/changePassword/index.ts";
+import render from "../render.ts";
 
 export default function ChangeUSERPassword(events: MouseEvent) {
   events.preventDefault();
