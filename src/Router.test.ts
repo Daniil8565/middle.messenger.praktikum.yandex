@@ -7,6 +7,10 @@ import {
   profile,
 } from "./services/Block.test.ts";
 
+if (typeof global.structuredClone !== "function") {
+  global.structuredClone = require("structured-clone");
+}
+
 describe("Router", () => {
   const router = new Router("#app");
 
