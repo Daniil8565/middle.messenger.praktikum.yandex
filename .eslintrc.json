@@ -1,34 +1,12 @@
 {
-  "root": true,
-  "env": {
-    "es2021": true, // Включаем поддержку ECMAScript 2021
-    "node": true, // Включаем поддержку Node.js
-    "browser": true // Включаем поддержку браузерных глобальных переменных
-  },
   "overrides": [
     {
       "files": ["**/*.ts"],
       "excludedFiles": ["**/node_modules/**", "**/dist/**"],
       "parser": "@typescript-eslint/parser",
-      "parserOptions": {
-        "ecmaVersion": 2021, // Поддержка последних фич ECMAScript
-        "sourceType": "module" // Указание, что файлы являются модулями
-      },
       "rules": {
         "max-len": ["error", { "code": 200 }]
       }
-    },
-    {
-      "files": ["**/*.js"],
-      "excludedFiles": ["**/node_modules/**", "**/dist/**"],
-      "parserOptions": {
-        "ecmaVersion": 2021, // Поддержка последних фич ECMAScript для JavaScript
-        "sourceType": "module" // Указание, что файлы являются модулями
-      },
-      "rules": {
-        "max-len": ["error", { "code": 200 }] // Можно добавить свои правила для js
-      }
     }
-  ],
-  "ignorePatterns": ["node_modules/", "dist/"]
+  ]
 }
