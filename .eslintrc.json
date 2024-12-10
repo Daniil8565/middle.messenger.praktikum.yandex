@@ -1,9 +1,10 @@
 {
-  // "extends": "airbnb",
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "rules": {
-    "@typescript-eslint/ban-ts-comment": "off",
-    "max-len": [2, 200]
-  }
+  "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "excludedFiles": "**/node_modules/**",
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"]
+    }
+  ]
 }
