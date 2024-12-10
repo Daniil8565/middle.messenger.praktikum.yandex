@@ -14,6 +14,7 @@
       "excludedFiles": ["**/node_modules/**", "**/dist/**"], // Исключение node_modules и dist
       "parser": "@typescript-eslint/parser", // Указываем парсер для TypeScript
       "rules": {
+        "@typescript-eslint/ban-ts-comment": "off",
         "max-len": ["error", { "code": 200 }] // Максимальная длина строки
       }
     },
@@ -26,6 +27,7 @@
   ],
   "ignorePatterns": ["node_modules/", "dist/"], // Игнорируем папки node_modules и dist
   "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
     "max-len": ["error", { "code": 200 }]
   }
 }
