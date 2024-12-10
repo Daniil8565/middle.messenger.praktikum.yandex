@@ -1,99 +1,102 @@
 import { expect } from "chai";
-import Component from "./Block.ts";
+import Block from "./Block.ts";
 
-class LoginPage extends Component {
+class Entrance extends Block {
   constructor() {
     super("div", {
       attr: {
-        class: "login-page",
+        class: "Entrance",
       },
-      content: "LoginPage",
+      description: "Entrance",
     });
   }
   render() {
-    return this.compile(`<span>{{{content}}}</span>`);
+    return this.compile(`<span>{{{description}}}</span>`);
   }
 }
-class SignupPage extends Component {
+class Registration extends Block {
   constructor() {
     super("div", {
       attr: {
-        class: "login-page",
+        class: "Registration",
       },
-      content: "LoginPage",
+      description: "Entrance",
     });
   }
   render() {
-    return this.compile(`<span>{{{content}}}</span>`);
+    return this.compile(`<span>{{{description}}}</span>`);
   }
 }
-class ChatPage extends Component {
+class Messenger extends Block {
   constructor() {
     super("div", {
       attr: {
-        class: "chat-page",
+        class: "Messenger",
       },
-      content: "ChatPage",
+      description: "Messenger",
     });
   }
   render() {
-    return this.compile(`<span>{{{content}}}</span>`);
+    return this.compile(`<span>{{{description}}}</span>`);
   }
 }
-class ProfilePage extends Component {
+class Profile extends Block {
   constructor() {
     super("div", {
       attr: {
-        class: "login-page",
+        class: "Profile",
       },
-      content: "LoginPage",
+      description: "Entrance",
     });
   }
   render() {
-    return this.compile(`<span>{{{content}}}</span>`);
+    return this.compile(`<span>{{{description}}}</span>`);
   }
 }
 
-export let loginPage: Component;
-export let signupPage: Component;
-export let chatPage: Component;
-export let profilePage: Component;
-describe("Component", () => {
-  loginPage = new LoginPage();
-  signupPage = new SignupPage();
-  chatPage = new ChatPage();
-  profilePage = new ProfilePage();
+export let entrance: Block;
+export let registration: Block;
+export let messenger: Block;
+export let profile: Block;
+describe("Block", () => {
+  entrance = new Entrance();
+  registration = new Registration();
+  messenger = new Messenger();
+  profile = new Profile();
 
-  it("should have current content", () => {
-    expect(loginPage.getContent()?.innerHTML, "<span>LoginPage</span>");
-    expect(signupPage.getContent()?.innerHTML, "<span>SignupPage</span>");
-    expect(chatPage.getContent()?.innerHTML, "<span>ChatPage</span>");
-    expect(profilePage.getContent()?.innerHTML, "<span>ProfilePage</span>");
+  it("Проверяем контент при объявлении компонента", () => {
+    expect(entrance.getContent()?.innerHTML, "<span>Entrance</span>");
+    expect(registration.getContent()?.innerHTML, "<span>Registration</span>");
+    expect(messenger.getContent()?.innerHTML, "<span>Messenger</span>");
+    expect(profile.getContent()?.innerHTML, "<span>Profile</span>");
   });
 
-  it("should have current className", () => {
-    expect(loginPage.getContent()?.className, "login-page");
-    expect(signupPage.getContent()?.className, "signup-page");
-    expect(chatPage.getContent()?.className, "chat-page");
-    expect(profilePage.getContent()?.className, "profile-page");
+  it("Проверяем класс при объявлении компонента", () => {
+    expect(entrance.getContent()?.className, "login-page");
+    expect(registration.getContent()?.className, "signup-page");
+    expect(messenger.getContent()?.className, "chat-page");
+    expect(profile.getContent()?.className, "profile-page");
   });
 
-  it("should have current nodeName", () => {
-    expect(loginPage.getContent()?.nodeName.toLowerCase(), "div");
-    expect(signupPage.getContent()?.nodeName.toLowerCase(), "div");
-    expect(chatPage.getContent()?.nodeName.toLowerCase(), "div");
-    expect(profilePage.getContent()?.nodeName.toLowerCase(), "div");
+  it("Проверяем DOM элемент при объявлении компонента", () => {
+    expect(entrance.getContent()?.nodeName.toLowerCase(), "div");
+    expect(registration.getContent()?.nodeName.toLowerCase(), "div");
+    expect(messenger.getContent()?.nodeName.toLowerCase(), "div");
+    expect(profile.getContent()?.nodeName.toLowerCase(), "div");
   });
 
-  it("should have new props after setProps", () => {
-    loginPage.setProps({ content: "New LoginPage" });
-    signupPage.setProps({ content: "New SignupPage" });
-    chatPage.setProps({ content: "New ChatPage" });
-    profilePage.setProps({ content: "New ProfilePage" });
+  it("Проверяем изменение контента при вызове метода setProps", () => {
+    entrance.setProps({ description: "New Entrance" });
+    registration.setProps({ description: "New Registration" });
+    messenger.setProps({ description: "New Messenger" });
+    profile.setProps({ description: "New Profile" });
 
-    expect(loginPage.getContent()?.innerHTML, "<span>New LoginPage</span>");
-    expect(signupPage.getContent()?.innerHTML, "<span>New SignupPage</span>");
-    expect(chatPage.getContent()?.innerHTML, "<span>New ChatPage</span>");
-    expect(profilePage.getContent()?.innerHTML, "<span>New ProfilePage</span>");
+    expect(entrance.getContent()?.innerHTML, "<span>New Entrance</span>");
+    expect(
+      registration.getContent()?.innerHTML,
+      "<span>New Registration</span>"
+    );
+    expect(messenger.getContent()?.innerHTML, "<span>New Messenger</span>");
+    expect(profile.getContent()?.innerHTML, "<span>New Profile</span>");
   });
 });
