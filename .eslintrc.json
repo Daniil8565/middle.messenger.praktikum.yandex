@@ -5,7 +5,6 @@
       "files": ["**/*.ts"],
       "excludedFiles": ["**/node_modules/**", "**/dist/**"],
       "parser": "@typescript-eslint/parser",
-      "plugins": ["@typescript-eslint"],
       "rules": {
         "@typescript-eslint/ban-ts-comment": "off",
         "max-len": ["error", { "code": 200 }]
