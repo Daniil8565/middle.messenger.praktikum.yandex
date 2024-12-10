@@ -11,5 +11,9 @@ const jsdom = new JSDOM(
   { url: "http://localhost" }
 );
 
+if (typeof global.structuredClone === "undefined") {
+  global.structuredClone = (value) => JSON.parse(JSON.stringify(value));
+}
+
 global.window = jsdom.window;
 global.document = jsdom.window.document;
