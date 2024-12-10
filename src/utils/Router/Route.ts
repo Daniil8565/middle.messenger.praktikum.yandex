@@ -1,6 +1,6 @@
 import IBlock from "../../services/IBlock";
-import isEqual from "./functionIsEqual";
-import render from "../render";
+import isEqual from "./functionIsEqual.ts";
+import render from "../render.ts";
 
 export default class Route {
   private _pathname: string;

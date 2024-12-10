@@ -1,0 +1,33 @@
+html,
+body {
+  height: 100%;
+}
+
+.content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  font-size: 40px;
+  line-height: 40px;
+  font-weight: 500;
+  color: #1e1e1e;
+  margin-bottom: 20px;
+}
+
+.descriptionError {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #1e1e1e;
+  margin-bottom: 60px;
+}
+
+.linkExit {
+  font-size: 11px;
+  line-height: 11px;
+  color: #3369F3;
+  font-weight: 500;
+}

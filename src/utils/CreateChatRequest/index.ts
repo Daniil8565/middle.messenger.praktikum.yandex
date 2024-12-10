@@ -1,4 +1,4 @@
-import UserLoginController from "../API/UserLoginController";
+import UserLoginController from "../API/UserLoginController/index.ts";
 
 export default function CreateChatRequest(event: Event) {
   event.preventDefault(); // Предотвращаем стандартное поведение формы

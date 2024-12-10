@@ -1,8 +1,8 @@
-import store, { StoreEvents } from "../store";
-import { Indexed } from "../store";
+import store, { StoreEvents } from "../store.ts";
+import { Indexed } from "../store.ts";
 // import isEqual from "../isEqual";
-import Block from "../../../services/Block";
-import isEqual from "../isEqual";
+import Block from "../../../services/Block.ts";
+import isEqual from "../isEqual/index.ts";
 
 export default function connect(
   mapStateToProps: (state: Indexed) => Record<string, unknown>
