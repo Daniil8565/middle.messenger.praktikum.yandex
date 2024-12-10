@@ -1,12 +1,31 @@
 {
+  "root": true,
+  "env": {
+    "es2021": true, // Поддержка ECMAScript 2021
+    "node": true // Поддержка Node.js
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021, // Поддержка последних фич ECMAScript
+    "sourceType": "module" // Указание, что файлы являются модулями
+  },
   "overrides": [
     {
-      "files": ["**/*.ts"],
-      "excludedFiles": ["**/node_modules/**", "**/dist/**"],
-      "parser": "@typescript-eslint/parser",
+      "files": ["**/*.ts"], // Для всех TypeScript файлов
+      "excludedFiles": ["**/node_modules/**", "**/dist/**"], // Исключение node_modules и dist
+      "parser": "@typescript-eslint/parser", // Указываем парсер для TypeScript
       "rules": {
-        "max-len": ["error", { "code": 200 }]
+        "max-len": ["error", { "code": 200 }] // Максимальная длина строки
+      }
+    },
+    {
+      "files": ["**/*.js"], // Для всех JavaScript файлов
+      "parserOptions": {
+        "sourceType": "module" // Указание, что JavaScript файлы также являются модулями
       }
     }
-  ]
+  ],
+  "ignorePatterns": ["node_modules/", "dist/"], // Игнорируем папки node_modules и dist
+  "rules": {
+    "max-len": ["error", { "code": 200 }]
+  }
 }
