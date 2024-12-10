@@ -23,6 +23,6 @@
       "*": ["node_modules/*", "src/types/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "src/**/*.css"],
   "exclude": ["node_modules"]
 }

@@ -27,4 +27,7 @@ export default defineConfig({
       },
     }),
   ],
+  css: {
+    postcss: "./postcss.config.js", // Указываем путь к нашему конфигурационному файлу
+  },
 });
