@@ -1,5 +1,4 @@
 import parsel from "@typescript-eslint/parser";
-import eslintPlugin from "@typescript-eslint/eslint-plugin";
 
 export default [
   {
@@ -7,9 +6,6 @@ export default [
     ignores: ["/node_modules", "/github", "/dist"],
     languageOptions: {
       parser: parsel,
-    },
-    plugins: {
-      "@typescript-eslint": eslintPlugin,
     },
   },
 ];
