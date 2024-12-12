@@ -57,6 +57,6 @@
     "vite-plugin-handlebars": "^2.0.0"
   },
   "engines": {
-    "node": "v18.10.0"
+    "node": ">=20.0.0"
   }
 }
