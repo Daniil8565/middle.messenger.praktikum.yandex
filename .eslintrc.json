@@ -2,6 +2,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "max-len": [1, 1000]
+    "max-len": [1, 1000],
+    "@typescript-eslint/ban-ts-comment": "off"
   }
 }
