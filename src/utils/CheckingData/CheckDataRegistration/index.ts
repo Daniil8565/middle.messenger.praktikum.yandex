@@ -1,11 +1,11 @@
-import CheckEmail from "../CheckEmail";
-import CheckLogin from "../CheckLogin";
-import CheckName from "../CheckName";
-import CheckSurname from "../CheckSurname";
-import CheckPhone from "../CheckPhone";
-import { CheckPassword } from "../CheckOldPassword";
-import { FlagRepeatPasswordRegistration } from "../CheckRegistrationPassword";
-import UserLoginController from "../../API/UserLoginController";
+import CheckEmail from "../CheckEmail/index.ts";
+import CheckLogin from "../CheckLogin/index.ts";
+import CheckName from "../CheckName/index.ts";
+import CheckSurname from "../CheckSurname/index.ts";
+import CheckPhone from "../CheckPhone/index.ts";
+import { CheckPassword } from "../CheckOldPassword/index.ts";
+import { FlagRepeatPasswordRegistration } from "../CheckRegistrationPassword/index.ts";
+import UserLoginController from "../../API/UserLoginController/index.ts";
 
 export default function CheckDataRegistration(event: SubmitEvent) {
   event.preventDefault();

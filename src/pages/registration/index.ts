@@ -5,7 +5,6 @@ import Link from "../../components/link/index.ts";
 import Form from "../../components/form/index.ts";
 import Label from "../../components/label/index.ts";
 import Input from "../../components/input/index.ts";
-import "./style.sass";
 import CheckEmail from "../../utils/CheckingData/CheckEmail/index.ts";
 import CheckLogin from "../../utils/CheckingData/CheckLogin/index.ts";
 import CheckName from "../../utils/CheckingData/CheckName/index.ts";

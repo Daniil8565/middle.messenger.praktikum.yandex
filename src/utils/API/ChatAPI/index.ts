@@ -1,5 +1,5 @@
-import Request from "../Request";
-import { URL } from "../BaseAPI";
+import Request from "../Request/index.ts";
+import { URL } from "../BaseAPI.ts";
 // import { BaseAPI } from "../BaseAPI";
 
 const entranceAPI = new Request("");

@@ -1,5 +1,5 @@
-import store from "../API/store";
-import UserLoginController from "../API/UserLoginController";
+import store from "../API/store.ts";
+import UserLoginController from "../API/UserLoginController/index.ts";
 
 export default function putRequest() {
   const controller = new UserLoginController();
