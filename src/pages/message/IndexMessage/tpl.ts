@@ -4,12 +4,6 @@ const tpl: string = `
             <div class="message__link">
               {{{link}}}
             </div>
-            <button class="button__search">
-              <div class="container__search">
-                <span class="search__image"></span>
-                <p class="search__description">Поиск</p>
-              </div>
-            </button>
             {{{CreateChatUser}}}
             <ul class="list__chats">
               {{{items}}}
@@ -21,7 +15,6 @@ const tpl: string = `
           <div class="content__main">
           </div>
           <div class="content__footer">
-            <a href=""><span class="footer__Investment"></span></a>
             {{{form}}}
           </div>
         </div>
