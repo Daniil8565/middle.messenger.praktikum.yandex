@@ -1,29 +1,7 @@
-<h1>Многостраничное веб приложение "чат".</h1>
-<h2>Установка</h2>
-<ul>
-  <li>npm run dev - запуск версии для разработчика</li>
-  <li>npm run build - сборка приложения</li>
-  <li>npm run start - сборка и запуск приложения</li>
-</ul>
 <p>Ссылка на проект: https://serene-salmiakki-eebcdb.netlify.app</p>
-<h3>Добавил следующие функции</h3>
-<ul>
-  <li>Сделал роутинг для перемещения по страницам</li>
-  <li>Внедрил HTTP API чатов, авторизации и пользователей</li>
-  <li>Добавил в роутер проверку авторизации пользователя.</li>
-  <li>Подключил WebSocket для обмена сообщениями</li>
-</ul>
+<h1>Многостраничное веб приложение "Messenger".</h1>
 
-
-## Проект: Messenger
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8d2019e6-98b7-43d0-8cad-a2d86bee843b/deploy-status)](https://app.netlify.com/sites/mellifluous-bunny-f4b9fb/deploys)
-
-* [Figma](https://www.figma.com/file/tT9Qv8j6OeVC2AmgQzXEG3/Chat?node-id=0%3A1)
-* [Netlify](https://deploy--sprightly-kataifi-71c800.netlify.app)
-* [Heroku](https://yandex-practicume-messanger.herokuapp.com)
-* [Surge CDN](https://karmyskove.surge.sh/)
-* [Swagger](https://ya-praktikum.tech/api/v2/swagger/#/)
+<p>Ссылка на проект: https://serene-salmiakki-eebcdb.netlify.app</p>
 
 ### Описание
 
@@ -35,7 +13,7 @@ Cамостоятельная практическая работа, выпол�
 
 ### Спринт 1
 
-https://github.com/Karmyshkov/middle.messenger.praktikum.yandex/pull/1
+[https://github.com/Daniil8565/middle.messenger.praktikum.yandex/tree/sprint_1](https://github.com/Daniil8565/middle.messenger.praktikum.yandex/tree/sprint_1)
 
 * Свёрстан макет приложения чат в Figma с использованием шаблонизатора Handlebars. [Ссылка на макет](https://www.figma.com/file/tT9Qv8j6OeVC2AmgQzXEG3/Chat?node-id=0%3A1)
 * Настроена сборка с использованием [Parcel](https://parceljs.org/) и раздача статики сервером на Express
