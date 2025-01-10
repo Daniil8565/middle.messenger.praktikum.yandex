@@ -1,4 +1,4 @@
-import EventBus from "../../services/EventBus";
+import EventBus from "../../services/EventBus.ts";
 
 type Ivalue = {
   [key: string]: unknown;

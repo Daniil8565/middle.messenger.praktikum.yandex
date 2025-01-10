@@ -31,6 +31,13 @@ export default class Request {
     this._queryString = queryString;
   }
 
+  getUrlANDMethod() {
+    return {
+      url: this._url,
+      method: this._method,
+    };
+  }
+
   async send(): Promise<XMLHttpRequest> {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();

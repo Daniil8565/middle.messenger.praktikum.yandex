@@ -1,4 +1,4 @@
-import UserLoginController from "../API/UserLoginController";
+import UserLoginController from "../API/UserLoginController/index.ts";
 
 export default function ModalShow() {
   const modal = document.getElementById("uploadModal") as HTMLElement; // Модальное окно

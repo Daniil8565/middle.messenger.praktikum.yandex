@@ -1,9 +1,9 @@
-import LoginAPI from "../LoginAPI";
-import router from "../../..";
-import store from "../store";
-import UserAPI from "../UserAPI";
-import ChatAPI from "../ChatAPI";
-import FlagAuthorization from "../../FlagAuthorization";
+import LoginAPI from "../LoginAPI/index.ts";
+import router from "../../../index.ts";
+import store from "../store.ts";
+import UserAPI from "../UserAPI/index.ts";
+import ChatAPI from "../ChatAPI/index.ts";
+import FlagAuthorization from "../../FlagAuthorization/index.ts";
 
 const loginApi = new LoginAPI();
 const UserApi = new UserAPI();

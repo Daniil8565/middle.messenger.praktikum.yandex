@@ -1,6 +1,6 @@
-import UserLoginController from "../API/UserLoginController";
-import store from "../API/store";
-import stTimeout from "../Timeout";
+import UserLoginController from "../API/UserLoginController/index.ts";
+import store from "../API/store.ts";
+import stTimeout from "../Timeout/index.ts";
 
 export default async function DataDelete(event: Event) {
   event.preventDefault(); // Предотвращаем стандартное поведение формы

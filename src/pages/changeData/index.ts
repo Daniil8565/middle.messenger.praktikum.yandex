@@ -15,7 +15,6 @@ import modal from "../../components/modal/index.ts";
 import ModalShow from "../../utils/ModalShow/index.ts";
 import connect from "../../utils/API/HOC/index.ts";
 import FormChangeData from "../../components/formChangeData/index.ts";
-import "./style.sass";
 
 const avatar = new avatarChangeData("div", {
   attr: {

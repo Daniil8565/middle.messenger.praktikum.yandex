@@ -1,8 +1,4 @@
-// import page from "./pages/404/index.ts";
 import Entrance from "./pages/entrance/index.ts";
-// import index500 from "./pages/500/index.ts";
-// import ChangeData from "./pages/changeData/index.ts";
-// import ChangePassword from "./pages/changePassword/index.ts";
 import FlagAuthorization from "./utils/FlagAuthorization/index.ts";
 import ChangeData from "./pages/changeData/index.ts";
 import message from "./pages/message/index.ts";
@@ -10,10 +6,9 @@ import Profile from "./pages/profile/index.ts";
 import registration from "./pages/registration/index.ts";
 import Route from "./utils/Router/Route.ts";
 import IBlock from "./services/IBlock.ts";
-import "./style.sass";
 import ChangePassword from "./pages/changePassword/index.ts";
 
-class Router {
+export class Router {
   private static __instance: Router | null = null;
   private routes: Route[] = [];
   private history;

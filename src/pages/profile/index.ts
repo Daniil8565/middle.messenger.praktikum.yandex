@@ -5,7 +5,6 @@ import mapUserToProps from "../../utils/API/mapUserToProps/index.ts";
 import connect from "../../utils/API/HOC/index.ts";
 import GlobalProfileData from "../../components/GlobalProfileData/index.ts";
 import UserLoginController from "../../utils/API/UserLoginController/index.ts";
-import "./style.sass";
 import ChangeUSERData from "../../utils/ChangePagesProfile/index.ts";
 import ChangeUSERPassword from "../../utils/ChangeUSERPassword/index.ts";
 

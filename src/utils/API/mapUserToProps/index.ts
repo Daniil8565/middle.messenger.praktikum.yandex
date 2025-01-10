@@ -1,4 +1,4 @@
-import { Indexed } from "../store";
+import { Indexed } from "../store.ts";
 
 export default function mapUserToProps(
   state: Indexed
