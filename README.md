@@ -7,17 +7,12 @@
 
 Cамостоятельная практическая работа, выполняемая в рамках обучения на курсе [Мидл фронтенд-разработчик](https://praktikum.yandex.ru/middle-frontend/) от [Яндекс.Практикум](https://praktikum.yandex.ru) на спринтах №1-4.
 
-### Текущий этап
-
-Спринт 4 из 4
-
 ### Спринт 1
 
 [https://github.com/Daniil8565/middle.messenger.praktikum.yandex/tree/sprint_1](https://github.com/Daniil8565/middle.messenger.praktikum.yandex/tree/sprint_1)
 
 * Свёрстан макет приложения чат в Figma с использованием шаблонизатора Handlebars. [Ссылка на макет](https://www.figma.com/file/tT9Qv8j6OeVC2AmgQzXEG3/Chat?node-id=0%3A1)
-* Настроена сборка с использованием [Parcel](https://parceljs.org/) и раздача статики сервером на Express
-* Приложение автоматически деплоится на [Netlify](https://www.netlify.com/) из ветки `deploy`. [Ссылка на приложение](https://deploy--sprightly-kataifi-71c800.netlify.app)
+* Приложение автоматически деплоится на [Netlify](https://www.netlify.com/) из ветки `deploy`. [Ссылка на приложение](https://serene-salmiakki-eebcdb.netlify.app)
 
 ### Спринт 2
 
