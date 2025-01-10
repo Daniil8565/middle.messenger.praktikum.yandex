@@ -8,7 +8,7 @@ import {
 } from "./services/Block.test.ts";
 
 describe("Router", () => {
-  const router = new Router("#app");
+  const router = new Router(".app");
 
   before(() => {
     router
@@ -20,8 +20,8 @@ describe("Router", () => {
   });
 
   it("Проверка на создание одного экземпляра класса", () => {
-    const router1 = new Router("#app");
-    const router2 = new Router("#app");
+    const router1 = new Router(".app");
+    const router2 = new Router(".app");
     expect(router1).to.equal(router2);
   });
 
