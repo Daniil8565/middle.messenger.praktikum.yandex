@@ -464,7 +464,7 @@ main {
   outline: 0;
 }
 .button__message {
-  background-image: url(../../../image/button_message.svg);
+  background-image: url(/image/button_message.svg);
   background-repeat: no-repeat;
   background-size: cover;
   border: 0;
